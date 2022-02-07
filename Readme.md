@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Irina Kashyntseva](https://up.htmlacademy.ru/react/9/user/169447).
-* Наставник: `Неизвестно`.
+* Наставник: [Владислав Зубко](https://htmlacademy.ru/profile/whatislove).
 
 ---
 
