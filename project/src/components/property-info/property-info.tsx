@@ -22,7 +22,8 @@ type Host = {
 }
 
 type PropertyInfoProps = {
-    info: {
+  info: {
+        id: string,
         premium: boolean,
         favorite: boolean,
         facilities: string[],

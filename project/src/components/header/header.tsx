@@ -1,11 +1,16 @@
+import { Link, useLocation } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import HeaderLogo from '../logo/header-logo';
 
 type HeaderProps = {
-    logInPage?: boolean,
-    loggedIn?: boolean
+    authorizationStatus?: string
 }
 
-function Header({loggedIn, logInPage}: HeaderProps) {
+function Header({ authorizationStatus }: HeaderProps) {
+  const { pathname } = useLocation();
+  const isSignInPage = pathname === '/login';
+  const isAuthorised = authorizationStatus === AuthorizationStatus.Auth;
+
   return (
     <header className="header">
       <div className="container">
@@ -13,23 +18,23 @@ function Header({loggedIn, logInPage}: HeaderProps) {
           <div className="header__left">
             <HeaderLogo />
           </div>
-          {logInPage ||
-                      <nav className="header__nav">
-                        <ul className="header__nav-list">
-                          <li className="header__nav-item user">
-                            <a className="header__nav-link header__nav-link--profile" href="#">
-                              <div className="header__avatar-wrapper user__avatar-wrapper">
-                              </div>
-                              {loggedIn && <span className="header__user-name user__name">Oliver.conner@gmail.com</span>}
-                            </a>
-                          </li>
-                          <li className="header__nav-item">
-                            <a className="header__nav-link" href="#">
-                              <span className="header__signout">Sign {loggedIn ? 'out' : 'in' }</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </nav>}
+          {isSignInPage ||
+          <nav className="header__nav">
+            <ul className="header__nav-list">
+              <li className="header__nav-item user">
+                <Link className="header__nav-link header__nav-link--profile" to={isAuthorised ? '' : AppRoute.SignIn}>
+                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                  {isAuthorised ? <span className="header__user-name user__name">Oliver.conner@gmail.com</span> : <span className="header__login">Sign in</span>}
+                </Link>
+              </li>
+              {isAuthorised &&
+                <li className="header__nav-item">
+                  <Link className="header__nav-link" to={AppRoute.Main}>
+                    <span className="header__signout">Sign out</span>
+                  </Link>
+                </li>}
+            </ul>
+          </nav>}
         </div>
       </div>
     </header>

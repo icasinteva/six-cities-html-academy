@@ -2,6 +2,7 @@ import PlaceCard from '../place-card/place-card';
 import FavoritesLocationsItem from '../locations-item/favorites-locations-item';
 
 const info = {
+  id: '3792ywigfeurt47',
   premium: true,
   favorite: true,
   type: 'Apartment',

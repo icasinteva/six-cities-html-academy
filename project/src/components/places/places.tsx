@@ -8,6 +8,7 @@ type PlacesProps = {
 }
 
 const info = {
+  id: '3792ywigfeurt47',
   premium: true,
   favorite: true,
   type: 'Apartment',

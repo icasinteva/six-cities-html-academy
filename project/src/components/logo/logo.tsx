@@ -1,4 +1,4 @@
-import './style.css';
+import { Link } from 'react-router-dom';
 
 type LogoProps = {
   className: string,
@@ -11,9 +11,9 @@ function Logo({ className, width, height }: LogoProps) {
   const logoClassNameLink = `${logoClassName}-link`;
 
   return (
-    <a className={logoClassNameLink} href="main.html">
+    <Link className={logoClassNameLink} to="/">
       <img className={logoClassName} src="img/logo.svg" width={width} height={height} alt="6 cities logo" />
-    </a>
+    </Link>
   );
 }
 
