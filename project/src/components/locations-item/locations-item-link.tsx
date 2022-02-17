@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 type LocationsItemLinkProps = {
     className?: string,
     city: string,
@@ -5,9 +7,9 @@ type LocationsItemLinkProps = {
 
 function LocationsItemLink({ className, city }: LocationsItemLinkProps) {
   return (
-    <a className={`locations__item-link ${className}`} href="#">
+    <Link className={`locations__item-link ${className}`} to='/'>
       <span>{city}</span>
-    </a>
+    </Link>
   );
 }
 

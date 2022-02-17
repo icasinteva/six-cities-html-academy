@@ -1,6 +1,7 @@
 import PlaceCard from '../place-card/place-card';
 
 const info = {
+  id: '3792ywigfeurt47-near',
   premium: true,
   favorite: true,
   type: 'Apartment',

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import LocationsItemLink from './locations-item-link';
 
 type LocationsItemProps = {
@@ -7,12 +8,14 @@ type LocationsItemProps = {
 }
 
 function LocationsItem({ key, city, isActive }: LocationsItemProps) {
-  const activeTabsItemClassName = isActive ? 'tabs__item--active' : '';
-  const tabsItemsClassName = `tabs__item ${activeTabsItemClassName}`;
-
   return (
     <li className="locations__item" key={key}>
-      <LocationsItemLink className={tabsItemsClassName} city={city} />
+      <LocationsItemLink className={classNames({
+        'tabs__item': true,
+        'tabs__item--active': isActive,
+      })}
+      city={city}
+      />
     </li>
   );
 }
