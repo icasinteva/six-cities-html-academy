@@ -1,15 +1,16 @@
-import LocationsItemLink from './locations-item-link';
+import { LocationItem } from '../../const';
+import LocationItemItemLink from './locations-item-link';
 
-type FavoritesLocationsItemProps = {
-  city: string
+type FavoritesLocationItemItemProps = {
+  location: LocationItem
 }
 
-function FavoritesLocationsItem({ city }: FavoritesLocationsItemProps) {
+function FavoritesLocationItemItem({ location }: FavoritesLocationItemItemProps) {
   return (
     <div className="locations__item">
-      <LocationsItemLink city={city} />
+      <LocationItemItemLink location={location} />
     </div>
   );
 }
 
-export default FavoritesLocationsItem;
+export default FavoritesLocationItemItem;

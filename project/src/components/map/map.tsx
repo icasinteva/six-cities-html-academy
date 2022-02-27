@@ -1,10 +1,11 @@
 type MapProps = {
-    className: string
+  className: string
+  id?: string
 }
 
-function Map({ className }: MapProps) {
+function Map({ id, className }: MapProps) {
   return (
-    <section className={`${className}__map map`}></section>
+    <section id={id} className={`${className}__map map`}></section>
   );
 }
 

@@ -1,49 +1,49 @@
+import classNames from 'classnames';
+
 import { Outlet, useLocation } from 'react-router-dom';
+import { AuthorizationStatus } from '../../const';
+import { User } from '../../types/user';
 import Header from '../header/header';
 import FooterLogo from '../logo/footer-logo';
 
 type LayoutProps = {
   isEmptyLayout: boolean,
-  authorizationStatus: string,
+  authorizationStatus: AuthorizationStatus,
+  user: User
 }
 
-type pagesType = {
+type PagesType = {
   [key:string]: string
 }
 
-const pages: pagesType = {
+const pages: PagesType = {
   '': 'index',
   'login': 'login',
   'offer': 'property',
   'favorites': 'favorites',
 };
 
-function Layout({ authorizationStatus, isEmptyLayout }: LayoutProps) {
+function Layout({ authorizationStatus, isEmptyLayout, user }: LayoutProps) {
   const location = useLocation();
   const [, pathname] = location.pathname.split('/');
   const page = pages[pathname] || '404';
   const pageMainClassName = `page__main--${page}`;
   const grayPages = ['index', 'login'];
   const pagesWithFooter = ['favorites', 'offer', '404'];
-  let additionalPageClassName = '';
-  let additionalMainClassName = '';
 
+  const mainClassName = classNames('page-main', pageMainClassName, {
+    [`${pageMainClassName}-empty`]: isEmptyLayout,
+  });
 
-  if (isEmptyLayout) {
-    additionalPageClassName = `page--${page}-empty`;
-    additionalMainClassName = `${pageMainClassName}-empty`;
-  }
-
-  if (grayPages.includes(page)) {
-    additionalPageClassName += 'page--gray';
-  }
+  const pageClassName = classNames('page', `page--${page}`, {
+    [`page--${page}-empty`]: isEmptyLayout,
+    'page--gray': grayPages.includes(page),
+  });
 
   return (
-    <div className={`page page--${page} ${additionalPageClassName}`}>
-      <Header authorizationStatus={authorizationStatus} />
-      <main className={`page__main ${pageMainClassName} ${additionalMainClassName
-      }`}
-      >
+    <div className={pageClassName}>
+      <Header authorizationStatus={authorizationStatus} user={user} />
+      <main className={mainClassName}>
         <Outlet />
       </main>
       {pagesWithFooter.includes(page) &&

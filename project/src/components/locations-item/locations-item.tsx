@@ -1,23 +1,25 @@
 import classNames from 'classnames';
-import LocationsItemLink from './locations-item-link';
+import { LocationItem } from '../../const';
+import LocationItemItemLink from './locations-item-link';
 
-type LocationsItemProps = {
+type LocationItemItemProps = {
   isActive?: boolean,
-  key?: string,
-  city: string
+  location: LocationItem,
+  onClick: (location: LocationItem) => void,
 }
 
-function LocationsItem({ key, city, isActive }: LocationsItemProps) {
+function LocationItemItem({location, onClick, isActive }: LocationItemItemProps) {
   return (
-    <li className="locations__item" key={key}>
-      <LocationsItemLink className={classNames({
+    <li className="locations__item">
+      <LocationItemItemLink className={classNames({
         'tabs__item': true,
         'tabs__item--active': isActive,
       })}
-      city={city}
+      location={location}
+      onClick={onClick}
       />
     </li>
   );
 }
 
-export default LocationsItem;
+export default LocationItemItem;

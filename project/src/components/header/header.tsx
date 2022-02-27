@@ -1,14 +1,16 @@
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import HeaderLogo from '../logo/header-logo';
+import { User } from '../../types/user';
 
 type HeaderProps = {
-    authorizationStatus?: string
+  authorizationStatus?: AuthorizationStatus,
+  user: User
 }
 
-function Header({ authorizationStatus }: HeaderProps) {
+function Header({ authorizationStatus, user }: HeaderProps) {
   const { pathname } = useLocation();
-  const isSignInPage = pathname === '/login';
+  const isSignInPage = pathname === AppRoute.SignIn;
   const isAuthorised = authorizationStatus === AuthorizationStatus.Auth;
 
   return (
@@ -22,9 +24,11 @@ function Header({ authorizationStatus }: HeaderProps) {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <Link className="header__nav-link header__nav-link--profile" to={isAuthorised ? '' : AppRoute.SignIn}>
-                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                  {isAuthorised ? <span className="header__user-name user__name">Oliver.conner@gmail.com</span> : <span className="header__login">Sign in</span>}
+                <Link className="header__nav-link header__nav-link--profile" to={isAuthorised ? AppRoute.Favorites : AppRoute.SignIn}>
+                  <div className="header__avatar-wrapper user__avatar-wrapper">
+                    {isAuthorised && <img className="user__avatar" src={user.avatar} alt='Avatar' />}
+                  </div>
+                  {isAuthorised ? <span className="header__user-name user__name">{user.email}</span> : <span className="header__login">Sign in</span>}
                 </Link>
               </li>
               {isAuthorised &&

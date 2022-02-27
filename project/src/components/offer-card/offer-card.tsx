@@ -1,27 +1,26 @@
+import classNames from 'classnames';
 import Rating from '../rating/rating';
 import Price from '../price/price';
 import { Link } from 'react-router-dom';
+import FavoriteButton from '../favorite-button/favorite-button';
+import { AppRoute } from '../../const';
+import { Card } from '../../types/offer';
 
-type PlaceCardProps = {
+type OfferCardProps = {
   className: string,
-  info: {
-    id: string,
-    premium?: boolean,
-    favorite?: boolean,
-    price: number,
-    rating: number,
-    type: string,
-    title: string,
-    imageSrc: string,
-  }
+  info: Card,
+  onMouseOver?: (id: string) => void,
 }
 
-function PlaceCard({ className, info }: PlaceCardProps) {
+function OfferCard({ className, info, onMouseOver }: OfferCardProps) {
   const {id, premium, favorite, rating, price, type, title, imageSrc} = info;
-  const classNameCard = className === 'cities' ? `${className}__place-card place-card` : `${className}__card place-card`;
+  const classNameCard = classNames({
+    [`${className}__place-card place-card`]: className === 'cities',
+    [`${className}__card place-card`]: className !== 'cities',
+  });
   const classNameImageWrapper = `${className}__image-wrapper place-card__image-wrapper`;
   const classNameInfo = `${className}__card-info place-card__info`;
-  const classNameFavorite = 'place-card__bookmark-button--active';
+  const offerRoute = AppRoute.Room.replace(':id', id);
 
   return (
     <article className={classNameCard}>
@@ -32,27 +31,22 @@ function PlaceCard({ className, info }: PlaceCardProps) {
         </div>
       }
       <div className={classNameImageWrapper}>
-        <Link to={`/offer/${id}`}>
+        <Link to={offerRoute}>
           <img className="place-card__image" src={imageSrc} alt="Place image" />
         </Link>
       </div>
       <div className={classNameInfo}>
         <div className="place-card__price-wrapper">
           <Price amount={price} className='place-card' />
-          <button className={`place-card__bookmark-button ${favorite ? classNameFavorite : ''} button`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton className='place-card' favorite={favorite} size={{width: 18, height: 19}} />
         </div>
         <Rating className='place-card' rating={rating} />
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={offerRoute}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
     </article>);
 }
 
-export default PlaceCard;
+export default OfferCard;
