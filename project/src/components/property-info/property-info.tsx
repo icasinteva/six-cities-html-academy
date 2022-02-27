@@ -2,40 +2,15 @@ import PropertyRating from '../property-rating/property-rating';
 import PropertyFacilities from '../property-facilities/property-facilities';
 import Host from '../host/host';
 import Price from '../price/price';
-
-type Review = {
-    author: string,
-    avatar: string,
-    rating: number,
-    text: string,
-    date: {
-      month: string,
-      year: number
-    }
-}
-
-type Host = {
-    pro: boolean,
-    name: string,
-    avatar: string,
-    description: string[],
-}
+import FavoriteButton from '../favorite-button/favorite-button';
+import { Offer } from '../../types/offer';
 
 type PropertyInfoProps = {
-  info: {
-        id: string,
-        premium: boolean,
-        favorite: boolean,
-        facilities: string[],
-        price: number,
-        rating: number,
-        host: Host,
-        reviews: Review[],
-    }
+  info: Offer
 }
 
 function PropertyInfo({ info }: PropertyInfoProps) {
-  const { premium, favorite, facilities, price, rating, host } = info;
+  const { premium, favorite, facilities, price, rating, title, host } = info;
 
   return (
     <>
@@ -44,15 +19,8 @@ function PropertyInfo({ info }: PropertyInfoProps) {
                   <span>Premium</span>
                 </div>}
       <div className="property__name-wrapper">
-        <h1 className="property__name">
-                  Beautiful &amp; luxurious studio at great location
-        </h1>
-        <button className={`property__bookmark-button ${favorite ? 'property__bookmark-button--active' : ''} button`} type="button">
-          <svg className="property__bookmark-icon" width="31" height="33">
-            <use xlinkHref="#icon-bookmark"></use>
-          </svg>
-          <span className="visually-hidden">To bookmarks</span>
-        </button>
+        <h1 className="property__name">{title}</h1>
+        <FavoriteButton className='property' favorite={favorite} size={{width: 31, height: 33}} />
       </div>
       <PropertyRating rating={rating} />
       <ul className="property__features">

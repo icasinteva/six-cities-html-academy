@@ -1,10 +1,11 @@
-import FavoritesLocationsItem from '../../components/locations-item/favorites-locations-item';
+import FavoritesLocationItemItem from '../../components/locations-item/favorites-locations-item';
+import { LocationItem } from '../../const';
 
 type LoginProps = {
-  city: string
+  location: LocationItem
 }
 
-function Login({ city }: LoginProps) {
+function Login({ location }: LoginProps) {
   return (
     <div className="page__login-container container">
       <section className="login">
@@ -22,7 +23,7 @@ function Login({ city }: LoginProps) {
         </form>
       </section>
       <section className="locations locations--login locations--current">
-        <FavoritesLocationsItem city={city} />
+        <FavoritesLocationItemItem location={location} />
       </section>
     </div>
   );

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 type LogoProps = {
   className: string,
@@ -7,12 +8,9 @@ type LogoProps = {
 }
 
 function Logo({ className, width, height }: LogoProps) {
-  const logoClassName = `${className}__logo`;
-  const logoClassNameLink = `${logoClassName}-link`;
-
   return (
-    <Link className={logoClassNameLink} to="/">
-      <img className={logoClassName} src="img/logo.svg" width={width} height={height} alt="6 cities logo" />
+    <Link className={`${className}__logo`} to={AppRoute.Main}>
+      <img className={`${className}__logo-link`} src="img/logo.svg" width={width} height={height} alt="6 cities logo" />
     </Link>
   );
 }

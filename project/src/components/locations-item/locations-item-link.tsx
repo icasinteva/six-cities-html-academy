@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom';
+import { AppRoute, LocationItem } from '../../const';
 
-type LocationsItemLinkProps = {
+type LocationItemItemLinkProps = {
     className?: string,
-    city: string,
+    location: LocationItem,
+    onClick?: (location: LocationItem) => void,
 }
 
-function LocationsItemLink({ className, city }: LocationsItemLinkProps) {
+function LocationItemItemLink({ className, location, onClick }: LocationItemItemLinkProps) {
   return (
-    <Link className={`locations__item-link ${className}`} to='/'>
-      <span>{city}</span>
+    <Link className={`locations__item-link ${className}`} to={AppRoute.Main} onClick={()=> onClick?.(location)}>
+      <span>{location}</span>
     </Link>
   );
 }
 
-export default LocationsItemLink;
+export default LocationItemItemLink;

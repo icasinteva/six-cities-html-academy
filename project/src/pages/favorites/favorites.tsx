@@ -1,15 +1,16 @@
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import FavoritesListEmpty from '../../components/favorites-list/favorites-list-empty';
+import { LocationOffers } from '../../types/offer';
 
 type FavoritesProps = {
-    favoritesCount: number
+  favorites: LocationOffers
 }
 
-function Favorites({ favoritesCount}: FavoritesProps) {
+function Favorites({ favorites }: FavoritesProps) {
   return (
     <div className="page__favorites-container container">
-      {favoritesCount ?
-        <FavoritesList /> :
+      {favorites.length ?
+        <FavoritesList favorites={favorites} /> :
         <FavoritesListEmpty />}
     </div>
   );

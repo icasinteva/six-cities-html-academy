@@ -1,23 +1,19 @@
-import LocationsItem from '../locations-item/locations-item';
-
-type LocationsListProps = {
-  cities: string[],
-  activeCity: string
+import { LocationItem, LocationItems } from '../../const';
+import LocationItemItem from '../locations-item/locations-item';
+type LocationItemListProps = {
+  activeLocation: LocationItem,
+  onClick: (location: LocationItem) => void
 }
 
-function LocationsList({ cities, activeCity }: LocationsListProps) {
+function LocationItemList({ activeLocation, onClick }: LocationItemListProps) {
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cities.map((city) => {
-            let isActive = false;
+          {LocationItems.map((location) => {
+            const isActive = location === activeLocation;
 
-            if (city === activeCity) {
-              isActive = true;
-            }
-
-            return <LocationsItem isActive={isActive} key={city} city={city} />;
+            return <LocationItemItem key={location} location={location} isActive={isActive} onClick={onClick} />;
           })}
         </ul>
       </section>
@@ -25,4 +21,4 @@ function LocationsList({ cities, activeCity }: LocationsListProps) {
   );
 }
 
-export default LocationsList;
+export default LocationItemList;
