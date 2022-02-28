@@ -1,15 +1,6 @@
-import PropertyReviewItem from '../property-review-item/property-review-item';
+import { Review } from '../../types/offer';
 
-type Review = {
-    author: string,
-    avatar: string,
-    rating: number,
-    text: string,
-    date: {
-      month: string,
-      year: number
-    }
-}
+import PropertyReviewItem from '../property-review-item/property-review-item';
 
 type PropertyReviewsListProps = {
     reviews: Review[]
@@ -19,10 +10,9 @@ function PropertyReviewsList({ reviews }: PropertyReviewsListProps) {
     <>
       <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
-        {reviews.map((review) => <PropertyReviewItem key='' review={review} />)}
+        {reviews.map((review, idx) => <PropertyReviewItem key={idx.toString()} review={review} />)}
       </ul>
     </>
   );
 }
-
 export default PropertyReviewsList;

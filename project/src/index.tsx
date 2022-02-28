@@ -1,24 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app/app';
-import { AuthorizationStatus } from './const';
 
-const Cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+import App from './components/app/app';
+import { AuthorizationStatus, LocationItem } from './const';
+import { locationOffers } from './mocks/offers';
+import { generateUser } from './mocks/user';
 
 const Settings = {
-  CITIES: Cities,
-  ACTIVE_CITY: Cities[0],
   AUTHORIZATION_STATUS: AuthorizationStatus.Auth,
-  PLACES_COUNT: 312,
-  FAVORITES_COUNT: 0,
+  BASE_LOCATION: LocationItem.Paris,
+  FAVORITES_COUNT: locationOffers.map(({ location, offers }) => ({ location, offers: offers.filter(({ favorite }) => favorite) })).length,
 };
 
 const initialState = {
   authorizationStatus: Settings.AUTHORIZATION_STATUS,
-  placesCount: Settings.PLACES_COUNT,
+  baseLocation: Settings.BASE_LOCATION,
   favoritesCount: Settings.FAVORITES_COUNT,
-  cities: Settings.CITIES,
-  activeCity: Settings.ACTIVE_CITY,
+  offers: locationOffers,
+  user: generateUser(Settings.AUTHORIZATION_STATUS),
 };
 
 ReactDOM.render(

@@ -1,15 +1,5 @@
+import { Review } from '../../types/offer';
 import Rating from '../rating/rating';
-
-type Review = {
-    author: string,
-    avatar: string,
-    rating: number,
-    text: string,
-    date: {
-      month: string,
-      year: number
-    }
-}
 
 type PropertyReviewItemProps = {
     review: Review

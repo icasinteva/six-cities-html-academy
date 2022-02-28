@@ -1,4 +1,4 @@
-import PlaceCard from '../place-card/place-card';
+import OfferCard from '../offer-card/offer-card';
 
 const info = {
   id: '3792ywigfeurt47-near',
@@ -17,9 +17,9 @@ function NearPlaces() {
       <section className="near-places places">
         <h2 className="near-places__title">Other places in the neighbourhood</h2>
         <div className="near-places__list places__list">
-          <PlaceCard className='near-places' info={info} />
-          <PlaceCard className='near-places' info={{...info, premium: false, favorite: false}} />
-          <PlaceCard className='near-places' info={info} />
+          <OfferCard className='near-places' info={info} />
+          <OfferCard className='near-places' info={{...info, premium: false, favorite: false}} />
+          <OfferCard className='near-places' info={info} />
         </div>
       </section>
     </div>

@@ -23,7 +23,7 @@ function Host({ host }: HostProps) {
         {pro && <span className="property__user-status">Pro</span>}
       </div>
       <div className="property__description">
-        {description.map((text) =>(<p key='' className="property__text">{text}</p>))}
+        {description.map((text, idx) =>(<p key={idx.toString()} className="property__text">{text}</p>))}
       </div>
     </div>
   );
