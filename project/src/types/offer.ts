@@ -24,6 +24,8 @@ export type Card = {
     favorite?: boolean,
     id: string,
     imageSrc: string,
+    lat: number,
+    lng: number,
     premium?: boolean,
     price: number,
     rating: number,

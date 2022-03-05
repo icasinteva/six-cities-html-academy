@@ -1,4 +1,4 @@
-import Map from '../../components/map/map';
+// import Map from '../../components/map/map';
 import NearPlaces from '../../components/near-places/near-places';
 import PropertyInfo from '../../components/property-info/property-info';
 import PropertyReviewsList from '../../components/property-reviews-list/property-reviews-list';
@@ -14,6 +14,7 @@ function Room({userName}: RoomProps) {
   const { id } = useParams();
   const [defaultOffer] = offers;
   const info = offers.find((offer) => offer.id === id) ?? defaultOffer;
+  const nearOffers = offers.filter((offer) => offer.id !== id);
 
   return (
     <>
@@ -49,9 +50,9 @@ function Room({userName}: RoomProps) {
             </section>
           </div>
         </div>
-        <Map className='property' />
+        {/* <Map className='property' /> */}
       </section>
-      <NearPlaces />
+      <NearPlaces offers={nearOffers} />
     </>
   );
 }

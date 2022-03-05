@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-curly-newline */
 import classNames from 'classnames';
-import OffersList from '../offers-list/offers-list';
+import Places from '../places/places';
 import NoPlaces from '../no-places/no-places';
 import { Offers } from '../../types/offer';
-import { LocationItem } from '../../const';
+import { City } from '../../types/map';
 
 type LocationProps = {
-  location: LocationItem,
+  location: City,
   offers: Offers
 }
 
@@ -19,8 +20,9 @@ function Location({ location, offers }: LocationProps) {
     <div className="cities">
       <div className={citiesClassName}>
         {placesCount ?
-          <OffersList location={location} placesCount={placesCount} /> :
-          <NoPlaces location={location} />}
+          <Places location={location} offers={offers} placesCount={placesCount} /> :
+          <NoPlaces location={location.title} />
+        }
       </div>
     </div>);
 }

@@ -1,26 +1,16 @@
-import OfferCard from '../offer-card/offer-card';
+import { Offers } from '../../types/offer';
+import OffersList from '../offers-list/offers-list';
 
-const info = {
-  id: '3792ywigfeurt47-near',
-  premium: true,
-  favorite: true,
-  type: 'Apartment',
-  rating: 4,
-  price: 120,
-  title: 'Beautiful & luxurious apartment at great location',
-  imageSrc: 'img/apartment-01.jpg',
-};
+type NearPlacesProps = {
+  offers: Offers
+}
 
-function NearPlaces() {
+function NearPlaces({offers}: NearPlacesProps) {
   return (
     <div className="container">
       <section className="near-places places">
         <h2 className="near-places__title">Other places in the neighbourhood</h2>
-        <div className="near-places__list places__list">
-          <OfferCard className='near-places' info={info} />
-          <OfferCard className='near-places' info={{...info, premium: false, favorite: false}} />
-          <OfferCard className='near-places' info={info} />
-        </div>
+        <OffersList offers={offers} className='near-places' />
       </section>
     </div>
   );
