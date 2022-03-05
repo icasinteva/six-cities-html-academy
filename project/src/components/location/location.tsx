@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-curly-newline */
 import classNames from 'classnames';
 import Places from '../places/places';
 import NoPlaces from '../no-places/no-places';
@@ -21,8 +20,7 @@ function Location({ location, offers }: LocationProps) {
       <div className={citiesClassName}>
         {placesCount ?
           <Places location={location} offers={offers} placesCount={placesCount} /> :
-          <NoPlaces location={location.title} />
-        }
+          <NoPlaces location={location.title} />}
       </div>
     </div>);
 }

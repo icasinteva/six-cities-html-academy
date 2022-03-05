@@ -9,10 +9,10 @@ import { Card } from '../../types/offer';
 type OfferCardProps = {
   className: string,
   info: Card,
-  onListItemHover?: (listItemName: string) => void,
+  onOfferCardHover?: (listItemName: string) => void,
 }
 
-function OfferCard({ className, info, onListItemHover }: OfferCardProps) {
+function OfferCard({ className, info, onOfferCardHover }: OfferCardProps) {
   const {id, premium, favorite, rating, price, type, title, imageSrc} = info;
   const classNameCard = classNames({
     [`${className}__place-card place-card`]: className === 'cities',
@@ -22,12 +22,12 @@ function OfferCard({ className, info, onListItemHover }: OfferCardProps) {
   const classNameInfo = `${className}__card-info place-card__info`;
   const offerRoute = AppRoute.Room.replace(':id', id);
 
-  const listItemHoverHandler = () => {
-    onListItemHover?.(id);
+  const handleOfferCardHover = () => {
+    onOfferCardHover?.(id);
   };
 
   return (
-    <article className={classNameCard}>
+    <article className={classNameCard} onMouseEnter={handleOfferCardHover}>
       {
         premium &&
         <div className="place-card__mark">
@@ -35,7 +35,7 @@ function OfferCard({ className, info, onListItemHover }: OfferCardProps) {
         </div>
       }
       <div className={classNameImageWrapper}>
-        <Link to={offerRoute} onMouseEnter={listItemHoverHandler}>
+        <Link to={offerRoute}>
           <img className="place-card__image" src={imageSrc} alt="Place image" />
         </Link>
       </div>

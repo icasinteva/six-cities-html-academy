@@ -13,5 +13,3 @@ export type Point = {
     lng: number;
   };
 
-export type Cities = City[]
-

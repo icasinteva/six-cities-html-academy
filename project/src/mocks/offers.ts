@@ -2,7 +2,6 @@ import { LocationItem } from '../const';
 import { LocationOffers, Offers } from '../types/offer';
 import { reviews } from './reviews';
 
-// const generateId = () => `${Math.floor(Math.random() * 100)}`;
 const generateRating = () => Math.floor(Math.random() * 5) + 1;
 const generatePrice = () => Math.floor(Math.random() * 355) + 90;
 

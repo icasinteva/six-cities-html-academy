@@ -12,13 +12,23 @@ type PlacesProps = {
 }
 
 function Places({ location, offers, placesCount }: PlacesProps) {
-  const [selectedPoint, setSelectedPoint] = useState<Point | undefined>(
-    undefined,
+  const [selectedPoint, setSelectedPoint] = useState<Point | null>(
+    null,
   );
 
-  const onListItemHover = (listItemName: string) => {
-    const currentPoint = offers.find((offer) => offer.title === listItemName);
-    setSelectedPoint(currentPoint);
+  const handleOfferCardHover = (offerId: string) => {
+    const currentOffer = offers.find((offer) => offer.id === offerId);
+
+    if (currentOffer) {
+      const { id, lat, lng } = currentOffer;
+      const currentPoint = {
+        title: id,
+        lat,
+        lng,
+      };
+
+      setSelectedPoint(currentPoint);
+    }
   };
 
   return (
@@ -27,7 +37,7 @@ function Places({ location, offers, placesCount }: PlacesProps) {
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{placesCount} places to stay in {location.title}</b>
         <Sorting sortOption='Popular' />
-        <OffersList offers={offers}  className='cities' onListItemHover={onListItemHover} />
+        <OffersList offers={offers}  className='cities' onOfferCardHover={handleOfferCardHover} />
       </section>
       <div className="cities__right-section">
         <Map className='cities' location={location} offers={offers} selectedPoint={selectedPoint} />

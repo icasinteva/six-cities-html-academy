@@ -18,7 +18,7 @@ function Main({ baseLocation, offers, onLayoutChange }: MainProps) {
   const locationOffers = useMemo(() => offers.find((offer) => offer.location === activeLocation.title)?.offers ?? [], [offers, activeLocation]);
 
   const handleLocationClick = (title: LocationItem) => {
-    const currentLocation = CITIES.find((city) => city.title === title) || baseLocation;
+    const currentLocation = CITIES.find((city) => city.title === title) ?? baseLocation;
     const {lat, lng, zoom} = currentLocation;
     setActiveLocation({
       title,

@@ -10,7 +10,7 @@ import { Offers } from '../../types/offer';
 type MapProps = {
   location: City;
   offers: Offers,
-  selectedPoint: Point | undefined;
+  selectedPoint: Point | null;
   className: string
 };
 
@@ -37,7 +37,7 @@ function Map(props: MapProps): JSX.Element {
       offers.forEach((offer) => {
         new Marker(offer)
           .setIcon(
-            selectedPoint !== undefined && offer.id === selectedPoint.title
+            selectedPoint && offer.id === selectedPoint.title
               ? currentCustomIcon
               : defaultCustomIcon,
           )
