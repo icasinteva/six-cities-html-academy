@@ -5,6 +5,7 @@ type SortingProps = {
 }
 
 function Sorting({ sortOption }: SortingProps) {
+
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
@@ -15,7 +16,7 @@ function Sorting({ sortOption }: SortingProps) {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <SortingList selectedOption={sortOption} />
+      <SortingList isOpened={false} selectedOption={sortOption} />
     </form>
   );
 }

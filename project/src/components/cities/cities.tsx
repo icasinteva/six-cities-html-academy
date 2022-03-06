@@ -4,25 +4,25 @@ import NoPlaces from '../no-places/no-places';
 import { Offers } from '../../types/offer';
 import { City } from '../../types/map';
 
-type LocationProps = {
-  location: City,
+type CitiesProps = {
+  city: City,
   offers: Offers
 }
 
-function Location({ location, offers }: LocationProps) {
-  const placesCount = offers.length;
+function Cities({ city, offers }: CitiesProps) {
+  const offersCount = offers.length;
   const citiesClassName = classNames('cities__places-container', 'container', {
-    'cities__places-container--empty': !placesCount,
+    'cities__places-container--empty': !offersCount,
   });
 
   return (
     <div className="cities">
       <div className={citiesClassName}>
-        {placesCount ?
-          <Places location={location} offers={offers} placesCount={placesCount} /> :
-          <NoPlaces location={location.title} />}
+        {offersCount ?
+          <Places city={city} offers={offers} offersCount={offersCount} /> :
+          <NoPlaces city={city} />}
       </div>
     </div>);
 }
 
-export default Location;
+export default Cities;

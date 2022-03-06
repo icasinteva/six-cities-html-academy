@@ -1,42 +1,55 @@
-import { useState, useMemo, useEffect } from 'react';
-import Location from '../../components/location/location';
-import LocationItemList from '../../components/locations-list/locations-list';
-import { LocationItem } from '../../const';
-import { LocationOffers } from '../../types/offer';
-import {City} from '../../types/map';
-import { CITIES } from '../../mocks/city';
+import { useState, useEffect } from 'react';
+import CitiesList from '../../components/cities-list/cities-list';
+import { City } from '../../types/map';
+import Places from '../../components/places/places';
+import NoPlaces from '../../components/no-places/no-places';
+import classNames from 'classnames';
+import { Offer } from '../../types/offer';
+import { CITIES } from '../../const';
+import { getOffersByCity } from '../../helpers';
 
 type MainProps = {
-  baseLocation: City,
-  offers: LocationOffers,
+  baseCity: City,
+  offers: Offer[],
   onLayoutChange: (val: boolean) => void
 }
 
-function Main({ baseLocation, offers, onLayoutChange }: MainProps) {
-  const [activeLocation, setActiveLocation] = useState(baseLocation);
+function Main({ baseCity, offers, onLayoutChange }: MainProps) {
+  const [currentCity, setCurrentCity] = useState(baseCity);
 
-  const locationOffers = useMemo(() => offers.find((offer) => offer.location === activeLocation.title)?.offers ?? [], [offers, activeLocation]);
+  const offersByCity = getOffersByCity(offers, currentCity.name);
 
-  const handleLocationClick = (title: LocationItem) => {
-    const currentLocation = CITIES.find((city) => city.title === title) ?? baseLocation;
-    const {lat, lng, zoom} = currentLocation;
-    setActiveLocation({
-      title,
-      lat,
-      lng,
-      zoom,
+  const offersByCityCount = offersByCity.length;
+
+  const citiesClassName = classNames('cities__places-container', 'container', {
+    'cities__places-container--empty': !offersByCityCount,
+  });
+
+  const handleCityItemClick = (name: string) => {
+    const selectedCity = CITIES.find((city) => city.name === name) ?? baseCity;
+    const { location } = selectedCity;
+
+    setCurrentCity({
+      location,
+      name,
     });
   };
 
   useEffect(() => {
-    onLayoutChange(!locationOffers.length);
-  }, [locationOffers]);
+    onLayoutChange(!offersByCity.length);
+  }, [offersByCity]);
 
   return (
     <>
       <h1 className="visually-hidden">Cities</h1>
-      <LocationItemList activeLocation={activeLocation.title} onClick={handleLocationClick} />
-      <Location location={activeLocation} offers={locationOffers} />
+      <CitiesList currentCity={currentCity} onClick={handleCityItemClick} />
+      <div className="cities">
+        <div className={citiesClassName}>
+          {offersByCityCount ?
+            <Places city={currentCity} offers={offersByCity} offersCount={offersByCityCount} /> :
+            <NoPlaces city={currentCity} />}
+        </div>
+      </div>);
     </>
   );
 }

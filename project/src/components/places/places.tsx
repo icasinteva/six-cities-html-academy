@@ -1,30 +1,31 @@
 import Map from '../map/map';
 import Sorting from '../sorting/sorting';
 import { useState } from 'react';
-import {City, Point} from '../../types/map';
+import {City, Location} from '../../types/map';
 import { Offers } from '../../types/offer';
 import OffersList from '../offers-list/offers-list';
+import { MAP_ZOOM } from '../../const';
 
 type PlacesProps = {
-  location: City,
+  city: City,
   offers: Offers,
-  placesCount: number
+  offersCount: number
 }
 
-function Places({ location, offers, placesCount }: PlacesProps) {
-  const [selectedPoint, setSelectedPoint] = useState<Point | null>(
+function Places({ city, offers, offersCount }: PlacesProps) {
+  const [selectedPoint, setSelectedPoint] = useState<Location | null>(
     null,
   );
 
-  const handleOfferCardHover = (offerId: string) => {
+  const handleOfferCardHover = (offerId: number) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
 
-    if (currentOffer) {
-      const { id, lat, lng } = currentOffer;
+    if (currentOffer && currentOffer.location) {
+      const { latitude, longitude } = currentOffer.location;
       const currentPoint = {
-        title: id,
-        lat,
-        lng,
+        latitude,
+        longitude,
+        zoom: MAP_ZOOM,
       };
 
       setSelectedPoint(currentPoint);
@@ -35,12 +36,12 @@ function Places({ location, offers, placesCount }: PlacesProps) {
     <>
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{placesCount} places to stay in {location.title}</b>
+        <b className="places__found">{offersCount} places to stay in {city.name}</b>
         <Sorting sortOption='Popular' />
-        <OffersList offers={offers}  className='cities' onOfferCardHover={handleOfferCardHover} />
+        <OffersList offers={offers} className='cities' onOfferCardHover={handleOfferCardHover} />
       </section>
       <div className="cities__right-section">
-        <Map className='cities' location={location} offers={offers} selectedPoint={selectedPoint} />
+        <Map className='cities' city={city} offers={offers} selectedPoint={selectedPoint} />
       </div>
     </>
   );

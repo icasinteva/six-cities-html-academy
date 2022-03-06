@@ -4,23 +4,24 @@ import Price from '../price/price';
 import { Link } from 'react-router-dom';
 import FavoriteButton from '../favorite-button/favorite-button';
 import { AppRoute } from '../../const';
-import { Card } from '../../types/offer';
+import { Offer } from '../../types/offer';
+import { capitalize } from '../../helpers';
 
 type OfferCardProps = {
   className: string,
-  info: Card,
-  onOfferCardHover?: (listItemName: string) => void,
+  offer: Offer,
+  onOfferCardHover?: (offerId: number) => void,
 }
 
-function OfferCard({ className, info, onOfferCardHover }: OfferCardProps) {
-  const {id, premium, favorite, rating, price, type, title, imageSrc} = info;
+function OfferCard({ className, offer, onOfferCardHover }: OfferCardProps) {
+  const { id, isPremium, isFavorite, rating, price, type, title, previewImage } = offer;
   const classNameCard = classNames({
     [`${className}__place-card place-card`]: className === 'cities',
     [`${className}__card place-card`]: className !== 'cities',
   });
   const classNameImageWrapper = `${className}__image-wrapper place-card__image-wrapper`;
-  const classNameInfo = `${className}__card-info place-card__info`;
-  const offerRoute = AppRoute.Room.replace(':id', id);
+  const classNameInfo = `${className}__card-offer place-card__offer`;
+  const offerRoute = AppRoute.Room.replace(':id', `${id}`);
 
   const handleOfferCardHover = () => {
     onOfferCardHover?.(id);
@@ -29,26 +30,26 @@ function OfferCard({ className, info, onOfferCardHover }: OfferCardProps) {
   return (
     <article className={classNameCard} onMouseEnter={handleOfferCardHover}>
       {
-        premium &&
+        isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       }
       <div className={classNameImageWrapper}>
         <Link to={offerRoute}>
-          <img className="place-card__image" src={imageSrc} alt="Place image" />
+          <img className="place-card__image" src={previewImage} alt="Place" />
         </Link>
       </div>
       <div className={classNameInfo}>
         <div className="place-card__price-wrapper">
           <Price amount={price} className='place-card' />
-          <FavoriteButton className='place-card' favorite={favorite} size={{width: 18, height: 19}} />
+          <FavoriteButton className='place-card' isFavorite={isFavorite} size={{width: 18, height: 19}} />
         </div>
         <Rating className='place-card' rating={rating} />
         <h2 className="place-card__name">
           <Link to={offerRoute}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalize(type)}</p>
       </div>
     </article>);
 }

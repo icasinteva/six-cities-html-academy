@@ -1,9 +1,9 @@
 import OfferCard from '../offer-card/offer-card';
-import FavoritesLocationItemItem from '../locations-item/favorites-locations-item';
-import { LocationOffers } from '../../types/offer';
+import FavoritesCityItem from '../city-item/favorites-city-item';
+import { FavoritesByCity } from '../../types/offer';
 
 type FavoritesListProps = {
-  favorites: LocationOffers
+  favorites: FavoritesByCity
 }
 
 function FavoritesList({ favorites }: FavoritesListProps) {
@@ -11,15 +11,17 @@ function FavoritesList({ favorites }: FavoritesListProps) {
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
-        {favorites.map(({ location, offers }) => (
-          <li key={location} className="favorites__locations-items">
-            <div className="favorites__locations locations locations--current">
-              <FavoritesLocationItemItem location={location} />
-            </div>
-            <div className="favorites__places">
-              {offers.map((offer) => <OfferCard key={offer.id} className='favorites' info={offer} />)}
-            </div>
-          </li>))}
+        {
+          Object.entries(favorites).map(([city, offers], idx) => (
+            <li key={idx.toString()} className="favorites__locations-items">
+              <div className="favorites__locations locations locations--current">
+                <FavoritesCityItem cityName={city} />
+              </div>
+              <div className="favorites__places">
+                {offers.map((offer) => <OfferCard key={offer.id} className='favorites' offer={offer} />)}
+              </div>
+            </li>))
+        }
       </ul>
     </section>
   );

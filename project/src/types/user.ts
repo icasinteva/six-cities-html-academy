@@ -1,5 +1,8 @@
 export type User = {
-    userName: string,
-    avatar?: string,
-    email?: string,
+    avatarUrl?: string
+    email?: string
+    id?: number
+    isPro?: boolean
+    name: string
+    token?: string
 }

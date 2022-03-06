@@ -2,18 +2,18 @@ import classNames from 'classnames';
 
 type FavoriteButtonProps = {
     className: string,
-    favorite?: boolean,
+    isFavorite: boolean,
     size: {
         width: number,
         height: number
     }
 }
 
-function FavoriteButton({ className, favorite, size }: FavoriteButtonProps) {
+function FavoriteButton({ className, isFavorite, size }: FavoriteButtonProps) {
   const {width, height} = size;
   const classNameFavorite = `${className}__bookmark-button--active`;
   const bookmarkClassName = classNames(`${className}__bookmark-button`, 'button', {
-    [classNameFavorite]: favorite,
+    [classNameFavorite]: isFavorite,
   });
 
   return (

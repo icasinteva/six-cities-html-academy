@@ -1,52 +1,49 @@
-import { LocationItem } from '../const';
+import { City, Location } from './map';
 
-type Host = {
-    pro: boolean,
-    name: string,
-    avatar: string,
-    description: string[],
+export type Host = {
+    avatarUrl: string
+    id: number
+    isPro: boolean
+    name: string
 }
 
 export type Review = {
-    author: string,
-    avatar: string,
-    rating: number,
-    text: string,
-    date: {
-      month: string,
-      year: number
+    comment: string
+    date: string
+    id: number
+    rating: number
+    user: {
+        avatarUrl: string
+        id: number
+        isPro: boolean
+        name: string
     }
 }
 
 export type Reviews = Review[]
 
-export type Card = {
-    favorite?: boolean,
-    id: string,
-    imageSrc: string,
-    lat: number,
-    lng: number,
-    premium?: boolean,
-    price: number,
-    rating: number,
-    title: string,
-    type: string,
+export type Offer = {
+    bedrooms: number
+    city: City
+    description: string
+    goods: string[]
+    host: Host
+    id: number
+    images: string[]
+    isFavorite: boolean
+    isPremium: boolean
+    location: Location
+    maxAdults: number
+    previewImage: string
+    price: number
+    rating: number
+    title: string
+    type: string
 }
-
-type AdditionalInfo = {
-    gallery: string[],
-    facilities: string[],
-    host: Host,
-    reviews: Review[]
-}
-
-export type Offer = Card & AdditionalInfo
 
 export type Offers = Offer[]
 
-type LocationOffer = {
-    location: LocationItem,
-    offers: Offers
+export type FavoritesByCity = {
+    [key: string]: Offer[],
 }
 
-export type LocationOffers = LocationOffer[]
