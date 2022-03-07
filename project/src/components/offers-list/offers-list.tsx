@@ -3,9 +3,9 @@ import { Offers } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
 
 type OffersListProps = {
-    offers: Offers,
-    className: string,
-    onOfferCardHover?: (listItemName: string) => void,
+  offers: Offers,
+  className: string,
+  onOfferCardHover?: (offerId: number) => void,
 }
 
 function OffersList({ offers, className, onOfferCardHover }: OffersListProps) {
@@ -17,10 +17,7 @@ function OffersList({ offers, className, onOfferCardHover }: OffersListProps) {
 
   return (
     <div className={offersListClassName}>
-      {offers.map((offer) => {
-        const { facilities, host, reviews, ...card } = offer;
-        return <OfferCard key={card.id} info={card} className={className} onOfferCardHover={onOfferCardHover} />;
-      })}
+      {offers.map((offer, idx) => <OfferCard key={idx.toString()} offer={offer} className={className} onOfferCardHover={onOfferCardHover} />)}
     </div>);
 }
 

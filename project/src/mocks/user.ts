@@ -1,9 +1,12 @@
 import { AuthorizationStatus } from '../const';
 
 export const generateUser = (authorizationStatus: AuthorizationStatus) => authorizationStatus === AuthorizationStatus.Auth ? {
-  userName: 'Oliver',
+  id: 1,
+  isPro: false,
+  name: 'Oliver',
   email: 'Oliver.conner@gmail.com',
-  avatar:'img/avatar-angelina.jpg',
+  avatarUrl: 'img/avatar-angelina.jpg',
+  token: 'qhdowry9283rrw',
 } : {
-  userName: 'Anonim',
+  name: 'Anonim',
 };

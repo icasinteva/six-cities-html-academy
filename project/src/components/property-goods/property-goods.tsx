@@ -1,13 +1,13 @@
-type PropertyFacilitiesProps = {
-    facilities: string[]
+type PropertyGoodsProps = {
+    goods: string[]
 }
 
-function PropertyFacilities({ facilities }: PropertyFacilitiesProps) {
+function PropertyGoods({ goods }: PropertyGoodsProps) {
   return (
     <div className="property__inside">
       <h2 className="property__inside-title">What&apos;s inside</h2>
       <ul className="property__inside-list">
-        {facilities.map((facility, idx) => (
+        {goods.map((facility, idx) => (
           <li key={idx.toString()} className="property__inside-item">
             {facility}
           </li>
@@ -17,4 +17,4 @@ function PropertyFacilities({ facilities }: PropertyFacilitiesProps) {
   );
 }
 
-export default PropertyFacilities;
+export default PropertyGoods;

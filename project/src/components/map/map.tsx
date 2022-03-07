@@ -1,16 +1,16 @@
 import { useRef, useEffect, useState } from 'react';
 import {Icon, Marker} from 'leaflet';
 import useMap from '../../hooks/useMap';
-import {City, Point} from '../../types/map';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
+import {City, Location} from '../../types/map';
+import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, BASE_CITY} from '../../const';
 import 'leaflet/dist/leaflet.css';
-import { CITY } from '../../mocks/city';
 import { Offers } from '../../types/offer';
 
 type MapProps = {
-  location: City;
+  resetable?: boolean,
+  city: City;
   offers: Offers,
-  selectedPoint: Point | null;
+  selectedPoint: Location | null;
   className: string
 };
 
@@ -26,30 +26,41 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40],
 });
 
-function Map(props: MapProps): JSX.Element {
-  const { location, offers, selectedPoint, className } = props;
+function Map({ city, offers, selectedPoint, className, resetable }: MapProps): JSX.Element {
+  const { location, name } = city;
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
-  const [currentLocation, setCurrentLocation] = useState(CITY.title);
+  const [currentCityName, setCurrentCityName] = useState(BASE_CITY.name);
 
   useEffect(() => {
     if (map) {
       offers.forEach((offer) => {
-        new Marker(offer)
+        const { latitude, longitude } = offer.location;
+
+        new Marker({
+          lat: latitude,
+          lng: longitude,
+        })
           .setIcon(
-            selectedPoint && offer.id === selectedPoint.title
+            selectedPoint && latitude === selectedPoint.latitude && longitude === selectedPoint.longitude
               ? currentCustomIcon
               : defaultCustomIcon,
           )
           .addTo(map);
       });
 
-      if (location.title !== currentLocation) {
-        map.setView(location);
-        setCurrentLocation(location.title);
+      if (name !== currentCityName) {
+        const { latitude, longitude } = location;
+
+        map.setView({
+          lat: latitude,
+          lng: longitude,
+        });
+
+        setCurrentCityName(name);
       }
     }
-  }, [map, offers, selectedPoint, location]);
+  }, [currentCityName, location, map, name, offers, selectedPoint]);
 
   return <section className={`${className}__map map`} style={{ height: '500px' }} ref={mapRef}></section>;
 }

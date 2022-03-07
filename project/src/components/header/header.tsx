@@ -26,7 +26,7 @@ function Header({ authorizationStatus, user }: HeaderProps) {
               <li className="header__nav-item user">
                 <Link className="header__nav-link header__nav-link--profile" to={isAuthorised ? AppRoute.Favorites : AppRoute.SignIn}>
                   <div className="header__avatar-wrapper user__avatar-wrapper">
-                    {isAuthorised && <img className="user__avatar" src={user.avatar} alt='Avatar' />}
+                    {isAuthorised && <img className="user__avatar" src={user.avatarUrl} alt='Avatar' />}
                   </div>
                   {isAuthorised ? <span className="header__user-name user__name">{user.email}</span> : <span className="header__login">Sign in</span>}
                 </Link>
