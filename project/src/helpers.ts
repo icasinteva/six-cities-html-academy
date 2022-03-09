@@ -1,10 +1,10 @@
 
-import { FavoritesByCity, Offers } from './types/offer';
+import { FavoritesByCity, Offer } from './types/offer';
 
-export const getOffersByCity = (offers: Offers, activeCity: string) => offers.filter(({ city }) => city.name === activeCity) ?? [];
+export const getOffersByCity = (offers: Offer[], activeCity: string) => offers?.filter(({ city }) => city.name === activeCity) ?? [];
 
-export const getFavorites = (offers: Offers) => {
-  const favorites = offers.filter(({ isFavorite }) => isFavorite);
+export const getFavorites = (offers: Offer[]) => {
+  const favorites = offers?.filter(({ isFavorite }) => isFavorite) || [];
   const favoritesByCity: FavoritesByCity = {};
 
   for (const data of favorites) {
@@ -20,8 +20,6 @@ export const getFavorites = (offers: Offers) => {
 
   return favoritesByCity;
 };
-
-export const capitalize = (text: string): string => text[0].toUpperCase() + text.slice(1, text.length);
 
 export const formatDate = (value: string) => {
   const date = new Date(value);

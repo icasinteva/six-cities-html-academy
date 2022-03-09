@@ -1,20 +1,19 @@
 import { CITIES } from '../../const';
 import { City } from '../../types/map';
-import CitiesListItem from '../city-item/city-item';
+import CitiesListItem from '../cities-list-item/cities-list-item';
 type CitiesListProps = {
-  currentCity: City,
-  onClick: (city: string) => void
+  currentCity: City
 }
 
-function CitiesList({ currentCity, onClick }: CitiesListProps) {
+function CitiesList({ currentCity }: CitiesListProps) {
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {CITIES.map((city, idx) => {
+          {CITIES.map((city) => {
             const isActive = city.name === currentCity.name;
 
-            return <CitiesListItem key={idx.toString()} cityName={city.name} isActive={isActive} onClick={onClick} />;
+            return <CitiesListItem key={city.name} cityName={city.name} isActive={isActive} />;
           })}
         </ul>
       </section>

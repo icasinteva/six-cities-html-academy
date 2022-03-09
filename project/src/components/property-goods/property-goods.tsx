@@ -7,9 +7,9 @@ function PropertyGoods({ goods }: PropertyGoodsProps) {
     <div className="property__inside">
       <h2 className="property__inside-title">What&apos;s inside</h2>
       <ul className="property__inside-list">
-        {goods.map((facility, idx) => (
-          <li key={idx.toString()} className="property__inside-item">
-            {facility}
+        {goods.map((good) => (
+          <li key={good} className="property__inside-item">
+            {good}
           </li>
         ))}
       </ul>

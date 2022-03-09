@@ -1,3 +1,5 @@
+import { City } from './types/map';
+
 export enum AppRoute {
     Main = '/',
     SignIn = '/login',
@@ -11,9 +13,25 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum OfferType {
+  APPARTMENT = 'appartment',
+  ROOM = 'room',
+  HOUSE = 'house',
+  HOTEL = 'hotel'
+}
+
+export const OFFERTYPE_TO_LABEL = {
+  [OfferType.APPARTMENT]: 'Apartment',
+  [OfferType.ROOM]: 'Room',
+  [OfferType.HOUSE]: 'House',
+  [OfferType.HOTEL]: 'Hotel',
+};
+
+export const GALLERY_IMAGES_COUNT = 6;
+
 export const MAP_ZOOM = 12;
 
-export const CITIES = [
+export const CITIES: City[] = [
   {
     location: {
       latitude: 48.8566,
@@ -64,7 +82,7 @@ export const CITIES = [
   },
 ];
 
-export const BASE_CITY = CITIES[3];
+export const [ BASE_CITY ] = CITIES;
 
 export const URL_MARKER_DEFAULT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';

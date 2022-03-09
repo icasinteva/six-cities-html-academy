@@ -1,4 +1,4 @@
-import CitiesListItemLink from './city-item-link';
+import CitiesListItemLink from './cities-list-item-link';
 
 type FavoritesCityItemProps = {
   cityName: string

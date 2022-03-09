@@ -1,4 +1,4 @@
-import FavoritesCityItem from '../../components/city-item/favorites-city-item';
+import FavoritesCityItem from '../../components/cities-list-item/favorites-cities-list-item';
 
 type LoginProps = {
   cityName: string

@@ -4,7 +4,7 @@ import HostView from '../host-view/host-view';
 import Price from '../price/price';
 import FavoriteButton from '../favorite-button/favorite-button';
 import { Offer } from '../../types/offer';
-import { capitalize } from '../../helpers';
+import { OFFERTYPE_TO_LABEL } from '../../const';
 
 type PropertyInfoProps = {
   offer: Offer
@@ -26,7 +26,7 @@ function PropertyInfo({ offer }: PropertyInfoProps) {
       <PropertyRating rating={rating} />
       <ul className="property__features">
         <li className="property__feature property__feature--entire">
-          {capitalize(type)}
+          {OFFERTYPE_TO_LABEL[type]}
         </li>
         <li className="property__feature property__feature--bedrooms">
           {`${bedrooms} Bedrooms`}
