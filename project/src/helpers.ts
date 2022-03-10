@@ -1,10 +1,10 @@
 
 import { FavoritesByCity, Offer } from './types/offer';
 
-export const getOffersByCity = (offers: Offer[], activeCity: string) => offers?.filter(({ city }) => city.name === activeCity) ?? [];
+export const getOffersByCity = (offers: Offer[], activeCity: string) => offers.filter(({ city }) => city.name === activeCity) ?? [];
 
 export const getFavorites = (offers: Offer[]) => {
-  const favorites = offers?.filter(({ isFavorite }) => isFavorite) || [];
+  const favorites = offers.filter(({ isFavorite }) => isFavorite) || [];
   const favoritesByCity: FavoritesByCity = {};
 
   for (const data of favorites) {

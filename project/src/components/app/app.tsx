@@ -25,7 +25,7 @@ function App({ authorizationStatus, offers, user }: AppProps): JSX.Element {
   const city = useAppSelector((state) => state.city);
 
   useEffect(() => {
-    dispatch(getOffers(city.name));
+    dispatch(getOffers());
   }, [city, dispatch]);
 
   const offersByCity = useAppSelector((state) => state.offers);
