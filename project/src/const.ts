@@ -1,4 +1,5 @@
 import { City } from './types/map';
+import { SortingOptionToCallbackType } from './types/sorting';
 
 export enum AppRoute {
     Main = '/',
@@ -82,11 +83,18 @@ export const CITIES: City[] = [
   },
 ];
 
-export const [ BASE_CITY ] = CITIES;
+export const [ ,,, BASE_CITY ] = CITIES;
 
 export const URL_MARKER_DEFAULT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 
 export const URL_MARKER_CURRENT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+
+
+export const sortingOptionToCallback: SortingOptionToCallbackType = {
+  'Price: low to high': (offer1, offer2) => offer1.price - offer2.price,
+  'Price: high to low': (offer1, offer2) => offer2.price - offer1.price,
+  'Top rated first': (offer1, offer2) => offer2.rating - offer1.rating,
+};
 

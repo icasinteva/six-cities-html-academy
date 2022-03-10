@@ -17,7 +17,7 @@ function OffersList({ offers, className, onOfferCardHover }: OffersListProps) {
 
   return (
     <div className={offersListClassName}>
-      {offers?.map((offer) => <OfferCard key={offer.id} offer={offer} className={className} onOfferCardHover={onOfferCardHover} />)}
+      {offers.map((offer) => <OfferCard key={offer.id} offer={offer} className={className} onOfferCardHover={onOfferCardHover} />)}
     </div>);
 }
 

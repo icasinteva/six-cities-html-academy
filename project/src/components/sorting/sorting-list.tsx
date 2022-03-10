@@ -1,20 +1,39 @@
 import classNames from 'classnames';
+import { useAppDispatch } from '../../hooks/index';
+import { setSortingType, sortOffers } from '../../store/action';
 
 type SortingListProps = {
   isOpened: boolean,
   selectedOption: string
+  onSortingOptionClick: () => void
 }
 
 const sortingOptions = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
-function SortingList({ isOpened, selectedOption }: SortingListProps) {
+function SortingList({ isOpened, selectedOption, onSortingOptionClick }: SortingListProps) {
+  const dispatch = useAppDispatch();
   const sortingListClassName = classNames('places__options places__options--custom', {
     'places__options--opened': isOpened,
   });
 
   return (
     <ul className={sortingListClassName}>
-      {sortingOptions.map((option) => <li key={option} className={`places__option ${option === selectedOption ? ' places__option--active' : ''}`} tabIndex={0}>{option}</li>)}
+      {sortingOptions.map((option) => {
+        const sortingOptionClassName = classNames('places__option', {
+          'places__option--active': option === selectedOption,
+        });
+        return (
+          <li key={option} className={sortingOptionClassName} tabIndex={0} onClick={(ev) => {
+            if (ev.currentTarget.textContent) {
+              dispatch(setSortingType(ev.currentTarget?.textContent));
+              dispatch(sortOffers());
+            }
+
+            onSortingOptionClick();
+          }}
+          >{option}
+          </li>);
+      })}
     </ul>
   );
 }

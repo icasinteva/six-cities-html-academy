@@ -18,7 +18,7 @@ function FavoritesList({ favorites }: FavoritesListProps) {
                 <FavoritesCityItem cityName={city} />
               </div>
               <div className="favorites__places">
-                {offers?.map((offer) => <OfferCard key={offer.id} className='favorites' offer={offer} />)}
+                {offers.map((offer) => <OfferCard key={offer.id} className='favorites' offer={offer} />)}
               </div>
             </li>))
         }

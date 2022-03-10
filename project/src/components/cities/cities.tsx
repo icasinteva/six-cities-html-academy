@@ -10,7 +10,7 @@ type CitiesProps = {
 }
 
 function Cities({ city, offers }: CitiesProps) {
-  const offersCount = offers?.length;
+  const offersCount = offers.length;
   const citiesClassName = classNames('cities__places-container', 'container', {
     'cities__places-container--empty': !offersCount,
   });

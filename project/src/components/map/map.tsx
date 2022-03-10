@@ -34,7 +34,7 @@ function Map({ city, offers, selectedPoint, className, resetable }: MapProps): J
 
   useEffect(() => {
     if (map) {
-      offers?.forEach((offer) => {
+      offers.forEach((offer) => {
         const { latitude, longitude } = offer.location;
 
         new Marker({

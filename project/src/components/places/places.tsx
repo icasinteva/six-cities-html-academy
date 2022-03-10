@@ -18,7 +18,7 @@ function Places({ city, offers, offersCount }: PlacesProps) {
   );
 
   const handleOfferCardHover = (offerId: number) => {
-    const currentOffer = offers?.find((offer) => offer.id === offerId);
+    const currentOffer = offers.find((offer) => offer.id === offerId);
 
     if (currentOffer && currentOffer.location) {
       const { latitude, longitude } = currentOffer.location;
