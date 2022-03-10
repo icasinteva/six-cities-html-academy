@@ -3,39 +3,49 @@ import NearPlaces from '../../components/near-places/near-places';
 import PropertyInfo from '../../components/property-info/property-info';
 import PropertyReviewsList from '../../components/property-reviews-list/property-reviews-list';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
-import { offers } from '../../mocks/offers';
 import { useParams } from 'react-router-dom';
 import PropertyGallery from '../../components/property-gallery/property-gallery';
-import { reviews } from '../../mocks/reviews';
-import { useMemo } from 'react';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchOffer, fetchNearByHotels, fetchComments } from '../../store/api-actions';
 
 type RoomProps = {
-  userName: string,
-}
+  userName: string;
+};
 
 function Room({ userName }: RoomProps) {
   const { id } = useParams();
-  const [defaultOffer] = offers;
-  const currentOffer = offers.find((offer) => `${offer.id}` === id) ?? defaultOffer;
-  const nearOffers = useMemo(() => offers.filter((offer) => offer.city === currentOffer.city && `${offer.id}` !== id), [id]);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchOffer(id));
+      dispatch(fetchComments(id));
+      dispatch(fetchNearByHotels(id));
+    }
+  }, [id, dispatch]);
+
+  const { offer, nearByOffers, reviews } = useAppSelector((state) => state);
 
   return (
-    <>
-      <section className="property">
-        <PropertyGallery images={currentOffer.images} />
-        <div className="property__container container">
-          <div className="property__wrapper">
-            <PropertyInfo offer={currentOffer} />
-            <section className="property__reviews reviews">
-              <PropertyReviewsList reviews={reviews} />
-              <ReviewsForm />
-            </section>
+    offer && (
+      <>
+        <section className="property">
+          <PropertyGallery images={offer.images} />
+          <div className="property__container container">
+            <div className="property__wrapper">
+              <PropertyInfo offer={offer} />
+              <section className="property__reviews reviews">
+                <PropertyReviewsList reviews={reviews} />
+                <ReviewsForm />
+              </section>
+            </div>
           </div>
-        </div>
-        <Map className='property' city={currentOffer.city} offers={nearOffers} selectedPoint={null} resetable />
-      </section>
-      {nearOffers.length ? <NearPlaces offers={nearOffers} /> : null}
-    </>
+          <Map className='property' city={offer.city} offers={nearByOffers} selectedPoint={null} resetable />
+        </section>
+        { !!nearByOffers.length && <NearPlaces offers={nearByOffers} />}
+      </>
+    )
   );
 }
 export default Room;
