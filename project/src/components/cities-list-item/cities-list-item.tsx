@@ -1,13 +1,12 @@
 import classNames from 'classnames';
-import CitiesListItemLink from './city-item-link';
+import CitiesListItemLink from './cities-list-item-link';
 
 type CitiesListItemProps = {
   isActive?: boolean,
   cityName: string,
-  onClick: (cityName: string) => void,
 }
 
-function CitiesListItem({cityName, onClick, isActive }: CitiesListItemProps) {
+function CitiesListItem({cityName, isActive }: CitiesListItemProps) {
   return (
     <li className="locations__item">
       <CitiesListItemLink className={classNames({
@@ -15,7 +14,6 @@ function CitiesListItem({cityName, onClick, isActive }: CitiesListItemProps) {
         'tabs__item--active': isActive,
       })}
       cityName={cityName}
-      onClick={onClick}
       />
     </li>
   );

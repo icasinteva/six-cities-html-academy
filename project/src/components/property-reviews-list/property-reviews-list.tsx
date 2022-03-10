@@ -10,7 +10,7 @@ function PropertyReviewsList({ reviews }: PropertyReviewsListProps) {
     <>
       <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
-        {reviews.map((review, idx) => <PropertyReviewItem key={idx.toString()} review={review} />)}
+        {reviews.map((review, idx) => <PropertyReviewItem key={review.id} review={review} />)}
       </ul>
     </>
   );

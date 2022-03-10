@@ -16,8 +16,8 @@ type RoomProps = {
 function Room({ userName }: RoomProps) {
   const { id } = useParams();
   const [defaultOffer] = offers;
-  const currentOffer = offers.find((offer) => `${offer.id}` === id) ?? defaultOffer;
-  const nearOffers = useMemo(() => offers.filter((offer) => offer.city === currentOffer.city && `${offer.id}` !== id), [id]);
+  const currentOffer = offers?.find((offer) => `${offer.id}` === id) ?? defaultOffer;
+  const nearOffers = useMemo(() => offers?.filter((offer) => offer.city === currentOffer.city && `${offer.id}` !== id), [id]);
 
   return (
     <>

@@ -4,12 +4,12 @@ import useMap from '../../hooks/useMap';
 import {City, Location} from '../../types/map';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, BASE_CITY} from '../../const';
 import 'leaflet/dist/leaflet.css';
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 
 type MapProps = {
   resetable?: boolean,
   city: City;
-  offers: Offers,
+  offers: Offer[],
   selectedPoint: Location | null;
   className: string
 };
@@ -34,7 +34,7 @@ function Map({ city, offers, selectedPoint, className, resetable }: MapProps): J
 
   useEffect(() => {
     if (map) {
-      offers.forEach((offer) => {
+      offers?.forEach((offer) => {
         const { latitude, longitude } = offer.location;
 
         new Marker({

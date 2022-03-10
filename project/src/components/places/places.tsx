@@ -2,13 +2,13 @@ import Map from '../map/map';
 import Sorting from '../sorting/sorting';
 import { useState } from 'react';
 import {City, Location} from '../../types/map';
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 import OffersList from '../offers-list/offers-list';
 import { MAP_ZOOM } from '../../const';
 
 type PlacesProps = {
   city: City,
-  offers: Offers,
+  offers: Offer[],
   offersCount: number
 }
 
@@ -18,7 +18,7 @@ function Places({ city, offers, offersCount }: PlacesProps) {
   );
 
   const handleOfferCardHover = (offerId: number) => {
-    const currentOffer = offers.find((offer) => offer.id === offerId);
+    const currentOffer = offers?.find((offer) => offer.id === offerId);
 
     if (currentOffer && currentOffer.location) {
       const { latitude, longitude } = currentOffer.location;

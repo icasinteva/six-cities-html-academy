@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
 
 type OffersListProps = {
-  offers: Offers,
+  offers: Offer[],
   className: string,
   onOfferCardHover?: (offerId: number) => void,
 }
@@ -17,7 +17,7 @@ function OffersList({ offers, className, onOfferCardHover }: OffersListProps) {
 
   return (
     <div className={offersListClassName}>
-      {offers.map((offer, idx) => <OfferCard key={idx.toString()} offer={offer} className={className} onOfferCardHover={onOfferCardHover} />)}
+      {offers?.map((offer) => <OfferCard key={offer.id} offer={offer} className={className} onOfferCardHover={onOfferCardHover} />)}
     </div>);
 }
 

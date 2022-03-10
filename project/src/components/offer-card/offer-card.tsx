@@ -1,11 +1,10 @@
 import classNames from 'classnames';
 import Rating from '../rating/rating';
 import Price from '../price/price';
-import { Link } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import FavoriteButton from '../favorite-button/favorite-button';
-import { AppRoute } from '../../const';
+import { AppRoute, OFFERTYPE_TO_LABEL } from '../../const';
 import { Offer } from '../../types/offer';
-import { capitalize } from '../../helpers';
 
 type OfferCardProps = {
   className: string,
@@ -21,7 +20,9 @@ function OfferCard({ className, offer, onOfferCardHover }: OfferCardProps) {
   });
   const classNameImageWrapper = `${className}__image-wrapper place-card__image-wrapper`;
   const classNameInfo = `${className}__card-offer place-card__offer`;
-  const offerRoute = AppRoute.Room.replace(':id', `${id}`);
+  const offerRoute = generatePath(AppRoute.Room, {
+    id: `${id}`,
+  });
 
   const handleOfferCardHover = () => {
     onOfferCardHover?.(id);
@@ -49,7 +50,7 @@ function OfferCard({ className, offer, onOfferCardHover }: OfferCardProps) {
         <h2 className="place-card__name">
           <Link to={offerRoute}>{title}</Link>
         </h2>
-        <p className="place-card__type">{capitalize(type)}</p>
+        <p className="place-card__type">{OFFERTYPE_TO_LABEL[type]}</p>
       </div>
     </article>);
 }

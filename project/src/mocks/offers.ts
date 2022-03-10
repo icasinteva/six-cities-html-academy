@@ -1,13 +1,15 @@
-import { CITIES, MAP_ZOOM } from '../const';
-import { Offers } from '../types/offer';
+import { CITIES, MAP_ZOOM, OfferType } from '../const';
+import { Offer } from '../types/offer';
+
+const [, , BRUSSELS, AMSTERDAM, HAMBURG, DUSSELDORF ] = CITIES;
 
 const generateRating = () => Math.floor(Math.random() * 5) + 1;
 const generatePrice = () => Math.floor(Math.random() * 355) + 90;
 
-export const offers: Offers = [
+export const offers: Offer[] = [
   {
     bedrooms: 2,
-    city: CITIES[3],
+    city: AMSTERDAM,
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the location comes to rest in this alley flowery and colorful.',
     goods: ['Wi-Fi', 'Washing machine', 'Towels', 'Heating', 'Coffee machine', 'Baby seat', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
     isFavorite: true,
@@ -45,11 +47,11 @@ export const offers: Offers = [
     price: generatePrice(),
     rating: generateRating(),
     title: 'Beautiful & luxurious apartment at great location',
-    type: 'apartment',
+    type: OfferType.APPARTMENT,
   },
   {
     bedrooms: 2,
-    city: CITIES[3],
+    city: AMSTERDAM,
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the location comes to rest in this alley flowery and colorful.',
     goods: ['Wi-Fi', 'Washing machine', 'Towels', 'Heating', 'Coffee machine', 'Baby seat', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
     isFavorite: true,
@@ -87,10 +89,10 @@ export const offers: Offers = [
     price: generatePrice(),
     rating: generateRating(),
     title: 'Beautiful & luxurious apartment at great location',
-    type: 'apartment',
+    type: OfferType.APPARTMENT,
   },
   {
-    'city': CITIES[5],
+    'city': DUSSELDORF,
     'previewImage': 'https://9.react.pages.academy/static/hotel/4.jpg',
     'images': [
       'https://9.react.pages.academy/static/hotel/6.jpg',
@@ -112,7 +114,7 @@ export const offers: Offers = [
     'isFavorite': true,
     'isPremium': false,
     'rating': 4.6,
-    'type': 'house',
+    'type': OfferType.HOUSE,
     'bedrooms': 4,
     'maxAdults': 5,
     'price': 463,
@@ -141,7 +143,7 @@ export const offers: Offers = [
     'id': 3,
   },
   {
-    city: CITIES[4],
+    city: HAMBURG,
     bedrooms: 1,
     images: ['img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg'],
     id: 4,
@@ -149,8 +151,8 @@ export const offers: Offers = [
     isFavorite: true,
     goods: ['Wi-Fi', 'Washing machine', 'Towels', 'Heating', 'Coffee machine', 'Baby seat', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.929309666406198,
+      latitude: 53.5611,
+      longitude: 9.9837,
       zoom: MAP_ZOOM,
     },
     maxAdults: 3,
@@ -158,7 +160,7 @@ export const offers: Offers = [
     price: generatePrice(),
     rating: generateRating(),
     title: 'Beautiful & luxurious apartment at great location',
-    type: 'hotel',
+    type: OfferType.HOTEL,
     host: {
       id: 3,
       isPro: true,
@@ -168,7 +170,7 @@ export const offers: Offers = [
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the location comes to rest in this alley flowery and colorful.',
   },
   {
-    city: CITIES[2],
+    city: BRUSSELS,
     bedrooms: 1,
     maxAdults: 2,
     images: ['img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg'],
@@ -178,14 +180,14 @@ export const offers: Offers = [
     isFavorite: false,
     goods: ['Wi-Fi', 'Washing machine', 'Towels', 'Heating', 'Coffee machine', 'Baby seat', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
     location: {
-      latitude: 52.3809553943508,
-      longitude: 4.939309666406198,
+      latitude: 50.827685858,
+      longitude: 4.37729797,
       zoom: MAP_ZOOM,
     },
     price: generatePrice(),
     rating: generateRating(),
     title: 'Beautiful & luxurious apartment at great location',
-    type: 'Apartment',
+    type: OfferType.ROOM,
     host: {
       id: 4,
       isPro: true,

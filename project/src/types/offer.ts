@@ -1,3 +1,4 @@
+import { OfferType } from '../const';
 import { City, Location } from './map';
 
 export type Host = {
@@ -38,10 +39,8 @@ export type Offer = {
     price: number
     rating: number
     title: string
-    type: string
+    type: OfferType
 }
-
-export type Offers = Offer[]
 
 export type FavoritesByCity = {
     [key: string]: Offer[],

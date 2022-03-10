@@ -1,8 +1,8 @@
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 import OffersList from '../offers-list/offers-list';
 
 type NearPlacesProps = {
-  offers: Offers
+  offers: Offer[]
 }
 
 function NearPlaces({offers}: NearPlacesProps) {
