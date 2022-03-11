@@ -98,3 +98,11 @@ export const sortingOptionToCallback: SortingOptionToCallbackType = {
   'Top rated first': (offer1, offer2) => offer2.rating - offer1.rating,
 };
 
+export enum APIRoute {
+  Hotels = '/hotels',
+  Hotel = '/hotels/:hotelId',
+  NearByHotels = '/hotels/:hotelId/nearby',
+  Favorite = '/favorite',
+  Comments = '/comments/:hotelId'
+}
+

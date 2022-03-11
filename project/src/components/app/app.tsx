@@ -10,26 +10,24 @@ import Room from '../../pages/room/room';
 import { User } from '../../types/user';
 import Layout from '../layout/layout';
 import PrivateRoute from '../private-route/private-route';
-import { Offer } from '../../types/offer';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { getOffers } from '../../store/action';
+import { fetchOffers } from '../../store/api-actions';
 
 type AppProps = {
   authorizationStatus: AuthorizationStatus,
-  offers: Offer[],
   user: User,
 }
 
-function App({ authorizationStatus, offers, user }: AppProps): JSX.Element {
+function App({ authorizationStatus, user }: AppProps): JSX.Element {
   const dispatch = useAppDispatch();
   const city = useAppSelector((state) => state.city);
 
   useEffect(() => {
-    dispatch(getOffers());
+    dispatch(fetchOffers());
   }, [city, dispatch]);
 
   const offersByCity = useAppSelector((state) => state.offers);
-  const favorites = getFavorites(offers);
+  const favorites = getFavorites([]);
   const isEmptyLayout = !offersByCity?.length || !Object.keys(favorites).length;
   const [isEmpty, setEmpty] = useState<boolean>(isEmptyLayout);
   const handleLayoutChange = (val: boolean) => {
