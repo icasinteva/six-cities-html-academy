@@ -1,27 +1,35 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { BASE_CITY, sortingOptionToCallback } from '../const';
+import { AuthorizationStatus, BASE_CITY, sortingOptionToCallback, SortingType } from '../const';
+import { getFavorites, loadOffersByCity } from '../services/helpers';
 import { City } from '../types/map';
-import { Offer, Review } from '../types/offer';
-import { loadComments, loadNearByOffers, loadOffer, loadOffers, setCity, setSortingType, sortOffers } from './action';
+import { FavoritesByCity, Offer, Review } from '../types/offer';
+import { User } from '../types/user';
+import { loadComments, loadFavorites, loadNearByOffers, loadOffer, loadOffers, requireAuthorization, setCity, setSortingType, setUser, sortOffers } from './action';
 
 type initialStateType = {
+  authorizationStatus: AuthorizationStatus
   city: City,
   offers: Offer[],
   offer: Offer | null,
+  favorites: FavoritesByCity,
   nearByOffers: Offer[],
   reviews: Review[],
-  sortingType: string,
+  sortingType: SortingType,
   isDataLoaded: boolean
+  user: User | null,
 }
 
 const initialState: initialStateType = {
+  authorizationStatus: AuthorizationStatus.Unknown,
   city: BASE_CITY,
   offers: [],
   offer: null,
+  favorites: {},
   nearByOffers: [],
   reviews: [],
-  sortingType: 'Popular',
+  sortingType: SortingType.Popular,
   isDataLoaded: false,
+  user: null,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -30,11 +38,14 @@ export const reducer = createReducer(initialState, (builder) => {
       state.city = action?.payload || state.city;
     })
     .addCase(loadOffers, (state, action) => {
-      state.offers = action.payload?.filter((offer: Offer) => offer.city.name === state.city.name) ?? [];
+      state.offers = loadOffersByCity(action.payload, state.city.name);
       state.isDataLoaded = true;
     })
     .addCase(loadOffer, (state, action) => {
       state.offer = action.payload;
+    })
+    .addCase(loadFavorites, (state, action) => {
+      state.favorites = getFavorites(action.payload);
     })
     .addCase(loadNearByOffers, (state, action) => {
       state.nearByOffers = action.payload ?? [];
@@ -49,5 +60,11 @@ export const reducer = createReducer(initialState, (builder) => {
       const sortingCallback = sortingOptionToCallback[state.sortingType];
 
       state.offers = state.offers.sort(sortingCallback);
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUser, (state, action) => {
+      state.user = action.payload;
     });
 });

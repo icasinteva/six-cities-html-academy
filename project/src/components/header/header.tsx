@@ -1,17 +1,17 @@
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import HeaderLogo from '../logo/header-logo';
-import { User } from '../../types/user';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { logout } from '../../store/api-actions';
 
-type HeaderProps = {
-  authorizationStatus?: AuthorizationStatus,
-  user: User
-}
 
-function Header({ authorizationStatus, user }: HeaderProps) {
+function Header() {
   const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
   const isSignInPage = pathname === AppRoute.SignIn;
+  const { authorizationStatus, user } = useAppSelector((state) => state);
   const isAuthorised = authorizationStatus === AuthorizationStatus.Auth;
+  const { avatarUrl, email } = user || {};
 
   return (
     <header className="header">
@@ -26,14 +26,17 @@ function Header({ authorizationStatus, user }: HeaderProps) {
               <li className="header__nav-item user">
                 <Link className="header__nav-link header__nav-link--profile" to={isAuthorised ? AppRoute.Favorites : AppRoute.SignIn}>
                   <div className="header__avatar-wrapper user__avatar-wrapper">
-                    {isAuthorised && <img className="user__avatar" src={user.avatarUrl} alt='Avatar' />}
+                    {isAuthorised && avatarUrl && <img className="user__avatar" src={avatarUrl} alt='Avatar' />}
                   </div>
-                  {isAuthorised ? <span className="header__user-name user__name">{user.email}</span> : <span className="header__login">Sign in</span>}
+                  {isAuthorised ? <span className="header__user-name user__name">{email || 'login@domain.com'}</span> : <span className="header__login">Sign in</span>}
                 </Link>
               </li>
               {isAuthorised &&
                 <li className="header__nav-item">
-                  <Link className="header__nav-link" to={AppRoute.Main}>
+                  <Link className="header__nav-link" to={AppRoute.Main} onClick={() => {
+                    dispatch(logout());
+                  }}
+                  >
                     <span className="header__signout">Sign out</span>
                   </Link>
                 </li>}

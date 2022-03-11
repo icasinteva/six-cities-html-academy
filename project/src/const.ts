@@ -2,10 +2,10 @@ import { City } from './types/map';
 import { SortingOptionToCallbackType } from './types/sorting';
 
 export enum AppRoute {
-    Main = '/',
-    SignIn = '/login',
-    Favorites = '/favorites',
-    Room = '/offer/:id',
+  Main = '/',
+  SignIn = '/login',
+  Favorites = '/favorites',
+  Room = '/offer/:id',
 }
 
 export enum AuthorizationStatus {
@@ -15,10 +15,33 @@ export enum AuthorizationStatus {
 }
 
 export enum OfferType {
-  APPARTMENT = 'appartment',
+  APPARTMENT = 'apartment',
   ROOM = 'room',
   HOUSE = 'house',
-  HOTEL = 'hotel'
+  HOTEL = 'hotel',
+}
+
+export enum SortingType {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
+}
+
+export enum APIRoute {
+  Login = '/login',
+  Logout = 'logout',
+  Hotels = '/hotels',
+  Hotel = '/hotels/:hotelId',
+  NearByHotels = '/hotels/:hotelId/nearby',
+  Favorite = '/favorite',
+  Comments = '/comments/:hotelId',
+}
+
+export enum HTTP_CODE {
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  NOT_FOUND = 404,
 }
 
 export const OFFERTYPE_TO_LABEL = {
@@ -83,7 +106,7 @@ export const CITIES: City[] = [
   },
 ];
 
-export const [ ,,, BASE_CITY ] = CITIES;
+export const [, , , BASE_CITY] = CITIES;
 
 export const URL_MARKER_DEFAULT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
@@ -91,18 +114,9 @@ export const URL_MARKER_DEFAULT =
 export const URL_MARKER_CURRENT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
-
 export const sortingOptionToCallback: SortingOptionToCallbackType = {
-  'Price: low to high': (offer1, offer2) => offer1.price - offer2.price,
-  'Price: high to low': (offer1, offer2) => offer2.price - offer1.price,
-  'Top rated first': (offer1, offer2) => offer2.rating - offer1.rating,
+  [SortingType.PriceLowToHigh]: (offer1, offer2) => offer1.price - offer2.price,
+  [SortingType.PriceHighToLow]: (offer1, offer2) => offer2.price - offer1.price,
+  [SortingType.TopRatedFirst]: (offer1, offer2) =>
+    offer2.rating - offer1.rating,
 };
-
-export enum APIRoute {
-  Hotels = '/hotels',
-  Hotel = '/hotels/:hotelId',
-  NearByHotels = '/hotels/:hotelId/nearby',
-  Favorite = '/favorite',
-  Comments = '/comments/:hotelId'
-}
-

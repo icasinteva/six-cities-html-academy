@@ -1,12 +1,19 @@
+import { useEffect } from 'react';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import FavoritesListEmpty from '../../components/favorites-list/favorites-list-empty';
-import { FavoritesByCity } from '../../types/offer';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFavorites } from '../../store/api-actions';
 
-type FavoritesProps = {
-  favorites: FavoritesByCity
-}
 
-function Favorites({ favorites }: FavoritesProps) {
+function Favorites() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFavorites());
+  }, [dispatch]);
+
+  const { favorites } = useAppSelector((state) => state);
+
   return (
     <div className="page__favorites-container container">
       {Object.keys(favorites).length ?
