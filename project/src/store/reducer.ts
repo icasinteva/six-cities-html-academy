@@ -4,7 +4,7 @@ import { getFavorites, loadOffersByCity } from '../services/helpers';
 import { City } from '../types/map';
 import { FavoritesByCity, Offer, Review } from '../types/offer';
 import { User } from '../types/user';
-import { loadComments, loadFavorites, loadNearByOffers, loadOffer, loadOffers, requireAuthorization, setCity, setSortingType, setUser, sortOffers } from './action';
+import { loadComments, loadFavorites, loadNearByOffers, loadOffer, loadOffers, requireAuthorization, setCity, setOfferNotFound, setSortingType, setUser, sortOffers } from './action';
 
 type initialStateType = {
   authorizationStatus: AuthorizationStatus
@@ -15,7 +15,9 @@ type initialStateType = {
   nearByOffers: Offer[],
   reviews: Review[],
   sortingType: SortingType,
-  isDataLoaded: boolean
+  areOffersLoaded: boolean,
+  isOfferLoaded: boolean,
+  isOfferNotFound: boolean,
   user: User | null,
 }
 
@@ -28,7 +30,9 @@ const initialState: initialStateType = {
   nearByOffers: [],
   reviews: [],
   sortingType: SortingType.Popular,
-  isDataLoaded: false,
+  areOffersLoaded: false,
+  isOfferLoaded: false,
+  isOfferNotFound: false,
   user: null,
 };
 
@@ -39,10 +43,11 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOffers, (state, action) => {
       state.offers = loadOffersByCity(action.payload, state.city.name);
-      state.isDataLoaded = true;
+      state.areOffersLoaded = true;
     })
     .addCase(loadOffer, (state, action) => {
       state.offer = action.payload;
+      state.isOfferLoaded = true;
     })
     .addCase(loadFavorites, (state, action) => {
       state.favorites = getFavorites(action.payload);
@@ -66,5 +71,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setUser, (state, action) => {
       state.user = action.payload;
+    })
+    .addCase(setOfferNotFound, (state) => {
+      state.isOfferNotFound = true;
     });
 });

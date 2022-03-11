@@ -20,14 +20,14 @@ function Main({ currentCity, offers }: MainProps) {
   const citiesClassName = classNames('cities__places-container', 'container', {
     'cities__places-container--empty': !offersByCityCount,
   });
-  const { isDataLoaded } = useAppSelector((state) => state);
+  const { areOffersLoaded } = useAppSelector((state) => state);
 
   return (
     <>
       <h1 className="visually-hidden">Cities</h1>
       <CitiesList currentCity={currentCity} />
       <div className="cities">
-        {isDataLoaded ? (
+        {areOffersLoaded ? (
           <div className={citiesClassName}>
             {offersByCityCount ?
               <Places city={currentCity} offers={offersByCity} offersCount={offersByCityCount} /> :

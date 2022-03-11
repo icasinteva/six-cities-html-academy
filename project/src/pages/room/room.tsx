@@ -1,20 +1,21 @@
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
 import Map from '../../components/map/map';
 import NearPlaces from '../../components/near-places/near-places';
+import PropertyGallery from '../../components/property-gallery/property-gallery';
 import PropertyInfo from '../../components/property-info/property-info';
 import PropertyReviewsList from '../../components/property-reviews-list/property-reviews-list';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
-import {generatePath, useNavigate, useParams } from 'react-router-dom';
-import PropertyGallery from '../../components/property-gallery/property-gallery';
-import { useEffect } from 'react';
+import Spinner from '../../components/spinner';
+import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchOffer, fetchNearByHotels, fetchComments } from '../../store/api-actions';
+import { fetchComments, fetchNearByHotels, fetchOffer } from '../../store/api-actions';
 import NotFound from '../not-found/not-found';
-import { AppRoute, AuthorizationStatus } from '../../const';
 
 function Room() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -24,16 +25,18 @@ function Room() {
     }
   }, [id, dispatch]);
 
-  const { authorizationStatus, offer, nearByOffers, reviews } = useAppSelector((state) => state);
+  const { authorizationStatus, offer, nearByOffers, reviews, isOfferLoaded, isOfferNotFound } = useAppSelector((state) => state);
 
-  if (!offer && id) {
-    navigate(generatePath(AppRoute.Room, {
-      id: '',
-    }));
+  if (isOfferNotFound) {
+    return <NotFound />;
+  }
+
+  if (!isOfferLoaded) {
+    return <Spinner speed={5} customText='Loading...' />;
   }
 
   return (
-    offer ? (
+    offer && (
       <>
         <section className="property">
           <PropertyGallery images={offer.images} />
@@ -42,7 +45,7 @@ function Room() {
               <PropertyInfo offer={offer} />
               <section className="property__reviews reviews">
                 {!!reviews.length && <PropertyReviewsList reviews={reviews} />}
-                {authorizationStatus === AuthorizationStatus.Auth &&  <ReviewsForm />}
+                {authorizationStatus === AuthorizationStatus.Auth &&  <ReviewsForm hotelId={`${offer.id}`} />}
               </section>
             </div>
           </div>
@@ -50,7 +53,7 @@ function Room() {
         </section>
         { !!nearByOffers.length && <NearPlaces offers={nearByOffers} />}
       </>
-    ) : <NotFound />
+    )
   );
 }
 export default Room;
