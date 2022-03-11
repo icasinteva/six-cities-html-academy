@@ -37,7 +37,7 @@ function Places({ city, offers, offersCount }: PlacesProps) {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{offersCount} places to stay in {city.name}</b>
-        <Sorting sortOption='Popular' />
+        <Sorting />
         <OffersList offers={offers} className='cities' onOfferCardHover={handleOfferCardHover} />
       </section>
       <div className="cities__right-section">

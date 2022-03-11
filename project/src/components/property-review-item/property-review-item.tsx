@@ -1,4 +1,4 @@
-import { formatDate } from '../../helpers';
+import { formatDate } from '../../services/helpers';
 import { Review } from '../../types/offer';
 import Rating from '../rating/rating';
 

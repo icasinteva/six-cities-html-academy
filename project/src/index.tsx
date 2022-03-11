@@ -1,25 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-
+import { ToastContainer } from 'react-toastify';
 import App from './components/app/app';
-import { AuthorizationStatus } from './const';
-import { generateUser } from './mocks/user';
 import { store } from './store';
 
-const Settings = {
-  AUTHORIZATION_STATUS: AuthorizationStatus.Auth,
-};
-
-const initialState = {
-  authorizationStatus: Settings.AUTHORIZATION_STATUS,
-  user: generateUser(Settings.AUTHORIZATION_STATUS),
-};
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App {...initialState} />
+      <ToastContainer />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

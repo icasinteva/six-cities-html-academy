@@ -1,20 +1,18 @@
-import { useEffect } from 'react';
-import CitiesList from '../../components/cities-list/cities-list';
-import { City } from '../../types/map';
-import Places from '../../components/places/places';
-import NoPlaces from '../../components/no-places/no-places';
 import classNames from 'classnames';
-import { Offer} from '../../types/offer';
-import { useAppSelector } from '../../hooks';
+import CitiesList from '../../components/cities-list/cities-list';
+import NoPlaces from '../../components/no-places/no-places';
+import Places from '../../components/places/places';
 import Spinner from '../../components/spinner/';
+import { useAppSelector } from '../../hooks';
+import { City } from '../../types/map';
+import { Offer } from '../../types/offer';
 
 type MainProps = {
   currentCity: City,
   offers: Offer[],
-  onLayoutChange: (val: boolean) => void
 }
 
-function Main({ currentCity, offers, onLayoutChange }: MainProps) {
+function Main({ currentCity, offers }: MainProps) {
   const offersByCity = offers;
 
   const offersByCityCount = offersByCity?.length;
@@ -23,10 +21,6 @@ function Main({ currentCity, offers, onLayoutChange }: MainProps) {
     'cities__places-container--empty': !offersByCityCount,
   });
   const { isDataLoaded } = useAppSelector((state) => state);
-
-  useEffect(() => {
-    onLayoutChange(!offersByCity?.length);
-  }, [offersByCity, onLayoutChange]);
 
   return (
     <>
