@@ -9,7 +9,7 @@ function Header() {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const isSignInPage = pathname === AppRoute.SignIn;
-  const { authorizationStatus, user } = useAppSelector((state) => state);
+  const { authorizationStatus, user } = useAppSelector(({ USER }) => USER);
   const isAuthorised = authorizationStatus === AuthorizationStatus.Auth;
   const { avatarUrl, email } = user || {};
 

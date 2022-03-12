@@ -1,6 +1,6 @@
 import Map from '../map/map';
 import Sorting from '../sorting/sorting';
-import { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {City, Location} from '../../types/map';
 import { Offer } from '../../types/offer';
 import OffersList from '../offers-list/offers-list';
@@ -17,7 +17,7 @@ function Places({ city, offers, offersCount }: PlacesProps) {
     null,
   );
 
-  const handleOfferCardHover = (offerId: number) => {
+  const handleOfferCardHover = useCallback((offerId: number) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
 
     if (currentOffer && currentOffer.location) {
@@ -30,7 +30,7 @@ function Places({ city, offers, offersCount }: PlacesProps) {
 
       setSelectedPoint(currentPoint);
     }
-  };
+  }, [offers]);
 
   return (
     <>
@@ -47,4 +47,4 @@ function Places({ city, offers, offersCount }: PlacesProps) {
   );
 }
 
-export default Places;
+export default React.memo(Places);

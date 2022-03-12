@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import FavoritesListEmpty from '../../components/favorites-list/favorites-list-empty';
+import Spinner from '../../components/spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFavorites } from '../../store/api-actions';
 
@@ -12,14 +13,16 @@ function Favorites() {
     dispatch(fetchFavorites());
   }, [dispatch]);
 
-  const { favorites } = useAppSelector((state) => state);
+  const { favorites, isDataLoaded } = useAppSelector(({ FAVORITES }) => FAVORITES);
 
   return (
-    <div className="page__favorites-container container">
-      {Object.keys(favorites).length ?
-        <FavoritesList favorites={favorites} /> :
-        <FavoritesListEmpty />}
-    </div>
+    isDataLoaded ?
+      <div className="page__favorites-container container">
+        {Object.keys(favorites).length ?
+          <FavoritesList favorites={favorites} /> :
+          <FavoritesListEmpty />}
+      </div> :
+      <Spinner />
   );
 }
 

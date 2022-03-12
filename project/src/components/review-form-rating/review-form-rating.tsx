@@ -1,23 +1,49 @@
 type ReviewRatingInputProps = {
-    onRatingChange: (ev: React.ChangeEvent<HTMLInputElement>) => void
+  rating: number,
+  onRatingChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
+};
+
+const enum RatingTitle {
+  Terribly = 'terribly',
+  Badly = 'badly',
+  NotBad = 'not bad',
+  Good = 'good',
+  Perfect = 'perfect',
 }
 
-function ReviewRatingInput({ onRatingChange }: ReviewRatingInputProps) {
-  const rating = [];
-  for (let i = 5; i >= 1; i--) {
-    rating.push(
-      <>
-        <input className="form__rating-input visually-hidden" name="rating" value={i} id={`${i}-stars`} type="radio" onChange={onRatingChange} />
-        <label htmlFor={`${i}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
-        </label>
-      </>);
-  }
+const ratingTitles: { [key: number]: RatingTitle } = {
+  1: RatingTitle.Terribly,
+  2: RatingTitle.Badly,
+  3: RatingTitle.NotBad,
+  4: RatingTitle.Good,
+  5: RatingTitle.Perfect,
+};
+
+function ReviewRatingInput({ onRatingChange, rating }: ReviewRatingInputProps) {
   return (
     <div className="reviews__rating-form form__rating">
-      {rating}
+      {Object.entries(ratingTitles).map(([i, title]) => (
+        <div key={title}>
+          <input
+            checked={rating === +i}
+            className="form__rating-input visually-hidden"
+            name="rating"
+            value={i}
+            id={`${i}-stars`}
+            type="radio"
+            onChange={onRatingChange}
+          />
+          <label
+            htmlFor={`${i}-stars`}
+            className="reviews__rating-label form__rating-label"
+            title={title}
+          >
+            <svg className="form__star-image" width="37" height="33">
+              <use xlinkHref="#icon-star"></use>
+            </svg>
+          </label>
+        </div>
+      ))}
     </div>
   );
 }

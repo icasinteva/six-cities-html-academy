@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import React from 'react';
 import { Offer } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
 
@@ -21,4 +22,4 @@ function OffersList({ offers, className, onOfferCardHover }: OffersListProps) {
     </div>);
 }
 
-export default OffersList;
+export default React.memo(OffersList);

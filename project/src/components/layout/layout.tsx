@@ -1,51 +1,28 @@
 import classNames from 'classnames';
 
 import { Outlet, useLocation } from 'react-router-dom';
+import { Page, PAGES, PathName } from '../../const';
 import { useAppSelector } from '../../hooks';
 import Header from '../header/header';
 import FooterLogo from '../logo/footer-logo';
 
-enum PathName {
-  Index = '',
-  Login = 'login',
-  Offer = 'offer',
-  Favorites = 'favorites'
-}
-
-enum Page {
-  Index = 'index',
-  Login = 'login',
-  Property = 'property',
-  Favorites = 'favorites',
-  NotFound = '404'
-}
-
-type PagesType = {
-  [key:string]: Page
-}
-
-const pages: PagesType = {
-  [PathName.Index]: Page.Index,
-  [PathName.Login]: Page.Login,
-  [PathName.Offer]: Page.Property,
-  [PathName.Favorites]: Page.Favorites,
-};
-
 function Layout() {
   let page = Page.NotFound;
-  const { offers, favorites, isOfferNotFound } = useAppSelector((state) => state);
-  const isEmptyLayout = !offers.length || !favorites.length;
+  const { offers } = useAppSelector(({ OFFERS }) => OFFERS);
+  const { favorites } = useAppSelector(({ FAVORITES }) => FAVORITES);
+  const { isOfferFound } = useAppSelector(({ OFFER }) => OFFER);
+  const isEmptyLayout = !offers.length || !Object.keys(favorites).length;
   const location = useLocation();
   const [, pathname, id] = location.pathname.split('/');
   const grayPages = [Page.Index, Page.Login];
   const pagesWithFooter = [Page.Favorites, PathName.Offer, Page.NotFound];
 
-  if (pages[pathname] && (id === undefined || !isNaN(parseInt(id, 10)))) {
-    page =  pages[pathname];
+  if (PAGES[pathname] && (id === undefined || !isNaN(parseInt(id, 10)))) {
+    page =  PAGES[pathname];
   }
 
 
-  if (page === Page.Property && isOfferNotFound) {
+  if (page === Page.Property && !isOfferFound) {
     page = Page.NotFound;
   }
 

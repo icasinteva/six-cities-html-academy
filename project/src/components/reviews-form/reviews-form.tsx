@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useCallback, useMemo, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { postReview } from '../../store/api-actions';
 import { ReviewData } from '../../types/review-data';
@@ -9,44 +9,48 @@ type ReviewFormProps = {
 }
 
 function ReviewsForm({ hotelId }: ReviewFormProps) {
-  const commentRef = useRef<HTMLTextAreaElement | null>(null);
-  const [rating, setRating] = useState<number>(0);
+  const initialReviewData: ReviewData = {
+    rating: 0,
+    comment: '',
+  };
+  const [reviewData, setReviewData] = useState<ReviewData>(initialReviewData);
 
 
-  const handleRatingChange = (
-    ev: React.ChangeEvent<HTMLInputElement>,
+  const handleFieldsChange = useCallback((
+    ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
 
-    setRating(+ev.target.value);
-  };
+    const { name, value } = ev.currentTarget;
+
+    setReviewData({
+      ...reviewData,
+      [name]: value,
+    });
+  }, [reviewData]);
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = (review: ReviewData) => {
-    dispatch(postReview({ hotelId, review }));
-  };
-
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback((evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (commentRef.current !== null) {
-      onSubmit({
-        comment: commentRef.current.value,
-        rating,
-      });
-    }
-  };
+    dispatch(postReview({ hotelId, review: reviewData }));
+
+    setReviewData(initialReviewData);
+
+  }, [hotelId, reviewData, dispatch]);
+
+  const isFormValid = useMemo(() => reviewData.comment && reviewData.rating, [reviewData]);
 
   return (
     <form className="reviews__form form" action="" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <ReviewRatingInput onRatingChange={handleRatingChange} />
-      <textarea ref={commentRef} className="reviews__textarea form__textarea" id="review" name="comment" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+      <ReviewRatingInput rating={reviewData.rating} onRatingChange={handleFieldsChange} />
+      <textarea value={reviewData.comment} className="reviews__textarea form__textarea" id="review" name="comment" placeholder="Tell how was your stay, what you like and what can be improved" onChange={handleFieldsChange}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-                      To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit">Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!isFormValid}>Submit</button>
       </div>
     </form>
   );

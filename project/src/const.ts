@@ -1,4 +1,5 @@
 import { City } from './types/map';
+import { PagesType } from './types/page';
 import { SortingOptionToCallbackType } from './types/sorting';
 
 export enum AppRoute {
@@ -14,6 +15,28 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export enum PathName {
+  Index = '',
+  Login = 'login',
+  Offer = 'offer',
+  Favorites = 'favorites'
+}
+
+export enum Page {
+  Index = 'index',
+  Login = 'login',
+  Property = 'property',
+  Favorites = 'favorites',
+  NotFound = '404'
+}
+
+export const PAGES: PagesType = {
+  [PathName.Index]: Page.Index,
+  [PathName.Login]: Page.Login,
+  [PathName.Offer]: Page.Property,
+  [PathName.Favorites]: Page.Favorites,
+};
 
 export enum OfferType {
   APPARTMENT = 'apartment',
@@ -37,12 +60,20 @@ export enum APIRoute {
   NearByHotels = '/hotels/:hotelId/nearby',
   Favorite = '/favorite',
   Comments = '/comments/:hotelId',
+  AddToFavorites = '/favorite/:hotelId/:status'
 }
 
 export enum HTTP_CODE {
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
   NOT_FOUND = 404,
+}
+
+export enum NameSpace {
+  offers = 'OFFERS',
+  offer = 'OFFER',
+  favorites = 'FAVORITES',
+  user = 'USER',
 }
 
 export const OFFERTYPE_TO_LABEL = {
@@ -54,7 +85,7 @@ export const OFFERTYPE_TO_LABEL = {
 
 export const GALLERY_IMAGES_COUNT = 6;
 
-export const MAP_ZOOM = 12;
+export const MAP_ZOOM = 13;
 
 export const CITIES: City[] = [
   {

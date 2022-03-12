@@ -1,11 +1,11 @@
 import '../spinner/spinner.css';
 
 type SpinnerProps = {
-    customText: string,
-    speed: number
+    customText?: string,
+    speed?: number
 }
 
-function Spinner({ customText, speed }: SpinnerProps) {
+function Spinner({ customText = 'Loading...', speed = 5 }: SpinnerProps) {
   return (
     <div className="spinner-container">
 

@@ -6,6 +6,9 @@ import FavoriteButton from '../favorite-button/favorite-button';
 import { AppRoute, OFFERTYPE_TO_LABEL } from '../../const';
 import { Offer } from '../../types/offer';
 
+import './style.css';
+import React, { useCallback } from 'react';
+
 type OfferCardProps = {
   className: string,
   offer: Offer,
@@ -24,9 +27,9 @@ function OfferCard({ className, offer, onOfferCardHover }: OfferCardProps) {
     id: `${id}`,
   });
 
-  const handleOfferCardHover = () => {
+  const handleOfferCardHover = useCallback(() => {
     onOfferCardHover?.(id);
-  };
+  }, [id, onOfferCardHover]);
 
   return (
     <article className={classNameCard} onMouseEnter={handleOfferCardHover}>
@@ -44,7 +47,7 @@ function OfferCard({ className, offer, onOfferCardHover }: OfferCardProps) {
       <div className={classNameInfo}>
         <div className="place-card__price-wrapper">
           <Price amount={price} className='place-card' />
-          <FavoriteButton className='place-card' isFavorite={isFavorite} size={{width: 18, height: 19}} />
+          <FavoriteButton id={id} className='place-card' isFavorite={isFavorite} size={{width: 18, height: 19}} />
         </div>
         <Rating className='place-card' rating={rating} />
         <h2 className="place-card__name">
@@ -55,4 +58,4 @@ function OfferCard({ className, offer, onOfferCardHover }: OfferCardProps) {
     </article>);
 }
 
-export default OfferCard;
+export default React.memo(OfferCard);

@@ -1,5 +1,6 @@
 import { OfferType } from '../const';
 import { City, Location } from './map';
+import { User } from './user';
 
 export type Host = {
     avatarUrl: string
@@ -13,15 +14,8 @@ export type Review = {
     date: string
     id: number
     rating: number
-    user: {
-        avatarUrl: string
-        id: number
-        isPro: boolean
-        name: string
-    }
+    user: User
 }
-
-export type Reviews = Review[]
 
 export type Offer = {
     bedrooms: number

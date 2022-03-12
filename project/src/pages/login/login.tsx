@@ -1,30 +1,25 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useCallback, useRef } from 'react';
 import FavoritesCityItem from '../../components/cities-list-item/favorites-cities-list-item';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { login } from '../../store/api-actions';
-import { AuthData } from '../../types/auth-data';
 
 function Login() {
-  const { city } = useAppSelector((state) => state);
+  const { city } = useAppSelector(({ OFFERS }) => OFFERS);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = (authData: AuthData) => {
-    dispatch(login(authData));
-  };
-
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback((evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
+      dispatch(login({
         login: loginRef.current.value,
         password: passwordRef.current.value,
-      });
+      }));
     }
-  };
+  }, [dispatch]);
 
   return (
     <div className="page__login-container container">

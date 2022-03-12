@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useAppDispatch } from '../../hooks/index';
-import { setSortingType, sortOffers } from '../../store/action';
+import { setSortingType, sortOffers } from '../../store/offers-data/offers-data';
 
 type SortingListProps = {
   isOpened: boolean,
