@@ -6,8 +6,9 @@ import { dropUser, getUser, saveUser } from '../services/user';
 import { api, store } from '../store';
 import { AuthData } from '../types/auth-data';
 import { Offer, Review } from '../types/offer';
+import { ReviewData } from '../types/review-data';
 import { User } from '../types/user';
-import { loadComments, loadFavorites, loadNearByOffers, loadOffer, loadOffers, redirectToRoute, requireAuthorization, setUser } from './action';
+import { loadComments, loadFavorites, loadNearByOffers, loadOffer, loadOffers, redirectToRoute, requireAuthorization, setOfferNotFound, setUser } from './action';
 
 export const fetchOffers = createAsyncThunk('data/fetchOffers', async () => {
   const { data } = await api.get<Offer[]>(APIRoute.Hotels);
@@ -15,10 +16,16 @@ export const fetchOffers = createAsyncThunk('data/fetchOffers', async () => {
 });
 
 export const fetchOffer = createAsyncThunk('data/fetchOffer', async (hotelId: string) => {
-  const { data } = await api.get<Offer>(generatePath(APIRoute.Hotel, {
-    hotelId,
-  }));
-  store.dispatch(loadOffer(data));
+  try {
+    const { data } = await api.get<Offer>(generatePath(APIRoute.Hotel, {
+      hotelId,
+    }));
+    store.dispatch(loadOffer(data));
+
+  } catch (error) {
+    errorHandle(error);
+    store.dispatch(setOfferNotFound());
+  }
 });
 
 export const fetchNearByHotels = createAsyncThunk('data/fetchNearByOffers', async (hotelId: string) => {
@@ -73,3 +80,16 @@ export const logout = createAsyncThunk(
     store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );
+
+export const postReview = createAsyncThunk('offer/postReview', async ({ hotelId, review }: {hotelId: string, review: ReviewData}) => {
+  try {
+    const { data } = await api.post<Review[]>(generatePath(APIRoute.Comments, {
+      hotelId,
+    }), review);
+
+    store.dispatch(loadComments(data));
+
+  } catch (error) {
+    errorHandle(error);
+  }
+});

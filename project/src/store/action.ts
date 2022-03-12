@@ -26,4 +26,6 @@ export const requireAuthorization = createAction<AuthorizationStatus>('user/requ
 
 export const setUser = createAction<User>('user/set');
 
-export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
+export const redirectToRoute = createAction<AppRoute | string>('app/redirectToRoute');
+
+export const setOfferNotFound = createAction('offer/notFound');
