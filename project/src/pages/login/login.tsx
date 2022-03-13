@@ -1,10 +1,11 @@
 import { FormEvent, useCallback, useRef } from 'react';
 import FavoritesCityItem from '../../components/cities-list-item/favorites-cities-list-item';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
+import { getRandomCity } from '../../services/helpers';
 import { login } from '../../store/api-actions';
 
 function Login() {
-  const { city } = useAppSelector(({ OFFERS }) => OFFERS);
+  const city = getRandomCity();
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 

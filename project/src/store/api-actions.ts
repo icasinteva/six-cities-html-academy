@@ -10,13 +10,17 @@ import { ReviewData } from '../types/review-data';
 import { User } from '../types/user';
 import { redirectToRoute } from './action';
 import { loadFavorites, updateFavorites } from './favorites-data/favorites-data';
-import { loadOffer, loadReviews } from './offer-data/offer-data';
+import { loadOffer, loadReviews, setOfferNotFound } from './offer-data/offer-data';
 import { loadNearByOffers, loadOffers, updateOffers } from './offers-data/offers-data';
 import { requireAuthorization, setUser } from './user-process/user-process';
 
 export const fetchOffers = createAsyncThunk('data/fetchOffers', async () => {
-  const { data } = await api.get<Offer[]>(APIRoute.Hotels);
-  store.dispatch(loadOffers(data));
+  try {
+    const { data } = await api.get<Offer[]>(APIRoute.Hotels);
+    store.dispatch(loadOffers(data));
+  } catch (error) {
+    errorHandle(error);
+  }
 });
 
 export const fetchOffer = createAsyncThunk(
@@ -31,6 +35,7 @@ export const fetchOffer = createAsyncThunk(
       store.dispatch(loadOffer(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(setOfferNotFound());
     }
   },
 );
@@ -48,19 +53,27 @@ export const fetchNearByHotels = createAsyncThunk(
 );
 
 export const fetchFavorites = createAsyncThunk('data/fetchOffers', async () => {
-  const { data } = await api.get<Offer[]>(APIRoute.Favorite);
-  store.dispatch(loadFavorites(data));
+  try {
+    const { data } = await api.get<Offer[]>(APIRoute.Favorite);
+    store.dispatch(loadFavorites(data));
+  } catch (error) {
+    errorHandle(error);
+  }
 });
 
 export const fetchReviews = createAsyncThunk(
   'data/fetchReviews',
   async (hotelId: string) => {
-    const { data } = await api.get<Review[]>(
-      generatePath(APIRoute.Comments, {
-        hotelId,
-      }),
-    );
-    store.dispatch(loadReviews(data));
+    try {
+      const { data } = await api.get<Review[]>(
+        generatePath(APIRoute.Comments, {
+          hotelId,
+        }),
+      );
+      store.dispatch(loadReviews(data));
+    } catch (error) {
+      errorHandle(error);
+    }
   },
 );
 
@@ -70,8 +83,8 @@ export const checkAuthorization = createAsyncThunk(
     try {
       await api.get(APIRoute.Login);
       const user = getUser();
-      store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
       store.dispatch(setUser(user));
+      store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));

@@ -1,4 +1,4 @@
 export type ReviewData = {
     comment: string
-    rating: number
+    rating: string
 }

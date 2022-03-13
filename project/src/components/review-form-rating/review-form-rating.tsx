@@ -1,5 +1,7 @@
+import { Fragment } from 'react';
+
 type ReviewRatingInputProps = {
-  rating: number,
+  rating: string,
   onRatingChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
 };
 
@@ -11,7 +13,7 @@ const enum RatingTitle {
   Perfect = 'perfect',
 }
 
-const ratingTitles: { [key: number]: RatingTitle } = {
+const ratingTitles: Record<number, RatingTitle> = {
   1: RatingTitle.Terribly,
   2: RatingTitle.Badly,
   3: RatingTitle.NotBad,
@@ -22,10 +24,10 @@ const ratingTitles: { [key: number]: RatingTitle } = {
 function ReviewRatingInput({ onRatingChange, rating }: ReviewRatingInputProps) {
   return (
     <div className="reviews__rating-form form__rating">
-      {Object.entries(ratingTitles).map(([i, title]) => (
-        <div key={title}>
+      {Object.entries(ratingTitles).reverse().map(([i, title]) => (
+        <Fragment key={title}>
           <input
-            checked={rating === +i}
+            checked={rating === i}
             className="form__rating-input visually-hidden"
             name="rating"
             value={i}
@@ -42,7 +44,7 @@ function ReviewRatingInput({ onRatingChange, rating }: ReviewRatingInputProps) {
               <use xlinkHref="#icon-star"></use>
             </svg>
           </label>
-        </div>
+        </Fragment>
       ))}
     </div>
   );
