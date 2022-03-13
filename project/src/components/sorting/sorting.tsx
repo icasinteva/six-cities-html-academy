@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks';
 import SortingList from './sorting-list';
 
 function Sorting() {
-  const sortingType = useAppSelector((state) => state.sortingType);
+  const { sortingType } = useAppSelector(({ OFFERS }) => OFFERS);
   const [opened, setOpened] = useState(false);
   const handleListClose = () => {
     setOpened(false);

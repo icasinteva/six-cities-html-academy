@@ -10,7 +10,7 @@ import ReviewsForm from '../../components/reviews-form/reviews-form';
 import Spinner from '../../components/spinner';
 import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchComments, fetchNearByHotels, fetchOffer } from '../../store/api-actions';
+import { fetchReviews, fetchNearByHotels, fetchOffer } from '../../store/api-actions';
 import NotFound from '../not-found/not-found';
 
 function Room() {
@@ -20,19 +20,23 @@ function Room() {
   useEffect(() => {
     if (id) {
       dispatch(fetchOffer(id));
-      dispatch(fetchComments(id));
+      dispatch(fetchReviews(id));
       dispatch(fetchNearByHotels(id));
     }
   }, [id, dispatch]);
 
-  const { authorizationStatus, offer, nearByOffers, reviews, isOfferLoaded, isOfferNotFound } = useAppSelector((state) => state);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
 
-  if (isOfferNotFound) {
-    return <NotFound />;
+  const { nearByOffers } = useAppSelector(({ OFFERS }) => OFFERS);
+
+  const { offer, reviews, isDataLoaded, isOfferFound } = useAppSelector(({ OFFER }) => OFFER);
+
+  if (!isDataLoaded) {
+    return <Spinner />;
   }
 
-  if (!isOfferLoaded) {
-    return <Spinner speed={5} customText='Loading...' />;
+  if (!isOfferFound) {
+    return <NotFound />;
   }
 
   return (

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, BASE_CITY, CITIES } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { setCity } from '../../store/action';
+import { setCity } from '../../store/offers-data/offers-data';
 
 type CitiesListItemLinkProps = {
     className?: string,

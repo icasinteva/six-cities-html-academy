@@ -11,7 +11,7 @@ type PropertyInfoProps = {
 }
 
 function PropertyInfo({ offer }: PropertyInfoProps) {
-  const { isPremium, isFavorite, goods, price, rating, title, host, description, bedrooms, type, maxAdults } = offer;
+  const { id, isPremium, isFavorite, goods, price, rating, title, host, description, bedrooms, type, maxAdults } = offer;
 
   return (
     <>
@@ -21,7 +21,7 @@ function PropertyInfo({ offer }: PropertyInfoProps) {
                 </div>}
       <div className="property__name-wrapper">
         <h1 className="property__name">{title}</h1>
-        <FavoriteButton className='property' isFavorite={isFavorite} size={{width: 31, height: 33}} />
+        <FavoriteButton id={id} className='property' isFavorite={isFavorite} size={{width: 31, height: 33}} />
       </div>
       <PropertyRating rating={rating} />
       <ul className="property__features">
