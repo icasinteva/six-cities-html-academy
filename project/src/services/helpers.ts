@@ -1,5 +1,6 @@
 
 import { FavoritesByCity, Offer } from '../types/offer';
+import { CITIES } from '../const';
 
 export const loadOffersByCity = (offers: Offer[], activeCity: string) => offers.filter(({ city }) => city.name === activeCity);
 
@@ -27,4 +28,10 @@ export const formatDate = (value: string) => {
   const year = date.toLocaleString('default', { year: 'numeric' });
 
   return `${  month  } ${  year}`;
+};
+
+export const getRandomCity = () => {
+  const index = Math.floor(Math.random() * (CITIES.length - 1));
+
+  return CITIES[index];
 };

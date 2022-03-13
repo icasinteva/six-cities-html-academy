@@ -18,10 +18,14 @@ export const offerData = createSlice({
       state.isDataLoaded = true;
       state.isOfferFound = true;
     },
+    setOfferNotFound: (state) => {
+      state.isDataLoaded = true;
+      state.isOfferFound = false;
+    },
     loadReviews: (state, action) => {
       state.reviews = action.payload;
     },
   },
 });
 
-export const { loadOffer, loadReviews } = offerData.actions;
+export const { loadOffer, setOfferNotFound, loadReviews } = offerData.actions;

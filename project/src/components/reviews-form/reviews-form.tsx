@@ -1,7 +1,7 @@
-import { FormEvent, useCallback, useMemo, useState } from 'react';
+import { FormEvent, useCallback, useMemo } from 'react';
 import { useAppDispatch } from '../../hooks';
+import { useReviewData } from '../../hooks/useReviewData';
 import { postReview } from '../../store/api-actions';
-import { ReviewData } from '../../types/review-data';
 import ReviewRatingInput from '../review-form-rating/review-form-rating';
 
 type ReviewFormProps = {
@@ -9,12 +9,9 @@ type ReviewFormProps = {
 }
 
 function ReviewsForm({ hotelId }: ReviewFormProps) {
-  const initialReviewData: ReviewData = {
-    rating: 0,
-    comment: '',
-  };
-  const [reviewData, setReviewData] = useState<ReviewData>(initialReviewData);
+  const [reviewData, handleReviewDataChange] = useReviewData();
 
+  const dispatch = useAppDispatch();
 
   const handleFieldsChange = useCallback((
     ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -22,22 +19,16 @@ function ReviewsForm({ hotelId }: ReviewFormProps) {
 
     const { name, value } = ev.currentTarget;
 
-    setReviewData({
-      ...reviewData,
-      [name]: value,
-    });
-  }, [reviewData]);
-
-  const dispatch = useAppDispatch();
+    handleReviewDataChange({ [name]: value });
+  }, [handleReviewDataChange]);
 
   const handleSubmit = useCallback((evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     dispatch(postReview({ hotelId, review: reviewData }));
+    handleReviewDataChange();
 
-    setReviewData(initialReviewData);
-
-  }, [hotelId, reviewData, dispatch]);
+  }, [hotelId, reviewData, dispatch, handleReviewDataChange]);
 
   const isFormValid = useMemo(() => reviewData.comment && reviewData.rating, [reviewData]);
 
