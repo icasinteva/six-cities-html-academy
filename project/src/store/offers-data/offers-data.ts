@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   BASE_CITY,
+  LOADING_STATUS,
   NameSpace, sortingOptionToCallback,
   SortingType
 } from '../../const';
@@ -10,16 +11,19 @@ import { OffersData } from '../../types/state';
 const initialState: OffersData = {
   city: BASE_CITY,
   offers: [],
-  nearByOffers: [],
   sortingType: SortingType.Popular,
-  isDataLoaded: false,
+  loadingStatus: LOADING_STATUS.IN_PROGRESS,
 };
 
 export const offersData = createSlice({
   name: NameSpace.offers,
   initialState,
   reducers: {
+    setOffersLoading: (state, action) => {
+      state.loadingStatus = action.payload;
+    },
     setCity: (state, action) => {
+      state.loadingStatus = LOADING_STATUS.IN_PROGRESS;
       state.city = action?.payload || state.city;
     },
     setSortingType: (state, action) => {
@@ -27,10 +31,6 @@ export const offersData = createSlice({
     },
     loadOffers: (state, action) => {
       state.offers = loadOffersByCity(action.payload, state.city.name);
-      state.isDataLoaded = true;
-    },
-    loadNearByOffers: (state, action) => {
-      state.nearByOffers = action.payload ?? [];
     },
     updateOffers: (state, action) => {
       const { id } = action.payload;
@@ -50,7 +50,7 @@ export const {
   setCity,
   setSortingType,
   loadOffers,
-  loadNearByOffers,
   updateOffers,
   sortOffers,
+  setOffersLoading,
 } = offersData.actions;

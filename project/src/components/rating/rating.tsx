@@ -5,7 +5,7 @@ type RatingProps = {
 }
 
 function Rating({ className, rating, showValue }: RatingProps) {
-  const percentage = rating * 20;
+  const percentage = Math.round(rating) * 20;
 
   return (
     <div className={`${className}__rating rating`}>

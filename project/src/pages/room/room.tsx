@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import Map from '../../components/map/map';
 import NearPlaces from '../../components/near-places/near-places';
+import NotFound from '../not-found/not-found';
 import PropertyGallery from '../../components/property-gallery/property-gallery';
 import PropertyInfo from '../../components/property-info/property-info';
 import PropertyReviewsList from '../../components/property-reviews-list/property-reviews-list';
@@ -10,54 +11,58 @@ import ReviewsForm from '../../components/reviews-form/reviews-form';
 import Spinner from '../../components/spinner';
 import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchReviews, fetchNearByHotels, fetchOffer } from '../../store/api-actions';
-import NotFound from '../not-found/not-found';
+import { useLoading } from '../../hooks/use-loading';
+import { fetchOffer } from '../../store/api-actions';
+
 
 function Room() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+  const [loading, handleLoading] = useLoading();
 
   useEffect(() => {
     if (id) {
       dispatch(fetchOffer(id));
-      dispatch(fetchReviews(id));
-      dispatch(fetchNearByHotels(id));
     }
   }, [id, dispatch]);
 
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
 
-  const { nearByOffers } = useAppSelector(({ OFFERS }) => OFFERS);
+  const { nearByOffers } = useAppSelector(({ NEARBY_OFFERS }) => NEARBY_OFFERS);
 
-  const { offer, reviews, isDataLoaded, isOfferFound } = useAppSelector(({ OFFER }) => OFFER);
+  const { offer, reviews, loadingStatus } = useAppSelector(({ OFFER }) => OFFER);
 
-  if (!isDataLoaded) {
+  useEffect(() => {
+    handleLoading(loadingStatus);
+  }, [loadingStatus]);
+
+  if (loading) {
     return <Spinner />;
   }
 
-  if (!isOfferFound) {
+  if (!offer) {
     return <NotFound />;
   }
 
+  const { city, images, location } = offer;
+
   return (
-    offer && (
-      <>
-        <section className="property">
-          <PropertyGallery images={offer.images} />
-          <div className="property__container container">
-            <div className="property__wrapper">
-              <PropertyInfo offer={offer} />
-              <section className="property__reviews reviews">
-                {!!reviews.length && <PropertyReviewsList reviews={reviews} />}
-                {authorizationStatus === AuthorizationStatus.Auth &&  <ReviewsForm hotelId={`${offer.id}`} />}
-              </section>
-            </div>
+    <>
+      <section className="property">
+        <PropertyGallery images={images} />
+        <div className="property__container container">
+          <div className="property__wrapper">
+            <PropertyInfo offer={offer} />
+            <section className="property__reviews reviews">
+              {!!reviews.length && <PropertyReviewsList reviews={reviews} />}
+              {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm hotelId={`${id}`} />}
+            </section>
           </div>
-          <Map className='property' city={offer.city} offers={nearByOffers} selectedPoint={null} resetable />
-        </section>
-        { !!nearByOffers.length && <NearPlaces offers={nearByOffers} />}
-      </>
-    )
+        </div>
+        <Map className='property' city={city} offers={[...nearByOffers, offer]} selectedPoint={location} resetable />
+      </section>
+      { !!nearByOffers.length && <NearPlaces offers={nearByOffers} />}
+    </>
   );
 }
 export default Room;

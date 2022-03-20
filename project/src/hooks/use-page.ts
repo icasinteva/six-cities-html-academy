@@ -1,28 +1,32 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '.';
-import { Page, PAGES } from '../const';
+import { LOADING_STATUS, Page, PAGES } from '../const';
+import { validatePage } from '../services/helpers';
 
 type usePageType = [page: Page, handleSetPage: () => void]
 
 export const usePage = (initialPage: Page): usePageType => {
   const [page, setPage] = useState<Page>(initialPage);
   const location = useLocation();
-  const { isOfferFound } = useAppSelector(({ OFFER }) => OFFER);
+  const { offer, loadingStatus } = useAppSelector(({ OFFER }) => OFFER);
 
   const handleSetPage = () => {
     const [, pathname, id] = location.pathname.split('/');
+    const currentPage = PAGES[pathname];
+    const isOfferFound = !!offer && loadingStatus !== LOADING_STATUS.IN_PROGRESS;
+    const isPageValid = validatePage({
+      currentPage,
+      id,
+      isOfferFound,
+    });
 
-    if (PAGES[pathname] && (id === undefined || !isNaN(parseInt(id, 10)))) {
-      setPage(PAGES[pathname]);
-    }
-
-
-    if (page === Page.Property && !isOfferFound) {
+    if (isPageValid) {
+      setPage(currentPage);
+    } else {
       setPage(Page.NotFound);
     }
   };
-
 
   return [page, handleSetPage];
 };

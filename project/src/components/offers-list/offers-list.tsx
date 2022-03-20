@@ -6,10 +6,11 @@ import OfferCard from '../offer-card/offer-card';
 type OffersListProps = {
   offers: Offer[],
   className: string,
-  onOfferCardHover?: (offerId: number) => void,
+  onOfferCardMouseEnter?: (offerId: number) => void,
+  onOfferCardMouseOut?: () => void,
 }
 
-function OffersList({ offers, className, onOfferCardHover }: OffersListProps) {
+function OffersList({ offers, className, onOfferCardMouseEnter, onOfferCardMouseOut }: OffersListProps) {
   const offersListClassName = classNames('places__list', {
     [`${className}__places-list`]: className === 'cities',
     [`${className}__list`]: className !== 'cities',
@@ -18,7 +19,7 @@ function OffersList({ offers, className, onOfferCardHover }: OffersListProps) {
 
   return (
     <div className={offersListClassName}>
-      {offers.map((offer) => <OfferCard key={offer.id} offer={offer} className={className} onOfferCardHover={onOfferCardHover} />)}
+      {offers.map((offer) => <OfferCard key={offer.id} offer={offer} className={className} onOfferCardMouseEnter={onOfferCardMouseEnter} onOfferCardMouseOut={onOfferCardMouseOut} />)}
     </div>);
 }
 

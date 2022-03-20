@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 
 type ReviewRatingInputProps = {
+  disabled: boolean,
   rating: string,
   onRatingChange: (ev: React.ChangeEvent<HTMLInputElement>) => void,
 };
@@ -21,12 +22,13 @@ const ratingTitles: Record<number, RatingTitle> = {
   5: RatingTitle.Perfect,
 };
 
-function ReviewRatingInput({ onRatingChange, rating }: ReviewRatingInputProps) {
+function ReviewRatingInput({ onRatingChange, rating, disabled }: ReviewRatingInputProps) {
   return (
     <div className="reviews__rating-form form__rating">
       {Object.entries(ratingTitles).reverse().map(([i, title]) => (
         <Fragment key={title}>
           <input
+            disabled={disabled}
             checked={rating === i}
             className="form__rating-input visually-hidden"
             name="rating"

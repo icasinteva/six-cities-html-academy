@@ -1,0 +1,35 @@
+fieldset {
+    border: none;
+    padding: 0;
+}
+
+textarea:disabled,
+button:disabled,
+input:disabled + .form__rating-label:hover,
+input:disabled + .form__rating-label:hover~.form__rating-label {
+    cursor: not-allowed;
+}
+
+input:disabled + .form__rating-label:hover .form__star-image,
+input:disabled + .form__rating-label:hover~.form__rating-label .form__star-image {
+    fill: #c7c7c7;
+}
+
+.reviews__form {
+    position: relative;
+
+}
+
+.reviews__spinner {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 38px;
+}
+
+.reviews__spinner .spinner-container  {
+    position: absolute;
+    margin-top: -50px;
+}

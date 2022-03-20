@@ -1,6 +1,7 @@
 
+import { Location } from 'history';
+import { CITIES, Page, PAGES } from '../const';
 import { FavoritesByCity, Offer } from '../types/offer';
-import { CITIES } from '../const';
 
 export const loadOffersByCity = (offers: Offer[], activeCity: string) => offers.filter(({ city }) => city.name === activeCity);
 
@@ -34,4 +35,20 @@ export const getRandomCity = () => {
   const index = Math.floor(Math.random() * (CITIES.length - 1));
 
   return CITIES[index];
+};
+
+export const validatePage = ({
+  currentPage,
+  id,
+  isOfferFound,
+}: {
+    currentPage: Page,
+    id: string,
+    isOfferFound: boolean
+  }): boolean => {
+  const isValidPage = currentPage && currentPage !== Page.Property && !id;
+
+  const isValidPropertyPage = currentPage === Page.Property && !isNaN(parseInt(id, 10)) && isOfferFound;
+
+  return isValidPage || isValidPropertyPage;
 };

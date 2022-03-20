@@ -12,10 +12,11 @@ import React, { useCallback } from 'react';
 type OfferCardProps = {
   className: string,
   offer: Offer,
-  onOfferCardHover?: (offerId: number) => void,
+  onOfferCardMouseEnter?: (offerId: number) => void,
+  onOfferCardMouseOut?: () => void
 }
 
-function OfferCard({ className, offer, onOfferCardHover }: OfferCardProps) {
+function OfferCard({ className, offer, onOfferCardMouseEnter, onOfferCardMouseOut }: OfferCardProps) {
   const { id, isPremium, isFavorite, rating, price, type, title, previewImage } = offer;
   const classNameCard = classNames({
     [`${className}__place-card place-card`]: className === 'cities',
@@ -27,12 +28,12 @@ function OfferCard({ className, offer, onOfferCardHover }: OfferCardProps) {
     id: `${id}`,
   });
 
-  const handleOfferCardHover = useCallback(() => {
-    onOfferCardHover?.(id);
-  }, [id, onOfferCardHover]);
+  const handleOfferCardMouseEnter = useCallback(() => {
+    onOfferCardMouseEnter?.(id);
+  }, [id, onOfferCardMouseEnter]);
 
   return (
-    <article className={classNameCard} onMouseEnter={handleOfferCardHover}>
+    <article className={classNameCard} onMouseEnter={handleOfferCardMouseEnter} onMouseLeave={onOfferCardMouseOut}>
       {
         isPremium &&
         <div className="place-card__mark">
