@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useAppDispatch } from '../../hooks/index';
-import { setSortingType, sortOffers } from '../../store/offers-data/offers-data';
+import { sortOffers } from '../../store/offers-data/offers-data';
 
 type SortingListProps = {
   isOpened: boolean,
@@ -25,8 +25,7 @@ function SortingList({ isOpened, selectedOption, onSortingOptionClick }: Sorting
         return (
           <li key={option} className={sortingOptionClassName} tabIndex={0} onClick={(ev) => {
             if (ev.currentTarget.textContent) {
-              dispatch(setSortingType(ev.currentTarget?.textContent));
-              dispatch(sortOffers());
+              dispatch(sortOffers(ev.currentTarget?.textContent));
             }
 
             onSortingOptionClick();

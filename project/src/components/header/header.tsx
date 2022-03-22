@@ -33,7 +33,7 @@ function Header() {
               </li>
               {isAuthorised &&
                 <li className="header__nav-item">
-                  <Link className="header__nav-link" to={AppRoute.Main} onClick={() => {
+                  <Link className="header__nav-link" to='#' onClick={() => {
                     dispatch(logout());
                   }}
                   >

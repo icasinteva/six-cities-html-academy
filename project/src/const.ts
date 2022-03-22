@@ -60,7 +60,7 @@ export enum APIRoute {
   NearByHotels = '/hotels/:hotelId/nearby',
   Favorite = '/favorite',
   Comments = '/comments/:hotelId',
-  AddToFavorites = '/favorite/:hotelId/:status'
+  UpdateFavorites = '/favorite/:hotelId/:status'
 }
 
 export enum HTTP_CODE {
@@ -160,8 +160,8 @@ export const CITIES: City[] = [
   },
 ];
 
-// export const [BASE_CITY] = CITIES;
-export const BASE_CITY = CITIES[6];
+export const [BASE_CITY] = CITIES;
+// export const BASE_CITY = CITIES[6];
 
 export const URL_MARKER_DEFAULT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useAppSelector } from '.';
 import { ReviewData } from '../types/review-data';
 
 type ReviewField = {

@@ -33,7 +33,7 @@ function OfferCard({ className, offer, onOfferCardMouseEnter, onOfferCardMouseOu
   }, [id, onOfferCardMouseEnter]);
 
   return (
-    <article className={classNameCard} onMouseEnter={handleOfferCardMouseEnter} onMouseLeave={onOfferCardMouseOut}>
+    <article className={classNameCard} onMouseEnter={handleOfferCardMouseEnter} onMouseLeave={onOfferCardMouseOut} data-testid={`${className}__item`}>
       {
         isPremium &&
         <div className="place-card__mark">

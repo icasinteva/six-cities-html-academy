@@ -24,6 +24,7 @@ export type NearByOffersData = {
 export type OfferData = {
   offer: Offer | null,
   reviews: Review[],
+  nearByOffers: Offer[],
   loadingStatus: LOADING_STATUS
 }
 

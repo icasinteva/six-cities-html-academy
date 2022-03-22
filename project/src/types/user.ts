@@ -1,8 +1,8 @@
 export type User = {
-    avatarUrl?: string
-    email?: string
-    id?: number
-    isPro?: boolean
+    avatarUrl: string
+    email: string
+    id: number
+    isPro: boolean
     name: string
-    token?: string
+    token: string
 }

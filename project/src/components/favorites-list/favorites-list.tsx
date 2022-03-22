@@ -10,10 +10,10 @@ function FavoritesList({ favorites }: FavoritesListProps) {
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
-      <ul className="favorites__list">
+      <ul className="favorites__list" data-testid="favorites__list">
         {
           Object.entries(favorites).map(([city, offers]) => (
-            <li key={city} className="favorites__locations-items">
+            <li key={city} className="favorites__locations-items" data-testid={'favorites__city'}>
               <div className="favorites__locations locations locations--current">
                 <FavoritesCityItem cityName={city} />
               </div>

@@ -28,9 +28,7 @@ function Room() {
 
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
 
-  const { nearByOffers } = useAppSelector(({ NEARBY_OFFERS }) => NEARBY_OFFERS);
-
-  const { offer, reviews, loadingStatus } = useAppSelector(({ OFFER }) => OFFER);
+  const { offer, reviews, nearByOffers, loadingStatus } = useAppSelector(({ OFFER }) => OFFER);
 
   useEffect(() => {
     handleLoading(loadingStatus);

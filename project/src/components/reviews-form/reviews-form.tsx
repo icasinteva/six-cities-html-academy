@@ -7,7 +7,6 @@ import ReviewRatingInput from '../review-form-rating/review-form-rating';
 import Spinner from '../spinner';
 import './style.css';
 
-
 type ReviewFormProps = {
   hotelId: string
 }

@@ -9,7 +9,7 @@ function CitiesList({ currentCity }: CitiesListProps) {
   return (
     <div className="tabs">
       <section className="locations container">
-        <ul className="locations__list tabs__list">
+        <ul className="locations__list tabs__list" data-testid="locations__list">
           {CITIES.map((city) => {
             const isActive = city.name === currentCity.name;
 

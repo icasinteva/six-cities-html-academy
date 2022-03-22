@@ -1,7 +1,7 @@
-import { useEffect, useState, MutableRefObject } from 'react';
-import { Layer, Map, TileLayer } from 'leaflet';
-import { Location } from '../types/map';
+import { Map, TileLayer } from 'leaflet';
+import { MutableRefObject, useEffect, useState } from 'react';
 import { MAP_ZOOM } from '../const';
+import { Location } from '../types/map';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,

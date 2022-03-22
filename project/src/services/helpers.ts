@@ -1,12 +1,11 @@
 
-import { Location } from 'history';
-import { CITIES, Page, PAGES } from '../const';
+import { CITIES, Page } from '../const';
 import { FavoritesByCity, Offer } from '../types/offer';
 
-export const loadOffersByCity = (offers: Offer[], activeCity: string) => offers.filter(({ city }) => city.name === activeCity);
+export const getOffersByCity = (offers: Offer[], activeCity: string) => offers.filter(({ city }) => city.name === activeCity);
 
-export const getFavorites = (offers: Offer[] = []) => {
-  const favorites = offers.filter(({ isFavorite }) => isFavorite);
+export const getFavoritesByCity = (offers: Offer[] = []) => {
+  const favorites = offers.filter?.(({ isFavorite }) => isFavorite) ?? [];
   const favoritesByCity: FavoritesByCity = {};
 
   for (const data of favorites) {

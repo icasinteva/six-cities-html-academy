@@ -6,6 +6,7 @@ import { OfferData } from '../../types/state';
 const initialState: OfferData = {
   offer: null,
   reviews: [],
+  nearByOffers: [],
   loadingStatus: LOADING_STATUS.IN_PROGRESS,
 };
 
@@ -22,7 +23,10 @@ export const offerData = createSlice({
     loadReviews: (state, action) => {
       state.reviews = action.payload.sort((review1: Review, review2: Review) => new Date(review2.date).getTime() - new Date(review1.date).getTime());
     },
+    loadNearByOffers: (state, action) => {
+      state.nearByOffers = action.payload ?? [];
+    },
   },
 });
 
-export const { loadOffer, loadReviews, setOfferLoading } = offerData.actions;
+export const { loadOffer, loadReviews, loadNearByOffers, setOfferLoading } = offerData.actions;
