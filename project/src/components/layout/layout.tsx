@@ -4,12 +4,12 @@ import classNames from 'classnames';
 import { Outlet } from 'react-router-dom';
 import { Page, PathName } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { usePage } from '../../hooks/usePage';
+import { usePage } from '../../hooks/use-page';
 import Header from '../header/header';
 import FooterLogo from '../logo/footer-logo';
 
 function Layout() {
-  const [ page, handleSetPage ] = usePage(Page.NotFound);
+  const [ page, handleSetPage ] = usePage(Page.Index);
   const { offers } = useAppSelector(({ OFFERS }) => OFFERS);
   const { favorites } = useAppSelector(({ FAVORITES }) => FAVORITES);
   const isEmptyLayout = !offers.length || !Object.keys(favorites).length;

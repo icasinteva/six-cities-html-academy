@@ -6,15 +6,16 @@ type CitiesListItemProps = {
   cityName: string,
 }
 
-function CitiesListItem({cityName, isActive }: CitiesListItemProps) {
+function CitiesListItem({ cityName, isActive }: CitiesListItemProps) {
+  const dataTestId = isActive ? 'tabs__item--active' : 'tabs__item';
+  const tabClassName = classNames({
+    'tabs__item': true,
+    'tabs__item--active': isActive,
+  });
+
   return (
-    <li className="locations__item">
-      <CitiesListItemLink className={classNames({
-        'tabs__item': true,
-        'tabs__item--active': isActive,
-      })}
-      cityName={cityName}
-      />
+    <li className="locations__item" data-testid={dataTestId}>
+      <CitiesListItemLink className={tabClassName} cityName={cityName}/>
     </li>
   );
 }

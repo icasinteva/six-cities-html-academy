@@ -1,22 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
-import { getFavorites } from '../../services/helpers';
+import { LOADING_STATUS, NameSpace } from '../../const';
+import { getFavoritesByCity } from '../../services/helpers';
 import { FavoritesData } from '../../types/state';
 
 const initialState: FavoritesData = {
   favorites: {},
-  isDataLoaded: false,
+  loadingStatus: LOADING_STATUS.IN_PROGRESS,
 };
 
 export const favoritesData = createSlice({
   name: NameSpace.favorites,
   initialState,
   reducers: {
-    loadFavorites: (state, action) => {
-      state.favorites = getFavorites(action.payload);
-      state.isDataLoaded = true;
+    setFavoritesLoading: (state, action) => {
+      state.loadingStatus = action.payload;
     },
-    updateFavorites: (state, action) => {
+    loadFavorites: (state, action) => {
+      state.favorites = getFavoritesByCity(action.payload);
+      state.loadingStatus = LOADING_STATUS.SUCCESS;
+    },
+    removeFromFavorites: (state, action) => {
       const { id, city: { name } } = action.payload;
       const favoritesByCity = state.favorites[name];
       const index = favoritesByCity.findIndex((offer) => offer.id === id);
@@ -32,4 +35,4 @@ export const favoritesData = createSlice({
   },
 });
 
-export const { loadFavorites, updateFavorites } = favoritesData.actions;
+export const { loadFavorites, removeFromFavorites, setFavoritesLoading } = favoritesData.actions;

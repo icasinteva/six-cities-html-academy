@@ -9,15 +9,14 @@ import { MAP_ZOOM } from '../../const';
 type PlacesProps = {
   city: City,
   offers: Offer[],
-  offersCount: number
 }
 
-function Places({ city, offers, offersCount }: PlacesProps) {
+function Places({ city, offers }: PlacesProps) {
   const [selectedPoint, setSelectedPoint] = useState<Location | null>(
     null,
   );
 
-  const handleOfferCardHover = useCallback((offerId: number) => {
+  const handleOfferCardMouseEnter = useCallback((offerId: number) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
 
     if (currentOffer && currentOffer.location) {
@@ -32,13 +31,17 @@ function Places({ city, offers, offersCount }: PlacesProps) {
     }
   }, [offers]);
 
+  const handleOfferCardMouseOut = () => {
+    setSelectedPoint(null);
+  };
+
   return (
     <>
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{offersCount} places to stay in {city.name}</b>
+        <b className="places__found">{offers.length} places to stay in {city.name}</b>
         <Sorting />
-        <OffersList offers={offers} className='cities' onOfferCardHover={handleOfferCardHover} />
+        <OffersList offers={offers} className='cities' onOfferCardMouseEnter={handleOfferCardMouseEnter} onOfferCardMouseOut={handleOfferCardMouseOut} />
       </section>
       <div className="cities__right-section">
         <Map className='cities' city={city} offers={offers} selectedPoint={selectedPoint} />

@@ -13,7 +13,7 @@ function Sorting() {
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       &nbsp;
-      <span className="places__sorting-type" tabIndex={0} onClick={() => setOpened(!opened)} >
+      <span className="places__sorting-type" data-testid="sorting-type" tabIndex={0} onClick={() => setOpened(!opened)} >
         {sortingType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>

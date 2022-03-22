@@ -17,7 +17,6 @@ export const getToken = (): Token => {
 };
 
 export const saveUser = (user: User): void => {
-
   localStorage.setItem(USER_DATA_KEY_NAME, JSON.stringify(user));
 };
 

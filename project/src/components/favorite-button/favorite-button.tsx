@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus, PAGES } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { addToFavorites } from '../../store/api-actions';
+import { updateFavorites } from '../../store/api-actions';
 
 type FavoriteButtonProps = {
   id: number,
@@ -32,7 +32,7 @@ function FavoriteButton({ id, className, isFavorite, size }: FavoriteButtonProps
       if (authorizationStatus !== AuthorizationStatus.Auth) {
         navigate(AppRoute.SignIn);
       } else {
-        dispatch(addToFavorites({hotelId: id, isFavorite, page}));
+        dispatch(updateFavorites({ hotelId: `${id}`, isFavorite, page }));
       }
     }}
     >

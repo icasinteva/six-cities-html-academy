@@ -60,7 +60,7 @@ export enum APIRoute {
   NearByHotels = '/hotels/:hotelId/nearby',
   Favorite = '/favorite',
   Comments = '/comments/:hotelId',
-  AddToFavorites = '/favorite/:hotelId/:status'
+  UpdateFavorites = '/favorite/:hotelId/:status'
 }
 
 export enum HTTP_CODE {
@@ -70,10 +70,18 @@ export enum HTTP_CODE {
 }
 
 export enum NameSpace {
-  offers = 'OFFERS',
-  offer = 'OFFER',
-  favorites = 'FAVORITES',
   user = 'USER',
+  offer = 'OFFER',
+  offers = 'OFFERS',
+  nearByOffers = 'NEARBY_OFFERS',
+  favorites = 'FAVORITES',
+  reviewsForm = 'REVIEWS_FORM'
+}
+
+export enum LOADING_STATUS {
+  IN_PROGRESS = 'IN_PROGRESS',
+  SUCCESS = 'SUCCESS',
+  ERROR ='ERROR'
 }
 
 export const OFFERTYPE_TO_LABEL = {
@@ -86,6 +94,12 @@ export const OFFERTYPE_TO_LABEL = {
 export const GALLERY_IMAGES_COUNT = 6;
 
 export const MAP_ZOOM = 13;
+
+export const REVIEW_SYMBOLS = {
+  min: 50,
+  max: 300,
+};
+
 
 export const CITIES: City[] = [
   {
@@ -136,9 +150,18 @@ export const CITIES: City[] = [
     },
     name: 'Dusseldorf',
   },
+  {
+    location: {
+      latitude: 51.225402,
+      longitude: 6.776314,
+      zoom: MAP_ZOOM,
+    },
+    name: 'Warsaw',
+  },
 ];
 
-export const [, , , BASE_CITY] = CITIES;
+export const [BASE_CITY] = CITIES;
+// export const BASE_CITY = CITIES[6];
 
 export const URL_MARKER_DEFAULT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';

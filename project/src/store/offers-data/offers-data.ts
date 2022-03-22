@@ -1,36 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   BASE_CITY,
+  LOADING_STATUS,
   NameSpace, sortingOptionToCallback,
   SortingType
 } from '../../const';
-import { loadOffersByCity } from '../../services/helpers';
+import { getOffersByCity } from '../../services/helpers';
 import { OffersData } from '../../types/state';
 
 const initialState: OffersData = {
   city: BASE_CITY,
   offers: [],
-  nearByOffers: [],
   sortingType: SortingType.Popular,
-  isDataLoaded: false,
+  loadingStatus: LOADING_STATUS.IN_PROGRESS,
 };
 
 export const offersData = createSlice({
   name: NameSpace.offers,
   initialState,
   reducers: {
+    setOffersLoading: (state, action) => {
+      state.loadingStatus = action.payload;
+    },
     setCity: (state, action) => {
+      state.loadingStatus = LOADING_STATUS.IN_PROGRESS;
       state.city = action?.payload || state.city;
     },
-    setSortingType: (state, action) => {
-      state.sortingType = action.payload;
-    },
     loadOffers: (state, action) => {
-      state.offers = loadOffersByCity(action.payload, state.city.name);
-      state.isDataLoaded = true;
-    },
-    loadNearByOffers: (state, action) => {
-      state.nearByOffers = action.payload ?? [];
+      state.offers = getOffersByCity(action.payload, state.city.name);
+      state.loadingStatus = LOADING_STATUS.SUCCESS;
     },
     updateOffers: (state, action) => {
       const { id } = action.payload;
@@ -38,9 +36,10 @@ export const offersData = createSlice({
 
       state.offers.splice(index, 1, action.payload);
     },
-    sortOffers: (state) => {
-      const sortingCallback = sortingOptionToCallback[state.sortingType];
+    sortOffers: (state, action) => {
+      const sortingCallback = sortingOptionToCallback[action.payload];
 
+      state.sortingType = action.payload;
       state.offers = state.offers.sort(sortingCallback);
     },
   },
@@ -48,9 +47,8 @@ export const offersData = createSlice({
 
 export const {
   setCity,
-  setSortingType,
   loadOffers,
-  loadNearByOffers,
   updateOffers,
   sortOffers,
+  setOffersLoading,
 } = offersData.actions;

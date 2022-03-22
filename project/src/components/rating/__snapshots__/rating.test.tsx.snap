@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Rating should render correctly 1`] = `
+<div>
+  <div
+    class="property__rating rating"
+  >
+    <div
+      class="property__stars rating__stars"
+    >
+      <span
+        style="width: 100%;"
+      />
+      <span
+        class="visually-hidden"
+      >
+        Rating
+      </span>
+    </div>
+  </div>
+</div>
+`;

@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
-import {Icon, Marker} from 'leaflet';
-import useMap from '../../hooks/useMap';
+import { Icon, Layer, Marker} from 'leaflet';
+import useMap from '../../hooks/use-map';
 import {City, Location} from '../../types/map';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, BASE_CITY} from '../../const';
 import 'leaflet/dist/leaflet.css';
@@ -34,20 +34,28 @@ function Map({ city, offers, selectedPoint, className, resetable }: MapProps): J
 
   useEffect(() => {
     if (map) {
+      map.eachLayer((layer: Layer) => {
+        if (layer && layer.getAttribution && !layer.getAttribution()) {
+          layer.remove();
+        }
+      });
+
       offers.forEach((offer) => {
         const { latitude, longitude } = offer.location;
-
-        new Marker({
+        const marker = new Marker({
           lat: latitude,
           lng: longitude,
-        })
-          .setIcon(
-            selectedPoint && latitude === selectedPoint.latitude && longitude === selectedPoint.longitude
-              ? currentCustomIcon
-              : defaultCustomIcon,
-          )
+        });
+
+
+        marker.setIcon(
+          selectedPoint && latitude === selectedPoint.latitude && longitude === selectedPoint.longitude
+            ? currentCustomIcon
+            : defaultCustomIcon,
+        )
           .addTo(map);
       });
+
 
       if (name !== currentCityName) {
         const { latitude, longitude } = location;
