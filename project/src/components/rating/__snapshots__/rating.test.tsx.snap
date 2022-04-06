@@ -9,6 +9,7 @@ exports[`Component: Rating should render correctly 1`] = `
       class="property__stars rating__stars"
     >
       <span
+        data-testid="rating"
         style="width: 100%;"
       />
       <span

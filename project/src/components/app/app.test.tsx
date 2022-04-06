@@ -55,7 +55,7 @@ describe('Application Routing', () => {
   });
 
   it('should render "Room" when user navigate to "/offer/:id"', () => {
-    const { id, rating, title } = fakeOffer;
+    const { id, title } = fakeOffer;
 
     history.push(generatePath(AppRoute.Room, {
       id: `${id}`,
@@ -64,7 +64,6 @@ describe('Application Routing', () => {
     render(fakeApp);
 
     expect(screen.getByText(title)).toBeInTheDocument();
-    expect(screen.getByText(rating)).toBeInTheDocument();
   });
 
   it('should render "NotFound" when user navigate to non-existent route', () => {

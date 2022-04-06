@@ -47,7 +47,6 @@ function Map({ city, offers, selectedPoint, className, resetable }: MapProps): J
           lng: longitude,
         });
 
-
         marker.setIcon(
           selectedPoint && latitude === selectedPoint.latitude && longitude === selectedPoint.longitude
             ? currentCustomIcon
@@ -70,7 +69,7 @@ function Map({ city, offers, selectedPoint, className, resetable }: MapProps): J
     }
   }, [currentCityName, location, map, name, offers, selectedPoint]);
 
-  return <section className={`${className}__map map`} style={{ height: '500px' }} ref={mapRef}></section>;
+  return <section className={`${className}__map map`} data-testid={`${className}__map`} style={{ height: '500px' }} ref={mapRef}></section>;
 }
 
 export default Map;

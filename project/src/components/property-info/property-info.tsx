@@ -1,10 +1,10 @@
-import PropertyRating from '../property-rating/property-rating';
-import PropertyGoods from '../property-goods/property-goods';
+import { OFFERTYPE_TO_LABEL } from '../../const';
+import { Offer } from '../../types/offer';
+import FavoriteButton from '../favorite-button/favorite-button';
 import HostView from '../host-view/host-view';
 import Price from '../price/price';
-import FavoriteButton from '../favorite-button/favorite-button';
-import { Offer } from '../../types/offer';
-import { OFFERTYPE_TO_LABEL } from '../../const';
+import PropertyGoods from '../property-goods/property-goods';
+import Rating from '../rating/rating';
 
 type PropertyInfoProps = {
   offer: Offer
@@ -16,22 +16,22 @@ function PropertyInfo({ offer }: PropertyInfoProps) {
   return (
     <>
       {isPremium &&
-                <div className="property__mark">
+                <div data-testid="property__mark" className="property__mark">
                   <span>Premium</span>
                 </div>}
       <div className="property__name-wrapper">
         <h1 className="property__name">{title}</h1>
         <FavoriteButton id={id} className='property' isFavorite={isFavorite} size={{width: 31, height: 33}} />
       </div>
-      <PropertyRating rating={rating} />
+      <Rating className='property' rating={rating} showValue />
       <ul className="property__features">
-        <li className="property__feature property__feature--entire">
+        <li data-testid="property__feature--entire" className="property__feature property__feature--entire">
           {OFFERTYPE_TO_LABEL[type]}
         </li>
-        <li className="property__feature property__feature--bedrooms">
+        <li data-testid="property__feature--bedrooms" className="property__feature property__feature--bedrooms">
           {`${bedrooms} Bedrooms`}
         </li>
-        <li className="property__feature property__feature--adults">
+        <li data-testid="property__feature--adults" className="property__feature property__feature--adults">
           {`Max ${maxAdults} adults`}
         </li>
       </ul>

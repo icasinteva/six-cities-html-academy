@@ -28,7 +28,7 @@ function FavoriteButton({ id, className, isFavorite, size }: FavoriteButtonProps
   const page = PAGES[pathname];
 
   return (
-    <button className={bookmarkClassName} type="button" onClick={() => {
+    <button data-testid="favorite-button" className={bookmarkClassName} type="button" onClick={() => {
       if (authorizationStatus !== AuthorizationStatus.Auth) {
         navigate(AppRoute.SignIn);
       } else {

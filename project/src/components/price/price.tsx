@@ -4,11 +4,11 @@ type PriceProps = {
 }
 
 function Price({ amount, className }: PriceProps) {
-  const style = className === 'property' ? {display: 'none'} : {};
+  const style = className === 'property' ? { display: 'none' } : {};
   return (
-    <div className={`${className}__price`}>
+    <div className={`${className}__price`} data-testid={`${className}__price`}>
       <b className={`${className}__price-value`}>€{amount}</b>
-      <span className={`${className}__price-text`}><span className="price-divider" style={style}>&nbsp;/</span>&nbsp;night</span>
+      <span className={`${className}__price-text`}><span className="price-divider" style={style}>/</span>night</span>
     </div>
   );
 }

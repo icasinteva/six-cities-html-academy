@@ -9,7 +9,7 @@ function HostView({ host, description }: HostProps) {
   const { isPro, name, avatarUrl } = host;
 
   return (
-    <div className="property__host">
+    <div data-testid="property__host" className="property__host">
       <h2 className="property__host-title">Meet the host</h2>
       <div className="property__host-user user">
         <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">

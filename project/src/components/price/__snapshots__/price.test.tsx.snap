@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Price should render correctly 1`] = `
+<div>
+  <div
+    class="property__price"
+    data-testid="property__price"
+  >
+    <b
+      class="property__price-value"
+    >
+      €
+      120
+    </b>
+    <span
+      class="property__price-text"
+    >
+      <span
+        class="price-divider"
+        style="display: none;"
+      >
+        /
+      </span>
+      night
+    </span>
+  </div>
+</div>
+`;

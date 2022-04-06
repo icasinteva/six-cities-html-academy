@@ -4,7 +4,7 @@ import SortingList from './sorting-list';
 
 function Sorting() {
   const { sortingType } = useAppSelector(({ OFFERS }) => OFFERS);
-  const [opened, setOpened] = useState(false);
+  const [ opened, setOpened ] = useState(false);
   const handleListClose = () => {
     setOpened(false);
   };

@@ -22,8 +22,9 @@ function SortingList({ isOpened, selectedOption, onSortingOptionClick }: Sorting
         const sortingOptionClassName = classNames('places__option', {
           'places__option--active': option === selectedOption,
         });
+
         return (
-          <li key={option} className={sortingOptionClassName} tabIndex={0} onClick={(ev) => {
+          <li data-testid={`sorting-option-${option}`} key={option} className={sortingOptionClassName} tabIndex={0} onClick={(ev) => {
             if (ev.currentTarget.textContent) {
               dispatch(sortOffers(ev.currentTarget?.textContent));
             }

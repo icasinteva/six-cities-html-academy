@@ -12,7 +12,7 @@ export const useReviewData = (): useReviewDataType => {
     comment: '',
     rating: '',
   };
-  const [reviewData, setReviewData] = useState<ReviewData>(initialReviewData);
+  const [ reviewData, setReviewData ] = useState<ReviewData>(initialReviewData);
 
 
   const handleReviewDataChange = (reviewField?: ReviewField) => {
@@ -26,5 +26,5 @@ export const useReviewData = (): useReviewDataType => {
     }
   };
 
-  return [reviewData, handleReviewDataChange];
+  return [ reviewData, handleReviewDataChange ];
 };
