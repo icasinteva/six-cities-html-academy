@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: CitiesListItem should render correctly 1`] = `
+<div>
+  <li
+    class="locations__item"
+    data-testid="tabs__item"
+  >
+    <a
+      class="locations__item-link tabs__item"
+      href="/"
+    >
+      <span>
+        Paris
+      </span>
+    </a>
+  </li>
+</div>
+`;

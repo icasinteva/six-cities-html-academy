@@ -1,13 +1,14 @@
+import React, { useCallback } from 'react';
+
 import classNames from 'classnames';
-import Rating from '../rating/rating';
-import Price from '../price/price';
 import { generatePath, Link } from 'react-router-dom';
-import FavoriteButton from '../favorite-button/favorite-button';
+
 import { AppRoute, OFFERTYPE_TO_LABEL } from '../../const';
 import { Offer } from '../../types/offer';
-
+import FavoriteButton from '../favorite-button/favorite-button';
+import Price from '../price/price';
+import Rating from '../rating/rating';
 import './style.css';
-import React, { useCallback } from 'react';
 
 type OfferCardProps = {
   className: string,
@@ -42,7 +43,7 @@ function OfferCard({ className, offer, onOfferCardMouseEnter, onOfferCardMouseOu
       }
       <div className={classNameImageWrapper}>
         <Link to={offerRoute}>
-          <img className="place-card__image" src={previewImage} alt="Place" />
+          <img data-testid="place-card__image" className="place-card__image" src={previewImage} alt="Place" />
         </Link>
       </div>
       <div className={classNameInfo}>

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: SortingList should render correctly 1`] = `
+<div>
+  <ul
+    class="places__options places__options--custom"
+  >
+    <li
+      class="places__option places__option--active"
+      data-testid="sorting-option-Popular"
+      tabindex="0"
+    >
+      Popular
+    </li>
+    <li
+      class="places__option"
+      data-testid="sorting-option-Price: low to high"
+      tabindex="0"
+    >
+      Price: low to high
+    </li>
+    <li
+      class="places__option"
+      data-testid="sorting-option-Price: high to low"
+      tabindex="0"
+    >
+      Price: high to low
+    </li>
+    <li
+      class="places__option"
+      data-testid="sorting-option-Top rated first"
+      tabindex="0"
+    >
+      Top rated first
+    </li>
+  </ul>
+</div>
+`;

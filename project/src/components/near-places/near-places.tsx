@@ -5,7 +5,7 @@ type NearPlacesProps = {
   offers: Offer[]
 }
 
-function NearPlaces({offers}: NearPlacesProps) {
+function NearPlaces({ offers }: NearPlacesProps) {
   return (
     <div className="container">
       <section className="near-places places">

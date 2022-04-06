@@ -1,9 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: Logo should render correctly 1`] = `
+exports[`Component: Logo should render FooterLogo correctly 1`] = `
+<div>
+  <a
+    class="footer__logo"
+    data-testid="footer__logo"
+    href="/"
+  >
+    <img
+      alt="6 cities logo"
+      class="footer__logo-link"
+      height="33"
+      src="img/logo.svg"
+      width="64"
+    />
+  </a>
+</div>
+`;
+
+exports[`Component: Logo should render HeaderLogo correctly 1`] = `
 <div>
   <a
     class="header__logo"
+    data-testid="header__logo"
     href="/"
   >
     <img

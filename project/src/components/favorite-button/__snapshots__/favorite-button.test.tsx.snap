@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: FavoriteButton should render correctly 1`] = `
+<div>
+  <button
+    class="property__bookmark-button button"
+    data-testid="favorite-button"
+    type="button"
+  >
+    <svg
+      class="property__bookmark-icon"
+      height="33"
+      width="31"
+    >
+      <use
+        xlink:href="#icon-bookmark"
+      />
+    </svg>
+    <span
+      class="visually-hidden"
+    >
+      To bookmarks
+    </span>
+  </button>
+</div>
+`;

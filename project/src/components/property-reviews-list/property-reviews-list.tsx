@@ -8,9 +8,9 @@ type PropertyReviewsListProps = {
 function PropertyReviewsList({ reviews }: PropertyReviewsListProps) {
   return (
     <>
-      <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
+      <h2 className="reviews__title" data-testid="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
-        {reviews.map((review, idx) => <PropertyReviewItem key={review.id} review={review} />)}
+        {reviews.map((review) => <PropertyReviewItem key={review.id} review={review} />)}
       </ul>
     </>
   );

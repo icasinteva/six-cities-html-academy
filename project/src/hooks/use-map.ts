@@ -3,11 +3,11 @@ import { MutableRefObject, useEffect, useState } from 'react';
 import { MAP_ZOOM } from '../const';
 import { Location } from '../types/map';
 
-function useMap(
+const useMap = (
   mapRef: MutableRefObject<HTMLElement | null>,
   location: Location,
-): Map | null {
-  const [map, setMap] = useState<Map | null>(null);
+): Map | null => {
+  const [ map, setMap ] = useState<Map | null>(null);
 
   useEffect(() => {
     if (mapRef.current !== null && map === null) {
@@ -32,9 +32,9 @@ function useMap(
 
       setMap(instance);
     }
-  }, [mapRef, map, location]);
+  }, [ mapRef, map, location ]);
 
   return map;
-}
+};
 
 export default useMap;

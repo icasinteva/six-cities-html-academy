@@ -10,7 +10,7 @@ function PropertyGallery({ images }: PropertyGalleryProps) {
       <div className="property__gallery">
         {images.slice(0, GALLERY_IMAGES_COUNT).map((image, idx) =>
           (
-            <div key={idx.toString()} className="property__image-wrapper">
+            <div key={idx.toString()} className="property__image-wrapper" data-testid='property__image-wrapper'>
               <img className="property__image" src={`${image}`} alt='Property' />
             </div>
           ))}

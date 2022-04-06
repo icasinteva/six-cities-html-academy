@@ -2,3 +2,8 @@
     width: 150px;
     height: 110px;
 }
+
+.price-divider {
+    display: inline-block;
+    margin: 0 5px;
+}

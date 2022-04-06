@@ -13,11 +13,11 @@ export const makeFakeUser = (): User => ({
   id: datatype.number(),
 } as User);
 
-export const makeFakeOffer = (options?: { isFavorite?: boolean }): Offer => ({
+export const makeFakeOffer = (options?: { isFavorite?: boolean, isPremium?: boolean }): Offer => ({
   bedrooms: datatype.number({ max: 5 }),
   city: CITIES[datatype.number({ max: 6})],
   description: lorem.sentences(),
-  goods: [],
+  goods: [...new Set(Array.from({ length: 8 }).map(() => commerce.product()))],
   host:  {
     avatarUrl: internet.avatar(),
     id: datatype.number(),
@@ -25,9 +25,9 @@ export const makeFakeOffer = (options?: { isFavorite?: boolean }): Offer => ({
     name: name.firstName(),
   },
   id: datatype.number(),
-  images: [],
+  images: Array.from({ length: 10 }).map(() => image.imageUrl()),
   isFavorite: options?.isFavorite ?? datatype.boolean(),
-  isPremium: datatype.boolean(),
+  isPremium: options?.isPremium ?? datatype.boolean(),
   location: {
     latitude: +address.latitude(),
     longitude: +address.longitude(),

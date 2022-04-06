@@ -7,7 +7,7 @@ import { validatePage } from '../services/helpers';
 type usePageType = [page: Page, handleSetPage: () => void]
 
 export const usePage = (initialPage: Page): usePageType => {
-  const [page, setPage] = useState<Page>(initialPage);
+  const [ page, setPage ] = useState<Page>(initialPage);
   const location = useLocation();
   const { offer, loadingStatus } = useAppSelector(({ OFFER }) => OFFER);
 
@@ -28,5 +28,5 @@ export const usePage = (initialPage: Page): usePageType => {
     }
   };
 
-  return [page, handleSetPage];
+  return [ page, handleSetPage ];
 };

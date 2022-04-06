@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: CitiesListItemLink should render correctly 1`] = `
+<div>
+  <a
+    class="locations__item-link"
+    href="/"
+  >
+    <span>
+      Paris
+    </span>
+  </a>
+</div>
+`;

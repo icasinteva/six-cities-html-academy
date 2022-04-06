@@ -28,6 +28,7 @@ function ReviewRatingInput({ onRatingChange, rating, disabled }: ReviewRatingInp
       {Object.entries(ratingTitles).reverse().map(([i, title]) => (
         <Fragment key={title}>
           <input
+            data-testid={`${i}-stars`}
             disabled={disabled}
             checked={rating === i}
             className="form__rating-input visually-hidden"
