@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import PropertyGallery from '../components/property-gallery/property-gallery';
-import { GALLERY_IMAGES_COUNT } from '../const';
-import { makeFakeOffer } from '../utils/mocks';
+
+import { GALLERY_IMAGES_COUNT } from '../../const';
+import { makeFakeOffer } from '../../utils/mocks';
+import PropertyGallery from './property-gallery';
 
 describe('Component: PropertyGallery', () => {
   it('should render correctly', () => {

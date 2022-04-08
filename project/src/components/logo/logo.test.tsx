@@ -1,12 +1,14 @@
 import { render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
+
 import HistoryRouter from '../history-route';
 import FooterLogo from './footer-logo';
 import HeaderLogo from './header-logo';
 
+const history = createMemoryHistory();
+
 describe('Component: Logo', () => {
-  test('should render HeaderLogo correctly', () => {
-    const history = createMemoryHistory();
+  it('should render HeaderLogo correctly', () => {
     const { container } = render(
       <HistoryRouter history={history}>
         <HeaderLogo />
@@ -16,8 +18,7 @@ describe('Component: Logo', () => {
     expect(container).toMatchSnapshot();
   });
 
-  test('should render FooterLogo correctly', () => {
-    const history = createMemoryHistory();
+  it('should render FooterLogo correctly', () => {
     const { container } = render(
       <HistoryRouter history={history}>
         <FooterLogo />

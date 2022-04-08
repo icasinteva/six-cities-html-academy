@@ -16,15 +16,6 @@ const store = mockStore({
 });
 
 describe('Component: SortingList', () => {
-  it('should render correctly', () => {
-    const { container } = render(
-      <Provider store={store}>
-        <SortingList isOpened={false} selectedOption={SortingType.Popular} onSortingOptionClick={jest.fn()} />
-      </Provider>);
-
-    expect(container).toMatchSnapshot();
-  });
-
   it('should call setState with false when user clicked any sorting option', () => {
     const setStateMock = jest.fn();
     const useStateMock: any = (useState: any) => [useState, setStateMock];

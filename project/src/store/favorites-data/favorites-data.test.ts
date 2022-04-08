@@ -1,4 +1,4 @@
-import { LOADING_STATUS } from '../../const';
+import { LoadingStatus } from '../../const';
 import { getFavoritesByCity } from '../../services/helpers';
 import { makeFakeFavorites } from '../../utils/mocks';
 import { favoritesData, loadFavorites, removeFromFavorites, setFavoritesLoading } from './favorites-data';
@@ -8,14 +8,14 @@ describe('Reducer: favorites', () => {
     expect(favoritesData.reducer(undefined, { type: 'UNKNOWN_ACTION' }))
       .toEqual({
         favorites: {},
-        loadingStatus: LOADING_STATUS.IN_PROGRESS,
+        loadingStatus: LoadingStatus.InProgress,
       });
   });
 
   it('should load favorites and update loadingStatus to "SUCCESS', () => {
     const state = {
       favorites: {},
-      loadingStatus: LOADING_STATUS.IN_PROGRESS,
+      loadingStatus: LoadingStatus.InProgress,
     };
 
     const mockFavorites = makeFakeFavorites(3);
@@ -24,17 +24,17 @@ describe('Reducer: favorites', () => {
 
     expect(favoritesData.reducer(state, loadFavorites(mockFavorites))).toEqual({
       favorites: getFavoritesByCity(mockFavorites),
-      loadingStatus: LOADING_STATUS.SUCCESS,
+      loadingStatus: LoadingStatus.Success,
     });
   });
 
   it('should update loadingStatus to "ERROR"', () => {
     const state = {
       favorites: {},
-      loadingStatus: LOADING_STATUS.IN_PROGRESS,
+      loadingStatus: LoadingStatus.InProgress,
     };
 
-    expect(favoritesData.reducer(state, setFavoritesLoading(LOADING_STATUS.ERROR)).loadingStatus).toEqual(LOADING_STATUS.ERROR);
+    expect(favoritesData.reducer(state, setFavoritesLoading(LoadingStatus.Error)).loadingStatus).toEqual(LoadingStatus.Error);
   });
 
   it('should update favorites', () => {
@@ -46,7 +46,7 @@ describe('Reducer: favorites', () => {
 
     const state = {
       favorites: mockFavorites,
-      loadingStatus: LOADING_STATUS.SUCCESS,
+      loadingStatus: LoadingStatus.Success,
     };
 
     offer.isFavorite = !isFavorite;

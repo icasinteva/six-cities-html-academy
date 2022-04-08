@@ -1,6 +1,6 @@
 import request from 'axios';
 import { toast } from 'react-toastify';
-import { HTTP_CODE } from '../const';
+import { HTTPCode } from '../const';
 import { ErrorType } from '../types/error';
 
 export const errorHandle = (error: ErrorType): void => {
@@ -15,15 +15,15 @@ export const errorHandle = (error: ErrorType): void => {
     const { status, data } = response;
 
     switch (status) {
-      case HTTP_CODE.BAD_REQUEST: {
+      case HTTPCode.BadRequest: {
         toast.info(data.error);
         break;
       }
-      case HTTP_CODE.UNAUTHORIZED: {
+      case HTTPCode.Unauthorized: {
         toast.info(data.error);
         break;
       }
-      case HTTP_CODE.NOT_FOUND: {
+      case HTTPCode.NotFound: {
         toast.info(data.error);
         break;
       }

@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import Map from './map';
+
 import { BASE_CITY } from '../../const';
 import { makeFakeOffers } from '../../utils/mocks';
+import Map from './map';
 
 describe('Component: Map', () => {
   it('should render correctly', () => {

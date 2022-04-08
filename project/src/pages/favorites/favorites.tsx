@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import FavoritesListEmpty from '../../components/favorites-list/favorites-list-empty';
-import Spinner from '../../components/spinner';
+import Spinner from '../../components/spinner/spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useLoading } from '../../hooks/use-loading';
 import { fetchFavorites } from '../../store/api-actions';

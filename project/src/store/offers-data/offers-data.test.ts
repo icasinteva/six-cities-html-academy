@@ -1,4 +1,4 @@
-import { BASE_CITY, CITIES, LOADING_STATUS, SortingType } from '../../const';
+import { BASE_CITY, CITIES, LoadingStatus, SortingType } from '../../const';
 import { getOffersByCity } from '../../services/helpers';
 import { makeFakeOffers } from '../../utils/mocks';
 import { removeFromFavorites } from '../favorites-data/favorites-data';
@@ -11,7 +11,7 @@ describe('Reducer: offers', () => {
         city: BASE_CITY,
         offers: [],
         sortingType: SortingType.Popular,
-        loadingStatus: LOADING_STATUS.IN_PROGRESS,
+        loadingStatus: LoadingStatus.InProgress,
       });
   });
 
@@ -20,14 +20,14 @@ describe('Reducer: offers', () => {
       city: BASE_CITY,
       offers: [],
       sortingType: SortingType.Popular,
-      loadingStatus: LOADING_STATUS.SUCCESS,
+      loadingStatus: LoadingStatus.Success,
     };
 
     expect(offersData.reducer(state, setCity(CITIES[3]))).toEqual({
       city: CITIES[3],
       offers: [],
       sortingType: SortingType.Popular,
-      loadingStatus: LOADING_STATUS.IN_PROGRESS,
+      loadingStatus: LoadingStatus.InProgress,
     });
   });
 
@@ -36,7 +36,7 @@ describe('Reducer: offers', () => {
       city: BASE_CITY,
       offers: [],
       sortingType: SortingType.Popular,
-      loadingStatus: LOADING_STATUS.IN_PROGRESS,
+      loadingStatus: LoadingStatus.InProgress,
     };
 
     const mockOffers = getOffersByCity(makeFakeOffers(15), BASE_CITY.name);
@@ -45,7 +45,7 @@ describe('Reducer: offers', () => {
       city: BASE_CITY,
       offers: mockOffers,
       sortingType: SortingType.Popular,
-      loadingStatus: LOADING_STATUS.SUCCESS,
+      loadingStatus: LoadingStatus.Success,
     });
   });
 
@@ -57,14 +57,14 @@ describe('Reducer: offers', () => {
       city,
       offers,
       sortingType: SortingType.Popular,
-      loadingStatus: LOADING_STATUS.SUCCESS,
+      loadingStatus: LoadingStatus.Success,
     };
 
     expect(offersData.reducer(state, sortOffers(SortingType.PriceLowToHigh))).toEqual({
       city,
       offers: [...offers].sort((offer1, offer2) => offer1.price - offer2.price),
       sortingType: SortingType.PriceLowToHigh,
-      loadingStatus: LOADING_STATUS.SUCCESS,
+      loadingStatus: LoadingStatus.Success,
     });
   });
 
@@ -73,10 +73,10 @@ describe('Reducer: offers', () => {
       city: BASE_CITY,
       offers: [],
       sortingType: SortingType.Popular,
-      loadingStatus: LOADING_STATUS.IN_PROGRESS,
+      loadingStatus: LoadingStatus.InProgress,
     };
 
-    expect(offersData.reducer(state, setOffersLoading(LOADING_STATUS.ERROR)).loadingStatus).toEqual(LOADING_STATUS.ERROR);
+    expect(offersData.reducer(state, setOffersLoading(LoadingStatus.Error)).loadingStatus).toEqual(LoadingStatus.Error);
   });
 
   it('should update offers', () => {
@@ -87,7 +87,7 @@ describe('Reducer: offers', () => {
       city: offer.city,
       offers: getOffersByCity(mockOffers, offer.city.name),
       sortingType: SortingType.Popular,
-      loadingStatus: LOADING_STATUS.SUCCESS,
+      loadingStatus: LoadingStatus.Success,
     };
 
     offer.isFavorite = !isFavorite;

@@ -1,6 +1,6 @@
-import OfferCard from '../offer-card/offer-card';
-import FavoritesCityItem from '../cities-list-item/favorites-cities-list-item';
 import { FavoritesByCity } from '../../types/offer';
+import FavoritesCityItem from '../cities-list-item/favorites-cities-list-item';
+import OfferCard from '../offer-card/offer-card';
 
 type FavoritesListProps = {
   favorites: FavoritesByCity

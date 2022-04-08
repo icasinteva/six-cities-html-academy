@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+
 import { AppRoute, BASE_CITY, CITIES } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { fetchOffers } from '../../store/api-actions';

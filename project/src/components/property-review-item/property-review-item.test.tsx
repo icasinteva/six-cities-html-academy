@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react';
+
+import { formatDate } from '../../services/helpers';
 import { makeFakeReviews } from '../../utils/mocks';
 import PropertyReviewItem from './property-review-item';
-import { formatDate } from '../../services/helpers';
 
 describe('Component: PropertyReviewItem', () => {
   it('should render correctly', () => {
-    const [review] = makeFakeReviews(1);
+    const [ review ] = makeFakeReviews(1);
     const { user, rating, date, comment } = review;
     const { avatarUrl, name } = user;
     const percentage = Math.round(rating) * 20;

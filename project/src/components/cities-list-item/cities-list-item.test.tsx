@@ -10,10 +10,10 @@ import CitiesListItem from './cities-list-item';
 
 const mockStore = configureMockStore();
 const store = mockStore();
+const history = createMemoryHistory();
 
 describe('Component: CitiesListItem', () => {
   it('should render correctly', () => {
-    const history = createMemoryHistory();
     const { container } = render(
       <Provider store={store}>
         <HistoryRouter history={history}>

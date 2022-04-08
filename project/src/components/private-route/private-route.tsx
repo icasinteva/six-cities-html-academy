@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { RouteProps } from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import { useAppSelector } from '../../hooks';
-import Spinner from '../spinner';
+import Spinner from '../spinner/spinner';
 
 type PrivateRouteProps = RouteProps & {
   children: JSX.Element;

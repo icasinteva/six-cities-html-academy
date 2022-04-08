@@ -33,6 +33,7 @@ describe('Component: Main', () => {
       </Provider>,
     );
 
+    expect(screen.getByTestId('locations__list')).toBeInTheDocument();
     expect(screen.getByText('No places to stay available')).toBeInTheDocument();
     expect(screen.getByText(`We could not find any property available at the moment in ${city.name}`)).toBeInTheDocument();
   });
@@ -58,7 +59,7 @@ describe('Component: Main', () => {
     );
 
     expect(screen.getByTestId('locations__list')).toBeInTheDocument();
-
+    expect(screen.getByTestId('sorting')).toBeInTheDocument();
     expect(screen.getByText(`${offersCount} places to stay in ${city.name}`)).toBeInTheDocument();
     expect(screen.getByTestId('cities__map')).toBeInTheDocument();
   });

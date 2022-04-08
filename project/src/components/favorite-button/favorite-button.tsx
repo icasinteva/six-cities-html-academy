@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus, PAGES } from '../../const';
+
+import { AppRoute, AuthorizationStatus, PathNameToPage } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { updateFavorites } from '../../store/api-actions';
 
@@ -25,7 +26,7 @@ function FavoriteButton({ id, className, isFavorite, size }: FavoriteButtonProps
   const navigate = useNavigate();
   const location = useLocation();
   const [, pathname] = location.pathname.split('/');
-  const page = PAGES[pathname];
+  const page = PathNameToPage[pathname];
 
   return (
     <button data-testid="favorite-button" className={bookmarkClassName} type="button" onClick={() => {

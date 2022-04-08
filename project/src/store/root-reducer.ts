@@ -7,9 +7,9 @@ import { reviewsForm } from './reviews-form-data/reviews-form-data';
 import { userProcess } from './user-process/user-process';
 
 export const rootReducer = combineReducers({
-  [NameSpace.user]: userProcess.reducer,
-  [NameSpace.offer]: offerData.reducer,
-  [NameSpace.offers]: offersData.reducer,
-  [NameSpace.favorites]: favoritesData.reducer,
-  [NameSpace.reviewsForm]: reviewsForm.reducer,
+  [NameSpace.User]: userProcess.reducer,
+  [NameSpace.Offer]: offerData.reducer,
+  [NameSpace.Offers]: offersData.reducer,
+  [NameSpace.Favorites]: favoritesData.reducer,
+  [NameSpace.ReviewsForm]: reviewsForm.reducer,
 });

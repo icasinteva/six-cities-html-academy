@@ -1,10 +1,11 @@
-import Map from '../map/map';
-import Sorting from '../sorting/sorting';
 import React, { useCallback, useState } from 'react';
-import {City, Location} from '../../types/map';
-import { Offer } from '../../types/offer';
-import OffersList from '../offers-list/offers-list';
+
 import { MAP_ZOOM } from '../../const';
+import { City, Location } from '../../types/map';
+import { Offer } from '../../types/offer';
+import Map from '../map/map';
+import OffersList from '../offers-list/offers-list';
+import Sorting from '../sorting/sorting';
 
 type PlacesProps = {
   city: City,

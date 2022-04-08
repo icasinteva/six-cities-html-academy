@@ -1,7 +1,9 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { render, screen } from '@testing-library/react';
+
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
+
 import { CITIES } from '../../const';
 import HistoryRouter from '../history-route';
 import CitiesList from './cities-list';

@@ -1,5 +1,6 @@
-import classNames from 'classnames';
 import React from 'react';
+import classNames from 'classnames';
+
 import { Offer } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
 

@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import classNames from 'classnames';
-
+import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
+
 import { Page, PathName } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { usePage } from '../../hooks/use-page';
@@ -9,12 +9,21 @@ import Header from '../header/header';
 import FooterLogo from '../logo/footer-logo';
 
 function Layout() {
-  const [ page, handleSetPage ] = usePage(Page.Index);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+  const { offer, loadingStatus } = useAppSelector(({ OFFER }) => OFFER);
   const { offers } = useAppSelector(({ OFFERS }) => OFFERS);
   const { favorites } = useAppSelector(({ FAVORITES }) => FAVORITES);
   const isEmptyLayout = !offers.length || !Object.keys(favorites).length;
   const grayPages = [Page.Index, Page.Login];
   const pagesWithFooter = [Page.Favorites, PathName.Offer, Page.NotFound];
+
+  const [ page, handleSetPage ] = usePage(Page.Index, {
+    authorizationStatus,
+    offerData: {
+      offer,
+      loadingStatus,
+    },
+  });
 
   useEffect(handleSetPage, [handleSetPage]);
 

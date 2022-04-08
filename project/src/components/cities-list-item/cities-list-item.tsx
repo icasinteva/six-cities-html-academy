@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import CitiesListItemLink from './cities-list-item-link';
+
+import CitiesListItemLink from '../cities-list-item-link/cities-list-item-link';
 
 type CitiesListItemProps = {
   isActive?: boolean,

@@ -1,6 +1,7 @@
 import { Review } from '../../types/offer';
 
 import PropertyReviewItem from '../property-review-item/property-review-item';
+import { OFFER_REVIEWS_COUNT } from '../../const';
 
 type PropertyReviewsListProps = {
     reviews: Review[]
@@ -8,9 +9,9 @@ type PropertyReviewsListProps = {
 function PropertyReviewsList({ reviews }: PropertyReviewsListProps) {
   return (
     <>
-      <h2 className="reviews__title" data-testid="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
+      <h2 className="reviews__title" data-testid="reviews__title">Reviews · <span className="reviews__amount">{reviews.length < OFFER_REVIEWS_COUNT ? reviews.length : OFFER_REVIEWS_COUNT}</span></h2>
       <ul className="reviews__list">
-        {reviews.map((review) => <PropertyReviewItem key={review.id} review={review} />)}
+        {reviews.slice(0, OFFER_REVIEWS_COUNT).map((review) => <PropertyReviewItem key={review.id} review={review} />)}
       </ul>
     </>
   );

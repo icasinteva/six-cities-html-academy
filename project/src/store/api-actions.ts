@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { generatePath } from 'react-router-dom';
-import { APIRoute, AppRoute, AuthorizationStatus, LOADING_STATUS, Page } from '../const';
+import { APIRoute, AppRoute, AuthorizationStatus, LoadingStatus, Page } from '../const';
 import { errorHandle } from '../services/error-handle';
 import { dropUser, getUser, saveUser } from '../services/user';
 import { AppDispatch, State } from '../types/state.js';
@@ -22,7 +22,7 @@ export const fetchOffers = createAsyncThunk<void, undefined, {
   extra: AxiosInstance
 }>(
   'data/fetchOffers', async (_arg, { dispatch, extra: api }) => {
-    dispatch(setOffersLoading(LOADING_STATUS.IN_PROGRESS));
+    dispatch(setOffersLoading(LoadingStatus.InProgress));
 
     try {
       const { data } = await api.get<Offer[]>(APIRoute.Hotels);
@@ -39,7 +39,7 @@ export const fetchOffer = createAsyncThunk<void, string, {
 }>(
   'data/fetchOffer',
   async (hotelId, { dispatch, extra: api }) => {
-    dispatch(setOfferLoading(LOADING_STATUS.IN_PROGRESS));
+    dispatch(setOfferLoading(LoadingStatus.InProgress));
 
     try {
       const { data } = await api.get<Offer>(
@@ -50,11 +50,11 @@ export const fetchOffer = createAsyncThunk<void, string, {
       dispatch(loadOffer(data));
       dispatch(fetchReviews(hotelId));
       dispatch(fetchNearByHotels(hotelId));
-      dispatch(setOfferLoading(LOADING_STATUS.SUCCESS));
+      dispatch(setOfferLoading(LoadingStatus.Success));
     } catch (error) {
       errorHandle(error);
       dispatch(loadOffer(null));
-      dispatch(setOfferLoading(LOADING_STATUS.ERROR));
+      dispatch(setOfferLoading(LoadingStatus.Error));
     }
   },
 );
@@ -85,7 +85,7 @@ export const fetchFavorites = createAsyncThunk<void, undefined, {
   extra: AxiosInstance
 }>(
   'data/fetchFavorites', async (_arg, { dispatch, extra: api }) => {
-    dispatch(setFavoritesLoading(LOADING_STATUS.IN_PROGRESS));
+    dispatch(setFavoritesLoading(LoadingStatus.InProgress));
 
     try {
       const { data } = await api.get<Offer[]>(APIRoute.Favorite);

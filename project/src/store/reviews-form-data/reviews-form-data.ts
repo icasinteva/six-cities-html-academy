@@ -12,7 +12,7 @@ const initialState: initialStateType = {
 };
 
 export const reviewsForm = createSlice({
-  name: NameSpace.reviewsForm,
+  name: NameSpace.ReviewsForm,
   initialState,
   reducers: {
     changeFormStatus: (state, action) => {
