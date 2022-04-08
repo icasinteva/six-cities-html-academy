@@ -1,9 +1,9 @@
 import { Link, useLocation } from 'react-router-dom';
+
 import { AppRoute, AuthorizationStatus } from '../../const';
-import HeaderLogo from '../logo/header-logo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logout } from '../../store/api-actions';
-
+import HeaderLogo from '../logo/header-logo';
 
 function Header() {
   const { pathname } = useLocation();

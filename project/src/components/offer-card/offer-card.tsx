@@ -3,11 +3,12 @@ import React, { useCallback } from 'react';
 import classNames from 'classnames';
 import { generatePath, Link } from 'react-router-dom';
 
-import { AppRoute, OFFERTYPE_TO_LABEL } from '../../const';
+import { AppRoute, OfferTypeToLabel } from '../../const';
 import { Offer } from '../../types/offer';
 import FavoriteButton from '../favorite-button/favorite-button';
 import Price from '../price/price';
 import Rating from '../rating/rating';
+
 import './style.css';
 
 type OfferCardProps = {
@@ -55,7 +56,7 @@ function OfferCard({ className, offer, onOfferCardMouseEnter, onOfferCardMouseOu
         <h2 className="place-card__name">
           <Link to={offerRoute}>{title}</Link>
         </h2>
-        <p className="place-card__type">{OFFERTYPE_TO_LABEL[type]}</p>
+        <p className="place-card__type">{OfferTypeToLabel[type]}</p>
       </div>
     </article>);
 }

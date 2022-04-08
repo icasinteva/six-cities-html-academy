@@ -1,5 +1,5 @@
 import { Page } from '../const';
 
-export type PagesType = {
+export type PathNameToPageType = {
     [key:string]: Page
   }

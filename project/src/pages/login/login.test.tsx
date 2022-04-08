@@ -4,18 +4,24 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import HistoryRouter from '../../components/history-route';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import Login from './login';
 
 const mockStore = configureMockStore();
+const store = mockStore({
+  USER: {
+    authorizationStatus: AuthorizationStatus.NoAuth,
+  },
+});
+
+const history = createMemoryHistory();
 
 describe('Component: Login', () => {
   it('should render correctly', () => {
-    const history = createMemoryHistory();
     history.push(AppRoute.SignIn);
 
     render(
-      <Provider store={mockStore({})}>
+      <Provider store={store}>
         <HistoryRouter history={history}>
           <Login />
         </HistoryRouter>

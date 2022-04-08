@@ -1,13 +1,14 @@
-import { useRef, useEffect, useState } from 'react';
-import { Icon, Layer, Marker} from 'leaflet';
+import { useEffect, useRef, useState } from 'react';
+import { Icon, Layer, Marker } from 'leaflet';
+
+import { BASE_CITY, UrlMarker } from '../../const';
 import useMap from '../../hooks/use-map';
-import {City, Location} from '../../types/map';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, BASE_CITY} from '../../const';
-import 'leaflet/dist/leaflet.css';
+import { City, Location } from '../../types/map';
 import { Offer } from '../../types/offer';
 
+import 'leaflet/dist/leaflet.css';
+
 type MapProps = {
-  resetable?: boolean,
   city: City;
   offers: Offer[],
   selectedPoint: Location | null;
@@ -15,18 +16,18 @@ type MapProps = {
 };
 
 const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: UrlMarker.Default,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
+  iconUrl: UrlMarker.Current,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
-function Map({ city, offers, selectedPoint, className, resetable }: MapProps): JSX.Element {
+function Map({ city, offers, selectedPoint, className }: MapProps): JSX.Element {
   const { location, name } = city;
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);

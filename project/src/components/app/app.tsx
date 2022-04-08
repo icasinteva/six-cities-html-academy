@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+
 import { AppRoute } from '../../const';
 import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';

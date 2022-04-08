@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { LOADING_STATUS, NameSpace } from '../../const';
+import { LoadingStatus, NameSpace } from '../../const';
 import { getFavoritesByCity } from '../../services/helpers';
 import { FavoritesData } from '../../types/state';
 
 const initialState: FavoritesData = {
   favorites: {},
-  loadingStatus: LOADING_STATUS.IN_PROGRESS,
+  loadingStatus: LoadingStatus.InProgress,
 };
 
 export const favoritesData = createSlice({
-  name: NameSpace.favorites,
+  name: NameSpace.Favorites,
   initialState,
   reducers: {
     setFavoritesLoading: (state, action) => {
@@ -17,7 +17,7 @@ export const favoritesData = createSlice({
     },
     loadFavorites: (state, action) => {
       state.favorites = getFavoritesByCity(action.payload);
-      state.loadingStatus = LOADING_STATUS.SUCCESS;
+      state.loadingStatus = LoadingStatus.Success;
     },
     removeFromFavorites: (state, action) => {
       const { id, city: { name } } = action.payload;

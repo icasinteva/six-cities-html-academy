@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import PropertyGoods from './property-goods';
+
 import { makeFakeOffer } from '../../utils/mocks';
+import PropertyGoods from './property-goods';
 
 describe('Component: PropertyGoods', () => {
   it('should render correctly', () => {

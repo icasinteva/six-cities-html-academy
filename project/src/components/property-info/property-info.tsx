@@ -1,4 +1,4 @@
-import { OFFERTYPE_TO_LABEL } from '../../const';
+import { OfferTypeToLabel } from '../../const';
 import { Offer } from '../../types/offer';
 import FavoriteButton from '../favorite-button/favorite-button';
 import HostView from '../host-view/host-view';
@@ -26,7 +26,7 @@ function PropertyInfo({ offer }: PropertyInfoProps) {
       <Rating className='property' rating={rating} showValue />
       <ul className="property__features">
         <li data-testid="property__feature--entire" className="property__feature property__feature--entire">
-          {OFFERTYPE_TO_LABEL[type]}
+          {OfferTypeToLabel[type]}
         </li>
         <li data-testid="property__feature--bedrooms" className="property__feature property__feature--bedrooms">
           {`${bedrooms} Bedrooms`}

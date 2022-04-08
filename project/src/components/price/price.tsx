@@ -5,6 +5,7 @@ type PriceProps = {
 
 function Price({ amount, className }: PriceProps) {
   const style = className === 'property' ? { display: 'none' } : {};
+
   return (
     <div className={`${className}__price`} data-testid={`${className}__price`}>
       <b className={`${className}__price-value`}>€{amount}</b>

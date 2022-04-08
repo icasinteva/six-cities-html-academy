@@ -1,4 +1,4 @@
-import { LOADING_STATUS } from '../../const';
+import { LoadingStatus } from '../../const';
 import { makeFakeOffer, makeFakeOffers, makeFakeReviews } from '../../utils/mocks';
 import { loadNearByOffers, loadOffer, loadReviews, offerData, setOfferLoading } from './offer-data';
 
@@ -9,7 +9,7 @@ describe('Reducer: offer', () => {
         offer: null,
         reviews: [],
         nearByOffers: [],
-        loadingStatus: LOADING_STATUS.IN_PROGRESS,
+        loadingStatus: LoadingStatus.InProgress,
       });
   });
 
@@ -19,14 +19,14 @@ describe('Reducer: offer', () => {
       offer: null,
       reviews: [],
       nearByOffers: [],
-      loadingStatus: LOADING_STATUS.IN_PROGRESS,
+      loadingStatus: LoadingStatus.InProgress,
     };
 
     expect(offerData.reducer(state, loadOffer(mockOffer)).offer)
       .toEqual(mockOffer);
 
-    expect(offerData.reducer(state, setOfferLoading(LOADING_STATUS.SUCCESS)).loadingStatus)
-      .toEqual(LOADING_STATUS.SUCCESS);
+    expect(offerData.reducer(state, setOfferLoading(LoadingStatus.Success)).loadingStatus)
+      .toEqual(LoadingStatus.Success);
   });
 
   it('should update offer to null', () => {
@@ -34,21 +34,21 @@ describe('Reducer: offer', () => {
       offer: null,
       reviews: [],
       nearByOffers: [],
-      loadingStatus: LOADING_STATUS.IN_PROGRESS,
+      loadingStatus: LoadingStatus.InProgress,
     };
 
     expect(offerData.reducer(state, loadOffer(null)).offer)
       .toEqual(null);
 
-    expect(offerData.reducer(state, setOfferLoading(LOADING_STATUS.ERROR)).loadingStatus)
-      .toEqual(LOADING_STATUS.ERROR);
+    expect(offerData.reducer(state, setOfferLoading(LoadingStatus.Error)).loadingStatus)
+      .toEqual(LoadingStatus.Error);
   });
   it('should load reviews', () => {
     const state = {
       offer: null,
       reviews: [],
       nearByOffers: [],
-      loadingStatus: LOADING_STATUS.IN_PROGRESS,
+      loadingStatus: LoadingStatus.InProgress,
     };
     const mockReviews = makeFakeReviews(5);
 
@@ -60,7 +60,7 @@ describe('Reducer: offer', () => {
       offer: null,
       reviews: [],
       nearByOffers: [],
-      loadingStatus: LOADING_STATUS.IN_PROGRESS,
+      loadingStatus: LoadingStatus.InProgress,
     };
 
     const mockNearByOffers = makeFakeOffers(3);

@@ -9,3 +9,7 @@ export type City = {
   name: string
 }
 
+export type MapRef = {
+  current: HTMLElement | null
+}
+

@@ -5,6 +5,7 @@ exports[`Component: ReviewsForm should render correctly 1`] = `
   <form
     action=""
     class="reviews__form form"
+    data-testid="reviews__form"
   >
     <label
       class="reviews__label form__label"

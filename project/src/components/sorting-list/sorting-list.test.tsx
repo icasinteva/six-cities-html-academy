@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 
 import { SortingType } from '../../const';
-import Sorting from './sorting';
+import SortingList from './sorting-list';
 
 const mockStore = configureMockStore();
 const store = mockStore({
@@ -13,11 +13,11 @@ const store = mockStore({
   },
 });
 
-describe('Component: Sorting', () => {
+describe('Component: SortingList', () => {
   it('should render correctly', () => {
     const { container } = render(
       <Provider store={store}>
-        <Sorting />
+        <SortingList isOpened={false} selectedOption={SortingType.Popular} onSortingOptionClick={jest.fn()} />
       </Provider>);
 
     expect(container).toMatchSnapshot();

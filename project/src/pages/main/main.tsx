@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import CitiesList from '../../components/cities-list/cities-list';
 import NoPlaces from '../../components/no-places/no-places';
 import Places from '../../components/places/places';
-import Spinner from '../../components/spinner/';
+import Spinner from '../../components/spinner/spinner';
 import { useAppSelector } from '../../hooks';
 import { useLoading } from '../../hooks/use-loading';
 

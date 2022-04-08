@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import { LOADING_STATUS } from '../const';
+import { LoadingStatus } from '../const';
 import { useLoading } from './use-loading';
 
 describe('Hook: useLoading', () => {
@@ -22,13 +22,13 @@ describe('Hook: useLoading', () => {
 
     expect(initialLoading).toBe(true);
 
-    act(() => handleLoading(LOADING_STATUS.SUCCESS));
+    act(() => handleLoading(LoadingStatus.Success));
 
     let [ loading ] = result.current;
 
     expect(loading).toBe(false);
 
-    act(() => handleLoading(LOADING_STATUS.IN_PROGRESS));
+    act(() => handleLoading(LoadingStatus.InProgress));
 
     [ loading ] = result.current;
 

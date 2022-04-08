@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+
 import ReviewRatingInput from './review-rating-input';
 
 describe('Component: ReviewRatingInput', () => {
@@ -8,19 +9,6 @@ describe('Component: ReviewRatingInput', () => {
     const secondStar = screen.getByTestId('2-stars');
 
     expect(container).toMatchSnapshot();
-
     expect(secondStar).toBeChecked();
-  });
-
-  it('should call onRatingChange when star is clicked', () => {
-    const onRatingChange = jest.fn();
-
-    render(<ReviewRatingInput rating='' disabled={false} onRatingChange={onRatingChange} />);
-
-    const secondStar = screen.getByTestId('2-stars');
-
-    secondStar.click();
-
-    expect(onRatingChange).toBeCalledTimes(1);
   });
 });

@@ -5,6 +5,7 @@ exports[`Component: Sorting should render correctly 1`] = `
   <form
     action="#"
     class="places__sorting"
+    data-testid="sorting"
     method="get"
   >
     <span

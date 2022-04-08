@@ -1,6 +1,7 @@
 import { useState } from 'react';
+
 import { useAppSelector } from '../../hooks';
-import SortingList from './sorting-list';
+import SortingList from '../sorting-list/sorting-list';
 
 function Sorting() {
   const { sortingType } = useAppSelector(({ OFFERS }) => OFFERS);
@@ -10,7 +11,7 @@ function Sorting() {
   };
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form className="places__sorting" action="#" method="get" data-testid="sorting">
       <span className="places__sorting-caption">Sort by</span>
       &nbsp;
       <span className="places__sorting-type" data-testid="sorting-type" tabIndex={0} onClick={() => setOpened(!opened)} >

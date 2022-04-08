@@ -38,7 +38,7 @@ export const makeFakeOffer = (options?: { isFavorite?: boolean, isPremium?: bool
   price: +commerce.price(),
   rating: datatype.number({ min: 1, max: 5, precision: 0.1 }),
   title: lorem.sentence(),
-  type: random.arrayElement([OfferType.APPARTMENT, OfferType.HOTEL, OfferType.HOUSE, OfferType.ROOM]),
+  type: random.arrayElement([OfferType.Apartment, OfferType.Hotel, OfferType.House, OfferType.Room]),
 });
 
 export const makeFakeReviewData = (): ReviewData => ({

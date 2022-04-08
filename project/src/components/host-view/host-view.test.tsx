@@ -3,7 +3,7 @@ import { makeFakeOffer } from '../../utils/mocks';
 import HostView from './host-view';
 
 describe('Component: Logo', () => {
-  test('should render correctly', () => {
+  it('should render correctly', () => {
     const fakeOffer = makeFakeOffer();
     const { host, description } = fakeOffer;
 

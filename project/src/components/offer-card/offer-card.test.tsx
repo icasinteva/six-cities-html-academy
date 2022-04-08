@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 
-import { AuthorizationStatus, OFFERTYPE_TO_LABEL } from '../../const';
+import { AuthorizationStatus, OfferTypeToLabel } from '../../const';
 import { makeFakeOffer } from '../../utils/mocks';
 import HistoryRouter from '../history-route';
 import OfferCard from './offer-card';
@@ -34,6 +34,6 @@ describe('Component: OfferCard', () => {
     expect(screen.getByTestId('place-card__price')).toBeInTheDocument();
     expect(screen.getByTestId('rating')).toBeInTheDocument();
     expect(screen.getByText(title)).toBeInTheDocument();
-    expect(screen.getByText(OFFERTYPE_TO_LABEL[type])).toBeInTheDocument();
+    expect(screen.getByText(OfferTypeToLabel[type])).toBeInTheDocument();
   });
 });

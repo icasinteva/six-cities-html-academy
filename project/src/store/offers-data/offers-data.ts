@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   BASE_CITY,
-  LOADING_STATUS,
-  NameSpace, sortingOptionToCallback,
+  LoadingStatus,
+  NameSpace, SortingOptionToCallback,
   SortingType
 } from '../../const';
 import { getOffersByCity } from '../../services/helpers';
@@ -12,23 +12,23 @@ const initialState: OffersData = {
   city: BASE_CITY,
   offers: [],
   sortingType: SortingType.Popular,
-  loadingStatus: LOADING_STATUS.IN_PROGRESS,
+  loadingStatus: LoadingStatus.InProgress,
 };
 
 export const offersData = createSlice({
-  name: NameSpace.offers,
+  name: NameSpace.Offers,
   initialState,
   reducers: {
     setOffersLoading: (state, action) => {
       state.loadingStatus = action.payload;
     },
     setCity: (state, action) => {
-      state.loadingStatus = LOADING_STATUS.IN_PROGRESS;
+      state.loadingStatus = LoadingStatus.InProgress;
       state.city = action?.payload || state.city;
     },
     loadOffers: (state, action) => {
       state.offers = getOffersByCity(action.payload, state.city.name);
-      state.loadingStatus = LOADING_STATUS.SUCCESS;
+      state.loadingStatus = LoadingStatus.Success;
     },
     updateOffers: (state, action) => {
       const { id } = action.payload;
@@ -37,7 +37,7 @@ export const offersData = createSlice({
       state.offers.splice(index, 1, action.payload);
     },
     sortOffers: (state, action) => {
-      const sortingCallback = sortingOptionToCallback[action.payload];
+      const sortingCallback = SortingOptionToCallback[action.payload];
 
       state.sortingType = action.payload;
       state.offers = state.offers.sort(sortingCallback);

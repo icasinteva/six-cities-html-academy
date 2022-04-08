@@ -1,5 +1,5 @@
 import { City } from './types/map';
-import { PagesType } from './types/page';
+import { PathNameToPageType } from './types/page';
 import { SortingOptionToCallbackType } from './types/sorting';
 
 export enum AppRoute {
@@ -31,19 +31,26 @@ export enum Page {
   NotFound = '404'
 }
 
-export const PAGES: PagesType = {
+export const PathNameToPage: PathNameToPageType = {
   [PathName.Index]: Page.Index,
   [PathName.Login]: Page.Login,
   [PathName.Offer]: Page.Property,
   [PathName.Favorites]: Page.Favorites,
-};
+} as const;
 
 export enum OfferType {
-  APPARTMENT = 'apartment',
-  ROOM = 'room',
-  HOUSE = 'house',
-  HOTEL = 'hotel',
+  Apartment = 'apartment',
+  Room = 'room',
+  House = 'house',
+  Hotel = 'hotel',
 }
+
+export const OfferTypeToLabel = {
+  [OfferType.Apartment]: 'Apartment',
+  [OfferType.Room]: 'Room',
+  [OfferType.House]: 'House',
+  [OfferType.Hotel]: 'Hotel',
+} as const;
 
 export enum SortingType {
   Popular = 'Popular',
@@ -51,6 +58,13 @@ export enum SortingType {
   PriceHighToLow = 'Price: high to low',
   TopRatedFirst = 'Top rated first',
 }
+
+export const SortingOptionToCallback: SortingOptionToCallbackType = {
+  [SortingType.PriceLowToHigh]: (offer1, offer2) => offer1.price - offer2.price,
+  [SortingType.PriceHighToLow]: (offer1, offer2) => offer2.price - offer1.price,
+  [SortingType.TopRatedFirst]: (offer1, offer2) =>
+    offer2.rating - offer1.rating,
+} as const;
 
 export enum APIRoute {
   Login = '/login',
@@ -63,43 +77,36 @@ export enum APIRoute {
   UpdateFavorites = '/favorite/:hotelId/:status'
 }
 
-export enum HTTP_CODE {
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  NOT_FOUND = 404,
+export enum HTTPCode {
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404,
 }
 
 export enum NameSpace {
-  user = 'USER',
-  offer = 'OFFER',
-  offers = 'OFFERS',
-  nearByOffers = 'NEARBY_OFFERS',
-  favorites = 'FAVORITES',
-  reviewsForm = 'REVIEWS_FORM'
+  User = 'USER',
+  Offer = 'OFFER',
+  Offers = 'OFFERS',
+  Favorites = 'FAVORITES',
+  ReviewsForm = 'REVIEWS_FORM'
 }
 
-export enum LOADING_STATUS {
-  IN_PROGRESS = 'IN_PROGRESS',
-  SUCCESS = 'SUCCESS',
-  ERROR ='ERROR'
+export enum LoadingStatus {
+  InProgress = 'IN_PROGRESS',
+  Success = 'SUCCESS',
+  Error ='ERROR'
 }
-
-export const OFFERTYPE_TO_LABEL = {
-  [OfferType.APPARTMENT]: 'Apartment',
-  [OfferType.ROOM]: 'Room',
-  [OfferType.HOUSE]: 'House',
-  [OfferType.HOTEL]: 'Hotel',
-};
 
 export const GALLERY_IMAGES_COUNT = 6;
 
+export const OFFER_REVIEWS_COUNT = 10;
+
 export const MAP_ZOOM = 13;
 
-export const REVIEW_SYMBOLS = {
+export const ReviewSymbols = {
   min: 50,
   max: 300,
-};
-
+} as const;
 
 export const CITIES: City[] = [
   {
@@ -160,18 +167,9 @@ export const CITIES: City[] = [
   },
 ];
 
-export const [BASE_CITY] = CITIES;
-// export const BASE_CITY = CITIES[6];
+export const [ BASE_CITY ] = CITIES;
 
-export const URL_MARKER_DEFAULT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-
-export const URL_MARKER_CURRENT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
-
-export const sortingOptionToCallback: SortingOptionToCallbackType = {
-  [SortingType.PriceLowToHigh]: (offer1, offer2) => offer1.price - offer2.price,
-  [SortingType.PriceHighToLow]: (offer1, offer2) => offer2.price - offer1.price,
-  [SortingType.TopRatedFirst]: (offer1, offer2) =>
-    offer2.rating - offer1.rating,
-};
+export const UrlMarker = {
+  Default: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+  Current: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
+} as const;

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { LOADING_STATUS, NameSpace } from '../../const';
+import { LoadingStatus, NameSpace } from '../../const';
 import { Review } from '../../types/offer';
 import { OfferData } from '../../types/state';
 
@@ -7,11 +7,11 @@ const initialState: OfferData = {
   offer: null,
   reviews: [],
   nearByOffers: [],
-  loadingStatus: LOADING_STATUS.IN_PROGRESS,
+  loadingStatus: LoadingStatus.InProgress,
 };
 
 export const offerData = createSlice({
-  name: NameSpace.offer,
+  name: NameSpace.Offer,
   initialState,
   reducers: {
     setOfferLoading: (state, action) => {

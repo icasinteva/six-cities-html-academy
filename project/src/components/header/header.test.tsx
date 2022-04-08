@@ -1,17 +1,30 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { render, screen } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
+
+import { createMemoryHistory, MemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { AppRoute, AuthorizationStatus } from '../../const';
 
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { makeFakeUser } from '../../utils/mocks';
 import HistoryRouter from '../history-route';
 import Header from './header';
-import { makeFakeUser } from '../../utils/mocks';
 
 const middlewares = [thunk];
 
 const mockStore = configureMockStore(middlewares);
+
+const makeFakeHeader = (history: MemoryHistory, store = mockStore({
+  USER: {
+    authorizationStatus: AuthorizationStatus.NoAuth,
+  },
+})) => (
+  <Provider store={store}>
+    <HistoryRouter history={history}>
+      <Header />
+    </HistoryRouter>
+  </Provider>
+);
 
 describe('Component: Header', () => {
   it('should render correctly', () => {
@@ -22,13 +35,7 @@ describe('Component: Header', () => {
       },
     });
 
-    render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Header />
-        </HistoryRouter>
-      </Provider>,
-    );
+    render(makeFakeHeader(history, store));
 
     expect(screen.getByTestId('header__logo')).toBeInTheDocument();
     expect(screen.getByTestId('header__nav-link--profile')).toBeInTheDocument();
@@ -44,13 +51,7 @@ describe('Component: Header', () => {
       },
     });
 
-    render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Header />
-        </HistoryRouter>
-      </Provider>,
-    );
+    render(makeFakeHeader(history, store));
 
     expect(screen.getByTestId('header__nav-link--profile')).toBeInTheDocument();
     expect(screen.getByTestId('user__avatar')).toBeInTheDocument();
@@ -60,19 +61,8 @@ describe('Component: Header', () => {
 
   it('should render user Sign in link when user is not authorized', () => {
     const history = createMemoryHistory();
-    const store = mockStore({
-      USER: {
-        authorizationStatus: AuthorizationStatus.NoAuth,
-      },
-    });
 
-    render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Header />
-        </HistoryRouter>
-      </Provider>,
-    );
+    render(makeFakeHeader(history));
 
     expect(screen.getByTestId('header__nav-link--profile')).toBeInTheDocument();
     expect(screen.queryByTestId('user__avatar')).not.toBeInTheDocument();
@@ -82,21 +72,10 @@ describe('Component: Header', () => {
 
   it('should not render header__nav when on /login', () => {
     const history = createMemoryHistory();
-    const store = mockStore({
-      USER: {
-        authorizationStatus: AuthorizationStatus.NoAuth,
-      },
-    });
 
     history.push(AppRoute.SignIn);
 
-    render(
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <Header />
-        </HistoryRouter>
-      </Provider>,
-    );
+    render(makeFakeHeader(history));
 
     expect(screen.queryByTestId('header__nav')).not.toBeInTheDocument();
   });

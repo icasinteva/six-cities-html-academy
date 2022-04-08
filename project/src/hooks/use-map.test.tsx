@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
+
 import { mocked } from 'jest-mock';
 import { useRef } from 'react';
-import Map from '../components/map/map';
+
 import { BASE_CITY } from '../const';
-import { makeFakeOffers } from '../utils/mocks';
+import { MapRef } from '../types/map';
 import useMap from './use-map';
 
 jest.mock('react', () => ({
@@ -14,24 +14,13 @@ jest.mock('react', () => ({
 
 const useMockRef = mocked(useRef);
 
-xdescribe('Hook: useMap', () => {
+describe('Hook: useMap', () => {
   it('should return map', () => {
-    const mapRef = { current: null };
-
-    Object.defineProperty(mapRef, 'current', {
-      set(_current) {
-        this._current = _current;
-      },
-      get() {
-        return this._current;
-      },
-    });
+    const mapRef: MapRef = { current: null };
 
     useMockRef.mockReturnValueOnce(mapRef);
 
     const { result } = renderHook(() => useMap(mapRef, BASE_CITY.location));
-
-    render(<Map className="cities" offers={makeFakeOffers(10)} city={BASE_CITY} selectedPoint={null} />);
 
     const map = result.current;
 
