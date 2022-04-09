@@ -1,10 +1,10 @@
 import CitiesListItemLink from '../cities-list-item-link/cities-list-item-link';
 
-type FavoritesCityItemProps = {
+type FavoritesCityListItemProps = {
   cityName: string
 }
 
-function FavoritesCityItem({ cityName }: FavoritesCityItemProps) {
+function FavoritesCityListItem({ cityName }: FavoritesCityListItemProps) {
   return (
     <div className="locations__item">
       <CitiesListItemLink cityName={cityName} />
@@ -12,4 +12,4 @@ function FavoritesCityItem({ cityName }: FavoritesCityItemProps) {
   );
 }
 
-export default FavoritesCityItem;
+export default FavoritesCityListItem;

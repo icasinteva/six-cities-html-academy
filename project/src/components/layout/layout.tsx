@@ -5,14 +5,19 @@ import { Outlet } from 'react-router-dom';
 import { Page, PathName } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { usePage } from '../../hooks/use-page';
+import { getFavoritesByCity } from '../../store/favorites-data/selectors';
+import { getOffer } from '../../store/offer-data/selectors';
+import { getOffers } from '../../store/offers-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import Header from '../header/header';
 import FooterLogo from '../logo/footer-logo';
 
 function Layout() {
-  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
-  const { offer, loadingStatus } = useAppSelector(({ OFFER }) => OFFER);
-  const { offers } = useAppSelector(({ OFFERS }) => OFFERS);
-  const { favorites } = useAppSelector(({ FAVORITES }) => FAVORITES);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const offer = useAppSelector(getOffer);
+  const loadingStatus = useAppSelector(getOffer);
+  const offers = useAppSelector(getOffers);
+  const favorites = useAppSelector(getFavoritesByCity);
   const isEmptyLayout = !offers.length || !Object.keys(favorites).length;
   const grayPages = [Page.Index, Page.Login];
   const pagesWithFooter = [Page.Favorites, PathName.Offer, Page.NotFound];

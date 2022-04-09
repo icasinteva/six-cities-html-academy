@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus, PathNameToPage } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { updateFavorites } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 type FavoriteButtonProps = {
   id: number,
@@ -22,7 +23,7 @@ function FavoriteButton({ id, className, isFavorite, size }: FavoriteButtonProps
     [classNameFavorite]: isFavorite,
   });
   const dispatch = useAppDispatch();
-  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
   const location = useLocation();
   const [, pathname] = location.pathname.split('/');
@@ -33,7 +34,7 @@ function FavoriteButton({ id, className, isFavorite, size }: FavoriteButtonProps
       if (authorizationStatus !== AuthorizationStatus.Auth) {
         navigate(AppRoute.SignIn);
       } else {
-        dispatch(updateFavorites({ hotelId: `${id}`, isFavorite, page }));
+        dispatch(updateFavorites({ hotelId: `${id}`, isFavorite, page, className }));
       }
     }}
     >

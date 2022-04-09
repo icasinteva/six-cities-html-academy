@@ -157,19 +157,16 @@ export const CITIES: City[] = [
     },
     name: 'Dusseldorf',
   },
-  {
-    location: {
-      latitude: 51.225402,
-      longitude: 6.776314,
-      zoom: MAP_ZOOM,
-    },
-    name: 'Warsaw',
-  },
 ];
 
 export const [ BASE_CITY ] = CITIES;
 
 export const UrlMarker = {
-  Default: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
-  Current: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
+  Default: 'img/pin.svg',
+  Current: 'img/pin-active.svg',
 } as const;
+
+export enum FavoriteButtonClassName {
+  Property = 'property',
+  OfferCard = 'place-card'
+}

@@ -4,12 +4,14 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logout } from '../../store/api-actions';
 import HeaderLogo from '../logo/header-logo';
+import { getAuthorizationStatus, getUser } from '../../store/user-process/selectors';
 
 function Header() {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const isSignInPage = pathname === AppRoute.SignIn;
-  const { authorizationStatus, user } = useAppSelector(({ USER }) => USER);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUser);
   const isAuthorised = authorizationStatus === AuthorizationStatus.Auth;
   const { avatarUrl, email } = user || {};
 

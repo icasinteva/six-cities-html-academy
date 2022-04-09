@@ -5,6 +5,7 @@ import Spinner from '../../components/spinner/spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useLoading } from '../../hooks/use-loading';
 import { fetchFavorites } from '../../store/api-actions';
+import { getFavoritesByCity, getLoadingStatus } from '../../store/favorites-data/selectors';
 
 
 function Favorites() {
@@ -15,7 +16,8 @@ function Favorites() {
     dispatch(fetchFavorites());
   }, [dispatch]);
 
-  const { favorites, loadingStatus } = useAppSelector(({ FAVORITES }) => FAVORITES);
+  const favorites = useAppSelector(getFavoritesByCity);
+  const loadingStatus = useAppSelector(getLoadingStatus);
 
   useEffect(() => {
     handleLoading(loadingStatus);

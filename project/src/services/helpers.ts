@@ -24,7 +24,7 @@ export const getFavoritesByCity = (offers: Offer[] = []) => {
 
 export const formatDate = (value: string) => {
   const date = new Date(value);
-  const month = date.toLocaleString('default', { month: 'long' });
+  const month = date.toLocaleString('en-US', { month: 'long' });
   const year = date.toLocaleString('default', { year: 'numeric' });
 
   return `${  month  } ${  year}`;

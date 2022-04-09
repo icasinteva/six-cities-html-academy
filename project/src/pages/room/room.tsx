@@ -12,23 +12,27 @@ import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useLoading } from '../../hooks/use-loading';
 import { fetchOffer, postReview } from '../../store/api-actions';
+import { getLoadingStatus, getNearByOfffers, getOffer, getReviews } from '../../store/offer-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { ReviewFormData } from '../../types/review-data';
 import NotFound from '../not-found/not-found';
 
 function Room() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const [loading, handleLoading] = useLoading();
+  const [ loading, handleLoading ] = useLoading();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchOffer(id));
     }
-  }, [id, dispatch]);
+  }, [id, authorizationStatus, dispatch]);
 
-  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
-
-  const { offer, reviews, nearByOffers, loadingStatus } = useAppSelector(({ OFFER }) => OFFER);
+  const offer = useAppSelector(getOffer);
+  const reviews = useAppSelector(getReviews);
+  const nearByOffers = useAppSelector(getNearByOfffers);
+  const loadingStatus = useAppSelector(getLoadingStatus);
 
   const hanldeReviewsFormSubmit = (data: ReviewFormData) => {
     dispatch(postReview(data));
