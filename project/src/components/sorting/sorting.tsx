@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
 import { useAppSelector } from '../../hooks';
+import { getSortingType } from '../../store/offers-data/selectors';
 import SortingList from '../sorting-list/sorting-list';
 
 function Sorting() {
-  const { sortingType } = useAppSelector(({ OFFERS }) => OFFERS);
+  const sortingType = useAppSelector(getSortingType);
   const [ opened, setOpened ] = useState(false);
   const handleListClose = () => {
     setOpened(false);

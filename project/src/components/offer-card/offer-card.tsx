@@ -20,6 +20,7 @@ type OfferCardProps = {
 
 function OfferCard({ className, offer, onOfferCardMouseEnter, onOfferCardMouseOut }: OfferCardProps) {
   const { id, isPremium, isFavorite, rating, price, type, title, previewImage } = offer;
+
   const classNameCard = classNames({
     [`${className}__place-card place-card`]: className === 'cities',
     [`${className}__card place-card`]: className !== 'cities',

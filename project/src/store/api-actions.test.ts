@@ -1,22 +1,24 @@
-import { Action } from 'redux';
-import { datatype } from 'faker';
-import thunk, { ThunkDispatch } from 'redux-thunk';
-import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { createAPI } from '../services/api';
-import { checkAuthorization, fetchOffer, fetchOffers, login, logout, fetchNearByHotels, fetchFavorites, fetchReviews, postReview } from './api-actions';
-import { requireAuthorization } from './user-process/user-process';
-import { APIRoute } from '../const';
-import { State } from '../types/state';
-import { AuthData } from '../types/auth-data';
-import { redirectToRoute } from './action';
-import { makeFakeOffer, makeFakeOffers, makeFakeFavorites, makeFakeReviews, makeFakeReviewData } from '../utils/mocks';
-import { loadOffers } from './offers-data/offers-data';
+
+import MockAdapter from 'axios-mock-adapter';
+import { datatype } from 'faker';
 import { generatePath } from 'react-router-dom';
-import { loadNearByOffers, loadOffer, loadReviews } from './offer-data/offer-data';
-import { loadFavorites } from './favorites-data/favorites-data';
+import { Action } from 'redux';
+import thunk, { ThunkDispatch } from 'redux-thunk';
+
+import { APIRoute } from '../const';
+import { createAPI } from '../services/api';
+import { AuthData } from '../types/auth-data';
 import { ReviewData } from '../types/review-data';
+import { State } from '../types/state';
+import { makeFakeFavorites, makeFakeOffer, makeFakeOffers, makeFakeReviewData, makeFakeReviews } from '../utils/mocks';
+import { redirectToRoute } from './action';
+import { checkAuthorization, fetchFavorites, fetchNearByHotels, fetchOffer, fetchOffers, fetchReviews, login, logout, postReview } from './api-actions';
+import { loadFavorites } from './favorites-data/favorites-data';
+import { loadNearByOffers, loadOffer, loadReviews } from './offer-data/offer-data';
+import { loadOffers } from './offers-data/offers-data';
 import { changeFormStatus } from './reviews-form-data/reviews-form-data';
+import { requireAuthorization } from './user-process/user-process';
 
 describe('Async actions', () => {
   const api = createAPI();
@@ -83,7 +85,6 @@ describe('Async actions', () => {
     const actions = store.getActions().map(({ type }) => type);
 
     expect(actions).toContain(requireAuthorization.toString());
-
     expect(Storage.prototype.removeItem).toBeCalledTimes(1);
     expect(Storage.prototype.removeItem).toBeCalledWith('six-cities-user-data');
   });

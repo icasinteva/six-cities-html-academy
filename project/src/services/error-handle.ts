@@ -27,6 +27,10 @@ export const errorHandle = (error: ErrorType): void => {
         toast.info(data.error);
         break;
       }
+      default: {
+        toast.info(data.error);
+        break;
+      }
     }
   }
 };
