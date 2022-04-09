@@ -36,7 +36,7 @@ function Login() {
           <form className="login__form form" action="" onSubmit={handleSubmit}>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden" htmlFor="email">E-mail</label>
-              <input ref={loginRef} className="login__input form__input" type="email" id="email" name="email" placeholder="Email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" data-testid="email" />    
+              <input ref={loginRef} className="login__input form__input" type="email" id="email" name="email" placeholder="Email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" data-testid="email" />
             </div>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden" htmlFor="password">Password</label>
