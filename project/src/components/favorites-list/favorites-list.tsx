@@ -1,5 +1,5 @@
 import { FavoritesByCity } from '../../types/offer';
-import FavoritesCityItem from '../cities-list-item/favorites-cities-list-item';
+import FavoritesCityListItem from '../cities-list-item/favorites-cities-list-item';
 import OfferCard from '../offer-card/offer-card';
 
 type FavoritesListProps = {
@@ -15,7 +15,7 @@ function FavoritesList({ favorites }: FavoritesListProps) {
           Object.entries(favorites).map(([city, offers]) => (
             <li key={city} className="favorites__locations-items" data-testid={'favorites__city'}>
               <div className="favorites__locations locations locations--current">
-                <FavoritesCityItem cityName={city} />
+                <FavoritesCityListItem cityName={city} />
               </div>
               <div className="favorites__places">
                 {offers.map((offer) => <OfferCard key={offer.id} className='favorites' offer={offer} />)}

@@ -19,6 +19,9 @@ const city = BASE_CITY;
 describe('Component: Main', () => {
   it('should render NoPlaces when there are no offers for the city', () => {
     const store = mockStore({
+      USER: {
+        authorizationStatus: AuthorizationStatus.Auth,
+      },
       OFFERS: {
         city,
         offers: [],

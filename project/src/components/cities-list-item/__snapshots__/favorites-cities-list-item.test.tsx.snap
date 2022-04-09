@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: FavoritesCityItem should render correctly 1`] = `
+exports[`Component: FavoritesCityListItem should render correctly 1`] = `
 <div>
   <div
     class="locations__item"

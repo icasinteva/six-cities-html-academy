@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { generatePath } from 'react-router-dom';
-import { APIRoute, AppRoute, AuthorizationStatus, LoadingStatus, Page } from '../const';
+import { APIRoute, AppRoute, AuthorizationStatus, FavoriteButtonClassName, LoadingStatus, Page } from '../const';
 import { errorHandle } from '../services/error-handle';
 import { dropUser, getUser, saveUser } from '../services/user';
 import { AppDispatch, State } from '../types/state.js';
@@ -11,7 +11,7 @@ import { ReviewData } from '../types/review-data';
 import { User } from '../types/user';
 import { redirectToRoute } from './action';
 import { loadFavorites, setFavoritesLoading, removeFromFavorites } from './favorites-data/favorites-data';
-import { loadNearByOffers, loadOffer, loadReviews, setOfferLoading } from './offer-data/offer-data';
+import { loadNearByOffers, loadOffer, loadReviews, setOfferLoading, updateNearByOffers } from './offer-data/offer-data';
 import { loadOffers, setOffersLoading, updateOffers } from './offers-data/offers-data';
 import { changeFormStatus } from './reviews-form-data/reviews-form-data';
 import { requireAuthorization, setUser } from './user-process/user-process';
@@ -158,15 +158,17 @@ export const login = createAsyncThunk<void, AuthData, {
   },
 );
 
-export const logout = createAsyncThunk<void, undefined, {
+export const logout = createAsyncThunk<void, undefined , {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'user/logout', async (_arg, { dispatch, extra: api }) => {
     await api.delete(APIRoute.Logout);
+
     dropUser();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    // dispatch(fetchOffers());
   });
 
 export const postReview = createAsyncThunk<void, { hotelId: string, review: ReviewData }, {
@@ -202,13 +204,13 @@ export const postReview = createAsyncThunk<void, { hotelId: string, review: Revi
   },
 );
 
-export const updateFavorites = createAsyncThunk<void, { hotelId: string, isFavorite: boolean, page: Page }, {
+export const updateFavorites = createAsyncThunk<void, { hotelId: string, isFavorite: boolean, page: Page, className: string }, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'offer/updateFavorites',
-  async ({ hotelId, isFavorite, page }, { dispatch, extra: api }) => {
+  async ({ hotelId, isFavorite, page, className }, { dispatch, extra: api }) => {
     try {
       const status = isFavorite ? '0' : '1';
       const { data } = await api.post<Offer>(
@@ -227,8 +229,20 @@ export const updateFavorites = createAsyncThunk<void, { hotelId: string, isFavor
           break;
         }
         case Page.Property: {
-          dispatch(loadOffer(data));
-          break;
+          switch (className) {
+            case FavoriteButtonClassName.Property: {
+              dispatch(updateOffers(data));
+              dispatch(loadOffer(data));
+              break;
+            }
+            case FavoriteButtonClassName.OfferCard: {
+              dispatch(updateNearByOffers(data));
+              break;
+            }
+            default: {
+              break;
+            }
+          }
         }
       }
     } catch (error) {

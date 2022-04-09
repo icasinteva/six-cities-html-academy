@@ -3,6 +3,7 @@ import { FormEvent, useCallback, useEffect, useMemo } from 'react';
 import { ReviewSymbols } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { useReviewData } from '../../hooks/use-review-data';
+import { getFormDisabled, getReviewPosted } from '../../store/reviews-form-data/selectors';
 import { ReviewFormData } from '../../types/review-data';
 import ReviewRatingInput from '../review-rating-input/review-rating-input';
 import Spinner from '../spinner/spinner';
@@ -16,7 +17,8 @@ type ReviewFormProps = {
 
 function ReviewsForm({ hotelId, onSubmit }: ReviewFormProps) {
   const [ reviewData, handleReviewDataChange ] = useReviewData();
-  const { isFormDisabled, isReviewPosted } = useAppSelector(({ REVIEWS_FORM }) => REVIEWS_FORM);
+  const isFormDisabled = useAppSelector(getReviewPosted);
+  const isReviewPosted = useAppSelector(getFormDisabled);
 
   const handleFieldsChange = useCallback((
     ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

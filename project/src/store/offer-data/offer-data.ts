@@ -26,7 +26,13 @@ export const offerData = createSlice({
     loadNearByOffers: (state, action) => {
       state.nearByOffers = action.payload ?? [];
     },
+    updateNearByOffers: (state, action) => {
+      const { id } = action.payload;
+      const index = state.nearByOffers.findIndex((offer) => offer.id === id);
+
+      state.nearByOffers.splice(index, 1, action.payload);
+    },
   },
 });
 
-export const { loadOffer, loadReviews, loadNearByOffers, setOfferLoading } = offerData.actions;
+export const { loadOffer, loadReviews, loadNearByOffers, updateNearByOffers, setOfferLoading } = offerData.actions;

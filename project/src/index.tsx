@@ -9,10 +9,9 @@ import browserHistory from './browser-history';
 import App from './components/app/app';
 import HistoryRouter from './components/history-route';
 import { store } from './store';
-import { checkAuthorization, fetchOffers } from './store/api-actions';
+import { checkAuthorization } from './store/api-actions';
 
 store.dispatch(checkAuthorization());
-store.dispatch(fetchOffers());
 
 ReactDOM.render(
   <React.StrictMode>
