@@ -15,7 +15,7 @@ export const makeFakeUser = (): User => ({
 
 export const makeFakeOffer = (options?: { isFavorite?: boolean, isPremium?: boolean }): Offer => ({
   bedrooms: datatype.number({ max: 5 }),
-  city: CITIES[datatype.number({ max: 5})],
+  city: CITIES[datatype.number({ max: CITIES.length - 1 })],
   description: lorem.sentences(),
   goods: [...new Set(Array.from({ length: 8 }).map(() => commerce.product()))],
   host:  {
