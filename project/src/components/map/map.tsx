@@ -17,13 +17,13 @@ type MapProps = {
 
 const defaultCustomIcon = new Icon({
   iconUrl: UrlMarker.Default,
-  iconSize: [40, 40],
+  iconSize: [27, 39],
   iconAnchor: [20, 40],
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: UrlMarker.Current,
-  iconSize: [40, 40],
+  iconSize: [27, 39],
   iconAnchor: [20, 40],
 });
 
