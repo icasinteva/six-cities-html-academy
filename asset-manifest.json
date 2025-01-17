@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/six-cities-html-academy.git/static/css/main.2148039c.css",
+    "main.js": "/six-cities-html-academy.git/static/js/main.f62aaf86.js",
+    "index.html": "/six-cities-html-academy.git/index.html",
+    "main.2148039c.css.map": "/six-cities-html-academy.git/static/css/main.2148039c.css.map",
+    "main.f62aaf86.js.map": "/six-cities-html-academy.git/static/js/main.f62aaf86.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2148039c.css",
+    "static/js/main.f62aaf86.js"
+  ]
+}
